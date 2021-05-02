@@ -10,7 +10,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Motivation}{1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Background}{2}%
+\contentsline {section}{\numberline {1.2}Background}{1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Transfer learning scenarios}{2}%
 \defcounter {refsection}{0}\relax 
@@ -32,36 +32,16 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\chapternumberline {3}An Alternative Means of Regularization for Domain Adaptation Problems}{21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introduction}{21}%
+\contentsline {chapter}{\chapternumberline {4}Asymptotics for Prior Elicitation}{28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Existence and Uniqueness of an Optimal Transport Map}{22}%
+\contentsline {section}{\numberline {4.1}Statistical Elicitation}{28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Convex Analysis Prerequisites}{22}%
+\contentsline {section}{\numberline {4.2}Sample Based Elicitation}{29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Derivation of Primal Formulation}{24}%
+\contentsline {subsection}{Finite Sample}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{What does the dual of f look like?}{25}%
+\contentsline {section}{\numberline {4.3}Experiments}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Inner product space of signed measures}{26}%
+\contentsline {subsection}{Validating the estimator and the learning rate}{32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Discrete Setting}{26}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}An Alternative Optimization Problem}{27}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Sample Complexity Bound}{33}%
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {4}Domain adaptation using Monge mappings}{37}%
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {5}Asymptotics for Prior Elicitation}{44}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Statistical Elicitation}{44}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Sample Based Elicitation}{45}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Finite Sample}{47}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Experiments}{48}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Validating the estimator and the learning rate}{48}%
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{56}%
+\contentsline {chapter}{\chapternumberline {5}Conclusions and Future Work}{40}%

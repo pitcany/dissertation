@@ -7,8 +7,7 @@
 \documentclass{ucbthesis}
 \usepackage{biblatex}
 \usepackage{rotating} % provides sidewaystable and sidewaysfigure
-\usepackage{listings}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts} 
 \usepackage{mathtools}      %
@@ -33,7 +32,6 @@
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definition}
-\newtheorem{prop}{Proposition}
 
 \DeclareMathOperator*{\calX}{\mathcal{X}}
 \DeclareMathOperator*{\calY}{\mathcal{Y}}
@@ -43,7 +41,6 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Prob}{\mathrm{P}}
-\newcommand{\R}{\mathbb{R}}
 
 \DeclarePairedDelimiter\paren{(}{)}           % (parentheses)
 \DeclarePairedDelimiter\ang{\langle}{\rangle} % <angle brackets>
@@ -135,12 +132,12 @@ Lastly, I am thankful for my parents, Grace and Clyde Pitcan, for always believi
 
 % (Optional) \part{First Part}
 
-\include{preliminaries(pjd)}
-\include{chap1(pjd)}
-\include{chap2(pjd)}
-\include{chap3(pjd)}
-\include{chap4(pjd)}
-\include{chap5(pjd)}
+\include{preliminaries}
+\include{chap1}
+\include{chap2}
+\include{chap3}
+\include{chap4}
+%\include{chap5}
 \printbibliography
 
 % \appendix
