@@ -1,0 +1,374 @@
+\chapter{Domain adaptation using Monge mappings}
+
+\section*{Introduction}
+Previously, we discussed two methods of regularized optimal transport for domain adaptation:
+\begin{itemize}
+	\item Entropic regularization
+	\item Regularization with respect to dual potentials
+\end{itemize}
+
+However, the emphasis earlier was not on finding the explicit mapping between datasets. One may instead seek to directly estimate the Monge map between source and target datasets. In the next section, we describe prior work done and suggest another regularization scheme that incorporates the explicit transport map.
+
+\section*{Linear Monge Mappings}
+Previous work \cite{Flamary2019} estimated the linear Monge mapping between distributions and used this to provide a domain adaptation generalization bound.
+
+We conjecture that their result about the optimal transport map can be extended to say that this particular function of the second moments of the source and target distributions gives the optimal linear transport map, even if the optimal transport map isn't linear.
+
+This corresponds to finding a solution to
+$$\min_A (E_P 1/2 x'Ax + E_Q 1/2 y'A^{-1}y),$$ which can be rewritten as 
+$$\min_A Tr(A E_P xx' + A^{-1} E_Q yy')/2.$$
+
+\section*{Notation}
+
+Let $A$ and $B$ be positive matrices. And define the fidelity $F(A,B) = tr(A^{1/2}BA^{1/2})^{1/2}$. Also let $A\#B=A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$.
+
+\section*{Minimizing over set of linear maps \cite{Bhatia2019}}
+Let $x$ and $y$ be random vectors with values in $\mathbb{C}^{n}$, each having zero mean WLOG, and with covariance matrices $A$ and $B$, respectively. This last statement means that
+\begin{center}
+	$A=[E(\overline{x}_{i}x_{j})],\ B=[E(\overline{y}_{i}y_{j})]$.
+\end{center}
+
+We want to find $x$ and $y$ for which $E\Vert x-y\Vert^{2}$ is minimal.
+
+The covariance matrix of the vector $(x,\ y)$ is
+
+$$
+\left[ \begin{matrix}
+	[E(\overline{x}_{i}x_{j})] & [E(\overline{x}_{i}y_{j})] \\
+	[E(\overline{y}_{i}x_{j})] & [E(\overline{y}_{i}y_{j})]
+\end{matrix}\right]
+=
+\left[ \begin{matrix}
+	A & M \\
+	M^{*} & B
+\end{matrix}\right]
+$$
+
+We seek to minimize the following:
+\begin{align*}
+E\Vert x-y\Vert^{2} &= E(\displaystyle \sum_{i=1}^{n}(|x_{i}|^{2}+|y_{i}|^{2}-2\mathrm{Re}\overline{x}_{i}y_{i})) \\
+&= \sum_{i=1}^{n}E(|x_{i}|^{2}+|y_{i}|^{2}-2\mathrm{Re}\overline{x}_{i}y_{i}) \\
+&= \mathrm{tr}(A+B)-2\mathrm{Re} (tr M).
+\end{align*}
+
+This is equivalent to the following optimization problem:
+
+$\displaystyle \max\{|\mathrm{tr}M|$ : $C=\left[ \begin{matrix}
+	A & M \\
+	M^{*} & B
+\end{matrix}\right] \geq 0\}.$
+
+The value of the maximum is $F(A,\ B)$. So
+$$
+\min E\Vert x-y\Vert^{2}\ =\ \mathrm{t}\mathrm{r}(A+B)-2\mathrm{t}\mathrm{r}(A^{1/2}BA^{1/2})^{1/2}
+$$
+$$
+=\ d^{2}(A,\ B).
+$$
+
+Let $x$ be a vector with mean $0$ and covariance matrix $A$. Then for any $T\in \mathrm{F}\mathrm{M}(n)$ we have
+
+\begin{align*}
+E(\langle x,\ Tx\rangle)\ &= E(\sum_{i,j}t_{ij}\overline{x_{i}}x_{j}) =\sum_{i,j}t_{ij}E(\overline{x_{i}}x_{j}) \\
+&= \displaystyle \sum_{i,j}t_{ij}a_{ij}=\mathrm{tr} TA.
+\end{align*}
+
+Hence,
+\begin{align*}
+E\Vert x-Tx\Vert^{2} &= E(\Vert x\Vert^{2}+\Vert Tx\Vert^{2} - 2\textrm{Re}\langle x,\ Tx\rangle) \\	
+&= \textrm{tr}A+\textrm{tr}T^{*}TA-2\textrm{Re} \textrm{tr} TA \\
+&= \textrm{tr} A+\textrm{tr}TAT^{*}-2\textrm{Re} \textrm{tr} A^{1/2}TA^{1/2}
+\end{align*}
+
+If we choose $T=A^{-1}\# B$, then  we see that tr $A^{1/2}TA^{1/2}=$ tr $(A^{1/2}BA^{1/2})^{1/2}$, and that $\mathrm{tr}TAT=\mathrm{tr}B$. Thus, for this choice of $T$, we have
+\begin{center}
+	$$E\Vert x-Tx\Vert^{2} = tr(A+B)-2 tr (A^{1/2}BA^{1/2})^{1/2}
+	=\ d^{2}(A,\ B)\ .
+	$$
+\end{center}
+Thus the problem
+$$
+\min E\Vert x-y\Vert^{2}
+$$
+where $x, y$ are vectors with mean zero and covariance matrices $A$ and $B,$ respectively, has as its solution the pairs $(x,\ y)$ , where $x$ is any vector and $y=Tx$, with $T=A^{-1}\# B$.
+
+Let $x$ be a vector with covariance matrix $A$, and let $y=Tx$. Then
+$$
+E(\overline{y}_{i}y_{j})\ =\ E\sum_{k,l}t_{ik}t_{kl}\overline{x}_{k}x_{l}
+$$
+$$
+=\ \sum_{k,l}t_{ik}t_{kl}a_{kl}=(TAT)_{ij}.
+$$
+If $T$ is the optimal transport map from $A$ to $B$, then $TAT=B$. This shows that the covariance matrix of the vector $y$ is $B.$
+
+\section*{Which cross-covariance matrices are feasible with given marginal distributions?}
+
+If we have marginal distributions $P$ and $Q$ we want to determine possible cross-covariances between the two distributions. Let $M$ denote the cross-covariance between $\mu$ and $\nu$.
+
+\subsection*{What if we knew the marginal covariances?}
+In the case where we know $\Sigma_{P}$ and $\Sigma_{Q}$, we have necessary and sufficient conditions for the block matrix
+$$
+\left( \begin{matrix}
+	\Sigma_{P} & M \\
+	M^{*} & \Sigma_{Q}
+\end{matrix}\right) 
+$$
+
+to be PSD. 
+
+These conditions are the following:
+\begin{enumerate}
+	\item $A\geq M\Sigma_{Q}^{-1}M^{*}$
+	\item There exists a contraction operator $K$ with $\norm{K}\leq 1$ such that $$M=\Sigma_{P}^{1/2}K\Sigma_{Q}^{1/2}.$$
+\end{enumerate}
+
+\subsection*{General Case}
+Back to our setting, we don't necessarily know the covariance matrices on the marginals.
+
+Consider the discrete setting where the distributions $\mu$ and $\nu$ can be represented by probability vectors $p$ and $q$. Also let $X$ and $Y$ represent random vectors from $\mu$ and $\nu$ and define the respective covariance matrices as $\Sigma_X$ and $\Sigma_Y$.
+
+Transform $X$ and $Y$ as follows
+\begin{align*}
+	\tilde{X} &= diag(\sqrt{p})X \\
+	\tilde{Y} &= diag(\sqrt{q})Y \\
+	\tilde{P} &= diag(1/\sqrt{p})\cdot diag(1/\sqrt{q})
+\end{align*}
+
+Let $$K=(X^{\perp}diag(\sqrt{p})X)^{-1/2}(X^{\perp}PY)(Y^{\perp}diag(\sqrt{q})Y)^{-1/2}.$$
+
+Note that
+$$\tilde{X}^{\perp}\tilde{P}\tilde{Y}=X^{\perp}PY=\Sigma_{XY}=\Sigma_X^{1/2}K\Sigma_Y^{1/2}$$
+
+We now want to solve the following optimization problem:
+
+Maximize $$\norm{K\Sigma_{\nu}^{1/2}}_{\mathcal{F}}$$ where
+$P$ satisfies constraints 
+\begin{align*}
+	P\vec{1} &=p \\
+	P^{\perp}\vec{1} &=q.
+\end{align*}
+
+\subsection*{Pythagorean identity for Wasserstein}
+
+\begin{equation}
+	W(P,Q)=\inf_T[d(P,T_{\#}P)+W(T_{\#}P,Q)].
+\end{equation}
+
+Indeed, 
+\begin{align*}
+	d(P,T_{\#}P)+W(T_{\#}P,Q)&=\inf_\gamma\Big[\sqrt{\int_{S\times S}(x-T(x))^2\gamma(dx,dy)}+\sqrt{\int_{S\times S}(T(x)-y)^2\gamma(dx,dy)}\Big] \\
+	&\ge\inf_\gamma\sqrt{\int_{S\times S}(x-y)^2\gamma(dx,dy)}=W(P,Q)
+\end{align*}
+where $\inf\limits_\gamma$ is taken over all couplings $\gamma$ of $P$ and $Q$. So, the right-hand side of (1) is no less than its left-hand side. On the other hand, taking $T$ to be the identity map of $S$, we see that the right-hand side of (1) is no greater than its left-hand side. Thus, (1) is proved. 
+
+%
+%\section*{A Two-Step Computation for Wasserstein}
+%Define $$d^2(p,q) = E\norm{X-Y}^2$$ with $X\sim p$ and $Y\sim q.$
+%
+%We conjecture that $W^2(p,q) = \min_{T} d^2(p,T_{\#}p) + W^2(T_{\#}p,q)$ where $T$ is the set of linear mappings. This is promising since if $T$ is chosen to be either the identity map or $\Sigma_X^{-1}\#\Sigma_Y$, then $d^2(p,T_{\#}p) + W^2(T_{\#}p,q) = W^2(p,q)$.
+%
+%One could extend the set $T$ to a set of mappings closed under addition and composition (i.e. $f,g\in T$ implies $f+g$ and $f(g)\in T$) as well.
+%
+%This idea is similar to the concept of $I$-projection for KL-divergences. I'm not sure if this will hold because the I-projection concept extends to Bregman divergences, but the Wasserstein isn't a Bregman type.
+%
+%\subsection*{Counterexample to our claim}
+%Suppose that the underlying measurable space 
+%$(S,\Si)$ on which $P$ and $Q$ are defined is $(\R,\B(\R))$, where $\B(\R)$ is the Borel $\sigma$-algebra over $\R$. Let $P$ be the uniform distribution on $(0,1)$. Then any distribution $R$ on $(\R,\B(\R))$ is of the form $T_{\#}P$ for some $T$; namely, $T$ is the quantile transformation given by the formula 
+%$$T(u)=H^{-1}(u):=\inf\{x\in\R\colon H(x)\ge u\}$$ 
+%for $u\in(0,1)$, where $H$ is the cdf of the distribution $R$. Let $Q$ be any distribution on $(\R,\B(\R))$ other than $P$. There are real-valued random variables (r.v.'s) $X$ and $Y$ with respective distributions $P$ and $Q$ such that $W^2(P,Q)=E(X-Y)^2$; for instance, take any r.v. $X\sim P$ and let then $Y:=G^{-1}(X)$, where $G$ is the cdf of $Q$. Now let $Z:=(X+Y)/2$ and let $R$ be the distribution of $Z$. Then the right-hand side of our conjectured identity is 
+%$$\le d^2(P,R) + W^2(R,Q)\le E(X-Z)^2+E(Z-Y)^2=\frac12\,E(X-Y)^2=\frac12\,W^2(P,Q)<W^2(P,Q);$$
+%the latter inequality holding because $Q\ne P$.
+%
+%\section*{What if $Q$ corresponds to a subspace?}
+%Here, one must generalize the claim
+%$$F(\Sigma_X,\Sigma_Y) = \max_{M>0} \{ \abs{trX}: \Sigma_X\geq M\Sigma_Y^{-1}M^{*}\}$$ to the case where $\Sigma_Y$ is not full rank.
+%
+%First, let's introduce the following lemma.
+%\begin{lemma}
+%	$$
+%	\left( \begin{matrix}
+%		\Sigma_{X} & M \\
+%		M^{*} & \Sigma_{Y}
+%	\end{matrix}\right)
+%	$$
+%	 is PSD if $\Sigma_{X}\geq M\Sigma_{Y}^{+}M^{*}$, where $\Sigma_Y^{+}$ denotes the pseudoinverse of $\Sigma_Y$.
+%\end{lemma}
+%
+%\begin{proof}
+%$$
+%	\left( \begin{matrix}
+%		\Sigma_{X}-M\Sigma_{Y}^{+}M^{*} & O \\
+%		O & \Sigma_{Y}
+%	\end{matrix}\right)\sim
+%	\left( \begin{matrix}
+%		I & M\Sigma_{Y}^{+} \\
+%		O & I
+%	\end{matrix}\right)
+%	\left( \begin{matrix}
+%		\Sigma_{X}-M\Sigma_{Y}^{+}M^{*} & O \\
+%		O & \Sigma_{Y}
+%	\end{matrix}\right)
+%	\left( \begin{matrix}
+%		I & O \\
+%		\Sigma_{Y}^{+}M^{*} & I
+%	\end{matrix}\right)
+%= 	\left( \begin{matrix}
+%	\Sigma_{X} & M \\
+%	M^{*} & \Sigma_{Y}
+%\end{matrix}\right).
+%$$
+%
+%It is clear from this that $\left( \begin{matrix}
+%\Sigma_{X} & M \\
+%M^{*} & \Sigma_{Y}
+%\end{matrix}\right)$ is positive if and only if $\Sigma_{X}- M\Sigma_{Y}^{+}M^{*}\geq 0.$
+%\end{proof}
+%
+%One also notes that the positive-definiteness of the cross-covariance matrix implies
+%$$
+%M=\Sigma_X^{1/2}K\Sigma_Y^{1/2},
+%$$
+%where $K$ is a contraction. By the Schwarz inequality we have
+%
+%\begin{align*}
+%	|\mathrm{tr}M|=|\mathrm{tr}(\Sigma_X^{1/2}K\Sigma_Y^{1/2})|\ &\leq \norm*{\Sigma_X^{1/2}K}_2 \norm*{\Sigma_Y^{1/2}}_2 \\
+%	&\leq \norm*{\Sigma_X^{1/2}}_2 \norm*{\Sigma_Y^{1/2}}_2 = \sqrt{\textrm{tr}\Sigma_X\textrm{tr}\Sigma_Y}
+%\end{align*}
+%
+%If $$
+%\left( \begin{matrix}
+%	\Sigma_{X} & M \\
+%	M^{*} & \Sigma_{Y}
+%\end{matrix}\right) \geq 0
+%$$
+%then for every $Z>0$ we have
+%
+%$$
+%	0\leq
+%	\left( \begin{matrix}
+%		Z^{1/2} & O \\
+%		O & Z^{-1/2}
+%	\end{matrix}\right)
+%	\left( \begin{matrix}
+%		\Sigma_{X} & M \\
+%		M^{*} & \Sigma_{Y}
+%	\end{matrix}\right)
+%	\left( \begin{matrix}
+%		Z^{1/2} & O \\
+%		O & Z^{-1/2}
+%	\end{matrix}\right)
+%	= \left( \begin{matrix}
+%		Z^{1/2}\Sigma_X Z^{1/2} & Z^{1/2}M Z^{-1/2} \\
+%		Z^{-1/2}M^{*} Z^{1/2} & Z^{-1/2}\Sigma_Y Z^{-1/2}
+%	\end{matrix}\right)
+%$$
+%
+%Hence
+%$$
+%|\mathrm{tr}Z^{1/2}M Z^{-1/2}|\leq\sqrt{\mathrm{tr}(Z^{1/2}\Sigma_X Z^{1/2})\mathrm{tr}(Z^{-1/2}\Sigma_Y Z^{-1/2})}.
+%$$
+%
+%This simplifies to
+%$$
+%|\mathrm{tr}M|\leq\sqrt{\mathrm{tr}(\Sigma_X Z)\mathrm{tr}(\Sigma_Y Z^{-1})}.
+%$$
+%
+%This is true for all $M$ satisfying the condition $\Sigma_{X}\geq M\Sigma_{Y}^{+}M^{*}$ and for all $Z>0$. So
+%
+%$$
+% \max\{|\mathrm{tr}M|\ :\ \Sigma_{X}\geq M\Sigma_{Y}^{+}M^{*}\} \leq \min_{Z>0} \sqrt{\mathrm{tr}(\Sigma_X Z)\mathrm{tr}(\Sigma_Y Z^{-1})}
+%$$
+%
+%Showing equality is a problem I'm having at the moment.
+%\blacksquare
+
+%\subsection*{Parts I Need To Clarify}
+%Why do we use $\norm{K\Sigma_{Y}^{1/2}}_{\mathcal{F}}$?
+%And what was the closed set we could extend to from the set of linear mappings (for the two-step Wasserstein computation)?
+%
+\section*{Regularized Optimization}
+One may want to look at a regularization of the combination of the squared Bures distance and the expected distance moved under the transport map $T$ by the squared Hilbert-Schmidt norm of $T$.
+$$
+\min_T Q(T) \textrm{ where }Q(T) = \lambda E \left\| TX-X \right\|^2 + d_B^2(Cov(TX),\Sigma_v) + \mu \left\|T\right\|^2_{HS}
+$$
+
+Differentiating $Q(T)$, we get 
+$$2\lambda (TX-X)X^{T} + (\frac{2}{n-1})CTX(I-(BA)^{-1/2}B)X^{T} + 2\mu T$$ where $A=Cov(TX)=(\frac{1}{n-1})(TX)^T C(TX)$, $B=\Sigma_v$, and $C=(1-\frac{1}{n}J)=C^T$ is a centering matrix.
+
+Solving for $\hat{T}$ such that $Q'(\hat{T})=0$, we get
+
+$$
+\lambda XX^{T} = \lambda \hat{T} XX^{T} + \mu \hat{T} + \frac{1}{n-1} C\hat{T}[X(I-(BA)^{-1/2}B)]X^{T}.
+$$
+
+\subsection*{Differentiating the Bures distance part I}
+For PSD matrices a drastic 
+simplification is possible:
+$$
+\textrm {Tr}((A^{1/2}BA^{1/2})^{1/2}) = \textrm{Tr}((BA)^{1/2})
+$$
+In addition, there is a general result for the differential of the trace of any matrix function
+$$
+d\,\textrm{Tr}\big(f(X)\big) = f'(X^T):dX
+$$
+where $f'$ is the ordinary derivative of the scalar function $f;\,$ both $f$ and $f'$ are evaluated using their respective matrix arguments.
+
+Combining these yields a straightforward solution for the problematic term
+\begin{align*}
+	\phi &= \textrm {Tr}\Big((BA)^{1/2}\Big) \\
+	d\phi
+	&=  \tfrac 12\big((BA)^T\big)^{-1/2}:d(BA) \\
+	&= \tfrac 12(AB)^{-1/2}:B\,dA \\
+	&= \tfrac 12 B(AB)^{-1/2}:dA \\
+	\frac{\partial\phi}{\partial A}
+	&= \tfrac 12 B(AB)^{-1/2} 
+	\;=\; \tfrac 12 (BA)^{-1/2}B
+\end{align*}
+Where the final equality is a theorem due to Higham
+$$B\cdot f(AB) = f(BA)\cdot B$$
+
+Therefore the gradient of the Bures Distance is
+\begin{align*}
+	\beta(A,B) &= \textrm {Tr}\Big(A+B - 2(BA)^{1/2} \Big) \\
+	d\beta &= \Big(I - B(AB)^{-1/2}\Big):dA \\
+	\frac{\partial\beta}{\partial A}
+	&= I - B(AB)^{-1/2} \;\;=\; I - (BA)^{-1/2}B \\
+	&= I - A^{-1}(AB)^{1/2} \;=\; I - (BA)^{1/2}A^{-1}
+\end{align*}
+
+\subsection*{Differentiating the Bures distance part II}
+Let $J$ be the all-ones matrix and 
+\begin{align*}
+	C &=(I-\tfrac 1nJ) = C^T \qquad\qquad\big(\textrm{ Centering\,Matrix}\big) \\
+	B &= \Sigma_v \\
+	A &= \textrm{Cov}(TX) \\
+	&= \left(\tfrac 1{n-1}\right)(TX)^TC\,(TX)
+\end{align*}
+
+From earlier, the Bures distance function and its differential can be simplified to
+\begin{align*}
+	\beta(A,B) &= \textrm{Tr}\Big(A+B - 2(BA)^{1/2} \Big) \\
+	d\beta &=\Big(I - (BA)^{-1/2}B\Big):dA
+\end{align*}
+Now change the differentiation variable from $\;dA\to dT$.
+\begin{align*}
+	d\beta
+	&= \Big(I - (BA)^{-1/2}B\Big):\left(\tfrac 2{n-1}\right)\textrm{ Sym}(X^TT^TC\,dT\,X) \\
+	&= \left(\tfrac 2{n-1}\right)\Big(I - (BA)^{-1/2}B\Big):(X^TT^TC\,dT\,X) \\
+	&= \left(\tfrac 2{n-1}\right)CTX\Big(I - (BA)^{-1/2}B\Big)X^T:dT \\
+	\frac{\partial\beta}{\partial T}
+	&= \left(\tfrac 2{n-1}\right)CTX\Big(I - (BA)^{-1/2}B\Big)X^T \\
+\end{align*}
+
+In the above derivation, the function 
+\begin{align*}
+	\textrm{Sym}(M) = \tfrac 12(M+M^T) \\
+\end{align*}
+was utilized, as well as the trace/Frobenius product
+\begin{align*}
+	P:M = \textrm{Tr}(P^TM) = \textrm{Tr}(M^TP) = M:P \\
+\end{align*}
+These have the following interaction 
+\begin{align*}
+	P:\textrm{Sym}(M) = \textrm{Sym}(P):M \\
+\end{align*}

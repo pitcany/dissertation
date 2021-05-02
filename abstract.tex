@@ -1,0 +1,22 @@
+% (This file is included by thesis.tex; you do not latex it by itself.)
+
+\begin{abstract}
+
+% The text of the abstract goes here.  If you need to use a \section
+% command you will need to use \section*, \subsection*, etc. so that
+% you don't get any numbering.  You probably won't be using any of
+% these commands in the abstract anyway.
+
+This dissertation consists of two papers. The outline is as follows.
+
+In chapter 1, we introduce domain adaptation, with particular emphasis on the generalization bounds for the unsupervised joint distribution domain adaptation problem. Previous work involved a theoretical analysis of the joint distribution optimal transport problem, but the generalization error required an exponentially large number of samples in order to be meaningful. This discussion is used to motivate the next two chapters, which revolve around different methods of regularizing optimal transport.
+
+In chapter 2, we discuss entropic regularized optimal transport, otherwise known as the Sinkhorn divergence. This was introduced by Marco Cuturi as a means of regularizing the Wasserstein distance because it is more tractable computationally. In this chapter, we introduce some sample complexity bounds and also demonstrate a potential pathway to utilizing these to obtain a generalization bound for future work. 
+
+Next, in chapter 3, we study domain adaptation using optimal transport in Reproducing Kernel Hilbert Spaces. We introduce alternative means of regularization. Instead of using an entropic regularization, which is used in the Sinkhorn divergence, we regularize using dual potentials in an RKHS. In this chapter, we investigate some of the properties of this regularization methods and discuss the first main result, which is a sample complexity bound that outperforms that of unregularized optimal transport.
+
+Chapter 4 diverges from domain adaptation and discusses some current work in prior elicitation, introducing a new framework in the form of a least squares minimization problem. There we provide non-asymptotic sample complexity bounds for M-estimators to demonstrate why our approach is theoretically viable for prior elicitation.
+
+Finally, we discuss some directions for future work in chapter 5.
+
+\end{abstract}

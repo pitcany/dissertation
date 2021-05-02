@@ -1,0 +1,618 @@
+\chapter{An Alternative Means of Regularization for Domain Adaptation Problems}
+
+\section{Introduction}
+Previously, we explored the applications of entropic regularization for the Wasserstein distance (Sinkhorn) in domain adaptation. In particular, we derived a new generalization bound for target error with respect to the Sinkhorn divergence. However, for domain adaptation, entropic regularization may not be the ideal route to take.
+ 
+When we prescribe a divergence measure for domain adaptation, the scenario we seek to penalize against is when the source $S$ and target $T$ distributions are not identical. However, with the entropic regularization, one is penalizing against $S$ and $T$ being independent. In this chapter, we propose an alternative regularization that may be more suitable for domain adaptation problems.
+
+If $S$ and $T$ are identical in distribution, which is the ideal setting in machine learning, then there exists an identity mapping between the two. Thus, it makes sense to use a regularization that penalizes the deviation between the transport map and the identity map.
+
+\newpage
+
+\section{Existence and Uniqueness of an Optimal Transport Map}
+Our approach relies on Brenier's theorem, which concerns the existence and uniqueness of optimal maps.
+
+\begin{theorem}{Brenier's Theorem}
+	
+	Let $\mu$ and $\nu$ be absolutely continuous probability measures on $\mathbb{R}^d$ with respect to the Lebesgue measure and $\nu$ has bounded support. There exists a convex function $\phi: \mathbb{R}^d\to \mathbb{R}$ such that its gradient, $\nabla \phi$, is the optimal transport map from $\mu$ to $\nu$.  
+	
+\end{theorem}
+
+We call $\phi$ a Kantorovich potential.
+
+\begin{corollary}{Existence of Solution to Monge Problem}
+	
+Under the above assumptions, $\nabla \phi$ uniquely solves the Monge problem.
+
+\[
+\int_X \abs{x-\nabla\phi(x)}^2\,d\mu(x) = \int_{T_{\#}\mu=\nu}\abs{x-T(x)}^2\,d\mu(x)
+\]
+	
+\end{corollary}
+
+\section*{Key Optimization Problem}
+
+We wish to examine the following optimization problem, where $H$ is a reproducing kernel hilbert space and $c(x,y)$ denotes an arbitrary cost function in $x$ and $y$.
+
+$$ \inf_{u,v} \left[ \int u \, ds + \int v \, dt + \lambda (\norm{u}_H^2 + \norm{v}_H^2)\right],\, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y). $$
+
+We will circle back to this after discussing some convex analysis preliminaries crucial to analyzing this going forward.
+
+\section{Convex Analysis Prerequisites}
+
+Before we continue, we introduce some concepts from convex analysis that will be needed going forward.
+
+\begin{definition}
+	Let $f:\,X\to \mathbb{R}\cup +\infty$ be a lower semicontinuous function. The Fenchel-Legendre transform $f^{*}: X^{*}\to \mathbb{R}\cup +\infty$ is defined by
+	$$
+	f^{*}(x^{*}) = \sup_{x\in X} [\ang*{x^{*},x}-f(x)]
+	$$
+	
+	This $f^{*}$ is always convex.
+\end{definition}
+
+\begin{definition}
+	The subdifferential of a lower semi-continuous convex function $\phi$ at $x\in \textrm{dom} \phi$ is defined by
+	
+	$$
+	\partial \phi(x) = \{ x^{*}\in X^{*}: \phi(y)-\phi(x)\geq \ang*{x^{*},y-x} \}
+	$$
+\end{definition}
+
+\begin{corollary}
+	Let $f:\,X\to \mathbb{R}\cup \{+\infty\}$ be a convex function. Then for any $x\in \textrm{int dom }f$,
+	
+	$$ \partial f(x)\neq \emptyset.$$
+\end{corollary}
+
+\begin{theorem}[Fenchel-Young inequality]
+	$$f(x)+f^{*}(x^{*})\geq \ang*{x^{*},x}$$
+\end{theorem}
+
+\begin{corollary}[Fenchel-Young equality]
+	$$f(x)+f^{*}(x^{*})= \ang*{x^{*},x}$$ iff
+	$$x^{*}\in \partial f(x).$$
+\end{corollary}
+
+\begin{theorem}
+	Let $v(y) = \inf_x [f(x)+g(x+y)].$ The Fenchel primal problem is
+	$$p = v(0) = \inf_x [f(x)+g(x)].$$
+	
+	The dual problem is
+	$$d = v^{**}(0)=\sup_{y^{*}} [-f^{*}(y^{*})-g^{*}(-y^{*})].$$
+\end{theorem}
+
+\begin{proof}
+	Calculate $v^{*}(-y^{*}) = \sup_{x,y}[\ang*{-y^{*},y}-f(x)-g(x+y)].$
+	
+	Let $u = x+y$, so we have
+	\begin{align*}
+	v^{*}(-y^{*}) &= \sup_{x,u} \ang*{-y^{*},u-x} - f(x) - g(u) \\
+	&= \sup_x [\ang*{y^{*},x}-f(x)]+\sup_u [\ang*{-y^{*},u}-g(u)] \\
+	&= f^{*}(y^{*}) + g^{*}(-y^{*}).
+	\end{align*}
+	
+	Thus,
+	$$d = v^{**}(0) = \sup_{-y^{*}}[0 - v^{*}(-y^{*})] = \sup_{-y^{*}}[-f^{*}(y^{*})-g^{*}(-y^{*})].$$
+	
+	Weak duality $p\geq d$ follows immediately. Strong duality $p=d$ requires $\partial v(0)\neq \emptyset$, i.e.
+	$$0\in \textrm{int dom }v = \textrm{int}[\textrm{dom } g-\textrm{dom} f].$$
+\end{proof}
+
+\begin{proof}[Strong duality criterion]
+	Here we prove $0\in \textrm{int dom }v = \textrm{int}[\textrm{dom } g-\textrm{dom} f]$ implies $\partial v(0)\neq \emptyset$. Let $-y^{*}\in \partial v(0)$ we have
+	$$
+	f(x)+g(x+y)\geq v(y)\geq p-\ang*{y^{*},y}
+	$$
+	Letting $u=x+y$, we have
+	$$p\leq f(x)-\ang*{y^{*},x}+g(u)+\ang*{y^{*},u}
+	$$ and taking infimum with respect to $x,u$, we have
+	$$
+	p\leq -f^{*}(y^{*})-g^{*}(-y^{*})\leq d\leq p.
+	$$
+	This concludes the proof.
+\end{proof}
+
+\section{Derivation of Primal Formulation}
+
+Our goal is to find the primal formulation for the following optimization problem: 
+$$ \inf_{u,v} \left[ \int u \, ds + \int v \, dt + \lambda (\norm{u}_H^2 + \norm{v}_H^2)\right],\, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y). $$ The arguments that follow are similar to those used to prove Kantorovich duality.
+
+Let $$\phi_c = \{ (u,v) \in C(X)\times C(Y): \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y)\}$$.
+%$E^{*} = M(X\times Y)$ is the set of regular Radon measures with total variation norm.
+
+In the next few lines, $z \in E = C(X\times Y)$ is the set of continuous functions on $X\times Y$ with sup. norm and $\pi\in E^{*} = M(X\times Y)$ is the set of regular Radon measures with total variation norm.
+
+$$f(z) = \begin{cases}
+\lambda( \left\|u\right\|_H^2 + \left\|v\right\|_H^2) + \int u\,ds + \int v\,dt, \, z(x,y)=u(x)+v(y) \\
++\infty, \, \textrm{ otherwise.}
+\end{cases}$$
+
+$$g(z) = \begin{cases}
+0, \, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - z(x,y)\leq c(x,y) \\
++\infty, \, \textrm{ otherwise.}
+\end{cases}$$
+
+$$f(z)+g(z) = \begin{cases}
+\int_X u\,ds + \int_Y v\,dt + \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2), \, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y) \\
+\infty, \textrm{ otherwise.}
+\end{cases}$$
+
+$$\inf_{z\in E} [f(z)+g(z)] = \inf_{(u,v)\in \Phi_c} \left\{ \int_X u\,ds + \int_Y v\,dt + \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2) \right\}$$
+
+\begin{align*}
+g^{*}(-\pi) &= \sup_{z\in E} \left[ -\int_{X\times Y} z\,d\pi - g(z)\right] \\
+&= \sup_{z\in E} \left[ - \int_{X\times Y} z\,d\pi :\, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - c(x,y)\leq z(x,y) \right] \\
+&= \begin{cases}
+\int_{X\times Y} \left[c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2\right] \,d\pi,\, \pi\in M_{+}(X\times Y) \\
++\infty, \, \textrm{otherwise}
+\end{cases}
+\end{align*}
+
+\begin{align*}
+f^{*}(\pi) &= \sup_{z\in E} \left[ \int_{X\times Y} z\,d\pi - f(z)\right] \\
+&= \sup_{z\in E} \left[ \int_{X\times Y} z(x,y)\,d\pi(x,y) - \int_X u\,ds - \int_Y v\,dt - \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2) :\, z= u\oplus v \right] \\
+&= \begin{cases}
+- \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2), \, \pi\in \Pi(s,t) \\
+-\inf_u (\int u\,ds - \int u\,d\pi + \lambda \norm{u}_H^2) - \inf_v (\int v\,dt - \int v\,d\pi + \lambda \norm{v}_H^2), \, \textrm{otherwise}
+\end{cases}
+\end{align*}
+
+When finite, the last line (when $\pi$ is not a coupling) can be rewritten as
+$$\frac{\sup_{\norm{u}=1} (\int u\,ds - \int u\,d\pi)^2}{2\lambda} + \frac{\sup_{\norm{v}=1}(\int v\,dt - \int v\,d\pi)^2}{2\lambda}$$ if finite. Otherwise, $f^{*}(\pi)=+\infty$.
+
+The dual problem is $\sup_{\pi\in E^{*}} \left[ -f^{*}(\pi)-g^{*}(-\pi)\right] $, which, from the above, is
+$$ \sup_{\pi\in E^{*}} \left\lbrace - \int_{X\times Y} c\,d\pi - \int_X \varphi\,d\mu - \int_Y \psi\,d\nu + \int_{X\times Y} (\varphi(x)+\psi(y))\,d\pi + \lambda(\norm{\varphi}_H^2+\norm{\psi}_H^2)\right\rbrace . $$
+
+\subsection{What does the dual of f look like?}
+
+If the previous claim holds,
+
+$$
+f^{*}(\pi) = \frac{1}{4\lambda} \left(Q(s,\pi_1) + Q(t,\pi_2)\right)
+$$ where $$Q(s,\pi_1) = \int k(x,y)\,ds(x) ds(y) + \int k(x,y)\,d\pi_1(x) d\pi_1(y) - 2 \int k(x,y)\,ds(x)d\pi_1(y)$$ and similarly for $Q(t,\pi_2)$.
+
+Then our dual problem is
+\begin{align*}
+\sup_{\pi\in E^{*}}(-f^{*}(\pi) - g^{*}(-\pi)) &= \sup_{\pi\in M_{+}} \left[ -\frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) - \int \left( c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 \right)\,d\pi \right] \\
+&= \inf_{\pi\in M_{+}} \left[ \frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int \left( c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 \right)\,d\pi \right]
+\end{align*}
+
+If $c(x,y)=\frac{1}{2}\norm{x-y}^2$, then $c(x,y)-\frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 = x^{T}y$, which seems more tractable to work with. The question now is how to minimize 
+$$
+\frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int x^{T}y\,d\pi(x,y).
+$$
+
+\subsection{Inner product space of signed measures}
+Define the inner product with respect to signed measures $m,n$ on $\mathcal{X}$ as $$\ang{m,n} = \int \tilde{k}(u,v)\,dm(u)\,dn(v).$$
+
+and
+
+$$\norm{s\otimes \pi_2 - \pi}^2 = Q(s,\pi_1) = \norm{s-\pi_1}^2.$$
+
+If we're looking at $\mathcal{X}^2$, then we have
+$$
+\ang{m,n} = \int \tilde{k}((u_1,u_2),(v_1,v_2))\,dm(u_1,u_2)\,dn(v_1,v_2)
+$$
+
+and
+
+$$\norm{s\otimes \pi_2 - \pi}^2 = \int \tilde{k}((u_1,u_2),(v_1,v_2))\,d(s(u_1)\pi_2(u_2)-\pi(v_1,v_2))$$
+
+Then our problem reduces to showing $$\inf_m \left\lbrace \ang{m,s-\pi_1} + \lambda \ang{m,m}\right\rbrace  = -\frac{1}{4\lambda} \ang{s-\pi_1,s-\pi_1}.$$
+
+\begin{proof}
+	\begin{align*}
+	\ang{m,s-\pi_1} + \lambda\ang{m,m} &= \lambda(\ang{m,m}+\ang{m,\frac{s-\pi_1}{\lambda}}) \\
+	&= \lambda (\norm{m + \frac{s-\pi_1}{2\lambda}}^2 - \norm{\frac{s-\pi_1}{2\lambda}}^2)
+	\end{align*}
+	
+	Choosing $m = \frac{\pi_1 - s}{2\lambda}$, we obtain the desired minimum.
+\end{proof}
+
+\subsection{Discrete Setting}
+
+If we take $\pi_1$ and $\pi_2$ to be discrete measures, we can represent them by $\pi_1 = \Pi 1$ and $\pi_2^T=1^{T}\Pi$, i.e. taking the row and column marginals of $\Pi$.
+
+Our optimization problem then becomes $$\inf_{\Pi} \frac{1}{4\lambda} (\norm{s-\Pi 1}^2+\norm{t-\Pi^{T} 1}^2) + tr(A^{T}\Pi).$$
+
+\section{An Alternative Optimization Problem}
+$f(\Pi,\lambda)=\dfrac{(\Pi\vec{1}-s)^{T}K(\Pi\vec{1}-s)+(\Pi^{T}\vec{1}-t)^{T}K(\Pi^{T}\vec{1}-t)}{4\tau}-Tr[\Pi K]+\lambda(1-\vec{1}^{T}\Pi1)-v_{1}E_{1}^{T}\Pi E_{1}-v_{2}E_{2}^{T}\Pi E_{1}-v_{3}E_{1}^{T}\Pi E_{2}-v_{4}E_{2}^{T}\Pi E_{2}$
+
+where $E_{1}=\left(\begin{array}{c}
+1\\
+0
+\end{array}\right)$ and $E_{2}=\left(\begin{array}{c}
+0\\
+1
+\end{array}\right)$ (assuming this is the 2D setting).
+
+$\frac{df}{d\Pi}=2K(\Pi\vec{1}-s)\vec{1}^{T}+2K(\Pi^{T}\vec{1}-t)\vec{1}^{T}-K-\lambda\vec{1}\vec{1^{T}}=2K[(\Pi+\Pi^{T})\vec{1}-(s+t)]\vec{1}^{T}-K-\lambda11^{T}-v_{1}\left(\begin{array}{cc}
+1 & 0\\
+0 & 0
+\end{array}\right)-v_{2}\left(\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right)-v_{3}\left(\begin{array}{cc}
+0 & 1\\
+0 & 0
+\end{array}\right)-v_{4}\left(\begin{array}{cc}
+0 & 0\\
+0 & 1
+\end{array}\right)$
+
+If $K=I$, then by Karsh Kuhn Tucker conditions, we have 
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{1}+1)=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{2})=0$
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{3})=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{4}+1)=0$
+
+And it follows that
+
+$v_{1}+1=v_{3}$
+
+$v_{4}+1=v_{2}$
+
+and also
+
+$\frac{1}{2\tau}-1=v_{1}+v_{2}+2\lambda=v_{3}+v_{4}+2\lambda$.
+
+If $\pi_{11},\pi_{22}=\frac{s_{1}+t_{1}}{2},\frac{s_{2}+t_{2}}{2}$,
+then $\pi_{11}+\pi_{22}=1$ and thus $\pi_{12}=\pi_{21}=0$. Letting
+$v_{1}=v_{4}=0$ and $v_{2}=v_{3}=1$, this satisfies slackness constraints.
+
+In the following, we provide some sample code that demonstrates these results empirically. 
+
+\subsection*{Example Code}
+
+\begin{lstlisting}
+	import cvxpy as cp
+	import numpy as np
+	
+	n = 2
+	#b = 10
+	
+	PP = cp.Variable((n,n),"PP")
+	KK = [[4,1],[1,4]]
+	#s = np.array([[.5, .5]]).T
+	#t = np.array([[.2,.8]]).T
+	s = np.array([[.3, .7]]).T
+	t = np.array([[.2,.8]]).T
+	e = np.ones((n,1))
+	x = PP.T@e - s
+	y = PP@e - t
+	for b in range(1,21):
+	obj = (1/4/b) * (cp.quad_form(x,KK) + cp.quad_form(y,KK)) - cp.trace(KK@PP) 
+	prob = cp.Problem(cp.Minimize(obj),[PP>=0,cp.sum(PP)==1])
+	obj=prob.solve()
+	print("status:",prob.status)
+	print("obj:",obj)
+	print(PP.value)
+	
+	n = 3
+	PP = cp.Variable((n,n),"PP")
+	KK = [[1,0,0],[0,1,0],[0,0,1]]
+	s = np.array([[.1, .4, .5]]).T
+	t = np.array([[.4, .2, .4]]).T
+	e = np.ones((n,1))
+	x = PP.T@e - s
+	y = PP@e - t
+	for b in range(1,21):
+	obj = (1/4/b) * (cp.quad_form(x,KK) + cp.quad_form(y,KK)) - cp.trace(KK@PP) 
+	prob = cp.Problem(cp.Minimize(obj),[PP>=0,cp.sum(PP)==1])
+	obj=prob.solve()
+	print("status:",prob.status)
+	print("obj:",obj)
+	print(PP.value)
+	
+	Output after running on Ubuntu machine.
+	
+	yannik@yannik-ubuntu:~/OTDA$ python optimization_implementation.py
+	status: optimal
+	obj: -3.9925
+	[[ 2.50000000e-01  1.22249411e-23]
+	[-1.23247236e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.99625
+	[[ 2.50000000e-01 -1.74316142e-22]
+	[ 6.32939582e-23  7.50000000e-01]]
+	status: optimal
+	obj: -3.9975
+	[[ 2.50000000e-01 -1.16215745e-22]
+	[-2.16851043e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.998125
+	[[2.50000000e-01 5.50834936e-23]
+	[5.59387059e-23 7.50000000e-01]]
+	status: optimal
+	obj: -3.9985
+	[[2.50000000e-01 5.92447828e-23]
+	[1.62799830e-22 7.50000000e-01]]
+	status: optimal
+	obj: -3.99875
+	[[ 2.50000000e-01 -1.05815269e-22]
+	[-1.16229217e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.9989285714285714
+	[[ 2.50000000e-01 -1.91865798e-24]
+	[ 1.12940857e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.9990624999999995
+	[[2.50000000e-01 2.21829294e-22]
+	[1.11237621e-22 7.50000000e-01]]
+	status: optimal
+	obj: -3.9991666666666665
+	[[2.50000000e-01 1.68413892e-22]
+	[5.36304987e-23 7.50000000e-01]]
+	status: optimal
+	obj: -3.99925
+	[[ 2.50000000e-01 -1.11021317e-22]
+	[-1.11023280e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.999318181818182
+	[[ 2.50000000e-01 -1.66641110e-22]
+	[-5.54035982e-23  7.50000000e-01]]
+	status: optimal
+	obj: -3.999375
+	[[ 2.50000000e-01 -1.11238505e-22]
+	[ 2.16099333e-25  7.50000000e-01]]
+	status: optimal
+	obj: -3.999423076923077
+	[[ 2.50000000e-01 -1.11130073e-22]
+	[ 1.07889446e-25  7.50000000e-01]]
+	status: optimal
+	obj: -3.9994642857142857
+	[[ 2.50000000e-01 -5.66878028e-23]
+	[ 5.66878108e-23  7.50000000e-01]]
+	status: optimal
+	obj: -3.9995
+	[[ 2.50000000e-01  1.12085206e-22]
+	[-1.06311748e-24  7.50000000e-01]]
+	status: optimal
+	obj: -3.9995312499999995
+	[[2.50000000e-01 5.51862768e-23]
+	[5.58360336e-23 7.50000000e-01]]
+	status: optimal
+	obj: -3.9995588235294117
+	[[2.50000000e-01 5.46823694e-23]
+	[5.63399411e-23 7.50000000e-01]]
+	status: optimal
+	obj: -3.9995833333333333
+	[[ 2.50000000e-01 -1.11130414e-22]
+	[-1.10914183e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.999605263157895
+	[[ 2.50000000e-01 -5.52883039e-23]
+	[-1.66756293e-22  7.50000000e-01]]
+	status: optimal
+	obj: -3.999625
+	[[ 2.50000000e-01 -1.10718444e-22]
+	[-3.03850898e-25  7.50000000e-01]]
+	status: optimal
+	obj: -0.9825
+	[[ 2.50000000e-01  1.10709851e-22 -1.11209797e-22]
+	[ 2.22356962e-22  3.00000000e-01 -1.10897391e-22]
+	[-1.10834732e-22 -1.11147135e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.99125
+	[[ 2.50000000e-01 -1.18086022e-22  5.54360229e-23]
+	[-1.03958191e-22  3.00000000e-01 -4.85221266e-23]
+	[ 5.55859871e-23 -6.24999931e-23  4.50000000e-01]]
+	status: optimal
+	obj: -0.9941666666666666
+	[[ 2.50000000e-01  1.67542279e-24 -9.02920747e-25]
+	[-1.67529689e-24  3.00000000e-01 -2.57830146e-24]
+	[ 2.22947625e-22  2.57835866e-24  4.50000000e-01]]
+	status: optimal
+	obj: -0.995625
+	[[ 2.50000000e-01  1.07518204e-22 -6.07356262e-23]
+	[ 3.36570089e-22  3.00000000e-01 -5.72319709e-23]
+	[ 1.71758402e-22 -5.37898275e-23  4.50000000e-01]]
+	status: optimal
+	obj: -0.9965
+	[[ 2.50000000e-01  3.62041633e-24 -2.23532165e-22]
+	[-2.25665827e-22  3.00000000e-01 -1.16130663e-22]
+	[-1.09534272e-22 -2.16935737e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.9970833333333333
+	[[ 2.50000000e-01 -3.04602898e-25  1.08844672e-22]
+	[ 2.22349078e-22  3.00000000e-01  2.20171516e-22]
+	[ 2.24222382e-22  1.12895546e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.9975
+	[[ 2.50000000e-01  1.67389178e-22  5.46058619e-23]
+	[ 5.46549226e-23  3.00000000e-01 -1.76082074e-24]
+	[ 2.78460827e-22  1.76149241e-24  4.50000000e-01]]
+	status: optimal
+	obj: -0.9978125
+	[[ 2.50000000e-01  1.12313616e-22 -1.11893932e-22]
+	[ 1.09729020e-22  3.00000000e-01 -2.16476158e-24]
+	[-1.10148658e-22  2.16510806e-24  4.50000000e-01]]
+	status: optimal
+	obj: -0.9980555555555556
+	[[ 2.50000000e-01  1.53521320e-24  5.55069310e-23]
+	[-1.53498217e-24  3.00000000e-01  5.39719504e-23]
+	[ 5.55152244e-23  5.70504391e-23  4.50000000e-01]]
+	status: optimal
+	obj: -0.99825
+	[[ 2.50000000e-01 -5.78584577e-23  2.20132019e-22]
+	[-5.31633945e-23  3.00000000e-01  1.66970182e-22]
+	[ 1.12932966e-22  5.50760656e-23  4.50000000e-01]]
+	status: optimal
+	obj: -0.9984090909090909
+	[[ 2.50000000e-01 -1.10159194e-22  5.78533683e-23]
+	[-1.11884677e-22  3.00000000e-01 -5.40302524e-23]
+	[ 5.31672297e-23 -5.69909081e-23  4.50000000e-01]]
+	status: optimal
+	obj: -0.9985416666666667
+	[[ 2.50000000e-01  1.58478915e-24 -2.90879011e-25]
+	[-1.58779679e-24  3.00000000e-01 -1.12899214e-22]
+	[ 1.11314400e-22 -1.09143652e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.9986538461538461
+	[[ 2.50000000e-01  1.29692731e-24 -1.09306083e-22]
+	[-1.12320800e-22  3.00000000e-01 -1.10603467e-22]
+	[-3.34782807e-22 -1.11440161e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.99875
+	[[ 2.50000000e-01  3.05960762e-25 -1.10047970e-22]
+	[-3.07807840e-25  3.00000000e-01  6.67870216e-25]
+	[-9.73800980e-25 -1.11688797e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.9988333333333334
+	[[ 2.50000000e-01 -2.20472007e-22 -1.10265620e-22]
+	[-4.45663084e-22  3.00000000e-01 -2.22859007e-22]
+	[ 1.10264081e-22 -1.10205137e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.99890625
+	[[2.50000000e-01 1.67831187e-22 2.23235717e-22]
+	[2.76255783e-22 3.00000000e-01 5.54049384e-23]
+	[1.09830812e-22 5.56200424e-23 4.50000000e-01]]
+	status: optimal
+	obj: -0.9989705882352942
+	[[ 2.50000000e-01  2.33062237e-24  1.12105844e-22]
+	[-2.33398078e-24  3.00000000e-01 -1.24802428e-24]
+	[-1.08251257e-24  1.25052514e-24  4.50000000e-01]]
+	status: optimal
+	obj: -0.9990277777777777
+	[[ 2.50000000e-01 -5.37805096e-23  1.66737466e-22]
+	[ 5.37758046e-23  3.00000000e-01 -1.52711421e-24]
+	[ 5.53077093e-23  1.12553722e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.9990789473684211
+	[[ 2.50000000e-01 -5.39169018e-23  5.52124567e-23]
+	[-5.71093712e-23  3.00000000e-01 -1.12913039e-22]
+	[ 5.58078346e-23 -2.20147494e-22  4.50000000e-01]]
+	status: optimal
+	obj: -0.999125
+	[[ 2.50000000e-01  5.63739603e-23  1.67291982e-22]
+	[ 5.46420535e-23  3.00000000e-01 -1.05069787e-25]
+	[-1.67291107e-22  1.11132958e-22  4.50000000e-01]]
+	
+\end{lstlisting}
+
+
+\section{Sample Complexity Bound}
+	In our case, we regularize with respect to the norms of the dual potentials in an RKHS $H$,
+	$$S(P,\displaystyle \ Q)=\sup_{f\in L_{1}(P) \cap H,g\in L_{1}(Q) \cap H}\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H).$$
+	
+	%We focus throughout on subgaussian probability measures. We say that a distribution $P\in \mathcal{P}(\mathbb{R}^{d})$ is $\sigma^{2}$-subgaussian for $\sigma\geq 0$ if $E_{P}e^{\frac{||X\Vert^{2}}{2d\sigma^{2}}}\leq 2$. By Jensen's inequality, if $E_{pe}2d\sigma^{2}\leq C$ for any constant $C\geq 2$, then $P$ is $C\sigma^{2}$-subgaussian. Note that if $P$ is subgaussian, then $ E_{P}e^{v^{\mathrm{T}}X}<\infty$ for all $v\in \mathbb{R}^{d}$. Conversely, standard results (see, e.g., ) imply that our definition is satisfied if $E_{P}e^{u^{\mathrm{T}}X}\leq e^{\Vert u\Vert^{2}\sigma^{2}/2}$ for all $u\in \mathbb{R}^{d}.$
+	
+	Unregularized OT suffers from the curse of dimensionality: in general, the Wasserstein distance $W_{2}^{2}(P_{n},\ Q_{n})$ converges to $W_{2}^{2}(P,\ Q)$ no faster than $n^{-1/d}$ for measures in $\mathbb{R}^{d}.$
+	
+	Others have studied entropic OT and have shown that entropic OT converges faster than the unregularized counterpart. Here, we regularize with respect to the RKHS norms of the potentials instead of entropy. The proof technique however is inspired by Loubes and Barrio and Weed and Mena. First, we use a simple argument to remove the regularization terms. Then we examine the empirical process over some set that the optimal potentials belong to. Key to our results are the establishment of uniform bounds of the potential functions. And since these potentials are in an RKHS, we can exploit the structure of the RKHS to avoid controlling the Holder norms or bounding the derivatives in order to establish empirical process bounds. After controlling the potentials, a chaining bound completes our proof.
+	
+	\begin{prop}
+		The optimal $f,g$, denoted $f^*,g^*$, of $$\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H)$$ lie in a RKHS ball of radius $K(P,Q)/\lambda$, where 
+		$$
+		K(P,Q)=\min_{\pi\in \Pi(P,Q)} \int c\,d\pi.
+		$$
+	\end{prop}
+	\begin{proof}
+		\begin{align*}
+			\lambda (\left\|f^*\right\|+\left\|g^*\right\|)&\leq \lambda (\left\|f^*\right\|+\left\|g^*\right\|) + \sup_{f,g s.t. f\oplus g\leq c} \left\{\int f\,dP + \int g\,dQ \right\} - \left(\int f^{*}\,dP + \int g^{*}\,dQ\right) \\
+			&\leq \lambda (\left\|f^*\right\|+\left\|g^*\right\|) + K(P,Q) - \left(\int f^{*}\,dP + \int g^{*}\,dQ\right) \\
+			&\leq \sup_{f,g\in H} \left\{\lambda (\left\|f\right\|+\left\|g\right\|) + K(P,Q) - \left(\int f\,dP + \int g\,dQ\right)\right\}
+		\end{align*}
+		
+		Assuming $c(x,y)\geq 0$, we get $$\lambda(\left\|f^*\right\|+\left\|g^*\right\|)\leq K(P,Q)$$ which implies that $f^*$ and $g^*$ lie in an RKHS ball of radius $K(P,Q)/\lambda$.
+	\end{proof}
+	
+	We denote by $\mathcal{F}$ the set of functions in the RKHS ball with radius $K(P,Q)/\lambda$. The following proposition shows that it suffices to control an empirical process indexed by this set.
+	
+	\begin{prop}
+		Let $P, Q$, and $P_{n}$ be probability distributions.
+		Then
+		\begin{center}
+			(9)   $|S(P_{n},\displaystyle \ Q)-S(P,\ Q)|\leq 2\sup_{u\in \mathcal{F}}|E_{P}u-E_{P_n}u|.$
+		\end{center}
+	\end{prop}
+	
+	\begin{proof}
+		
+		We define the operator $\mathcal{A}^{\alpha,\beta}(u,\ v)$ for the pair of probability measures $(\alpha,\ \beta)$ and functions $(u,\ v)\in L_{1}(\alpha)\otimes L_{1}(\beta)$ as:
+		
+		$\displaystyle \mathcal{A}^{\alpha,\beta}(u,\ v)=\int u(x)\mathrm{d}\alpha(x)+\int v(y)\mathrm{d}\beta(y)-\lambda(\left\|u\right\|_H+\left\|v\right\|_H).$
+		
+		Denote by $(f_{n},\ g_{n})$ a pair of optimal potentials for $(P_{n},\ Q)$ and $(f,\ g)$ for $(P,\ Q)$, respectively. We can choose smooth optimal potentials $(f,\ g)$ and $(f_{n},\ g_{n})$ so that the condition $()$ holds for all $x, y\in \mathbb{R}^{d}.$ We earlier showed that $f$, $f_n\in \mathcal{F}$.
+		
+		Strong duality implies that $S(P,\ Q)=\mathcal{A}^{P,Q}(f,\ g)$ and $S(P_{n},\ Q)=\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n}).$
+		
+		Moreover, by the optimality of $(f,\ g)$ and $(f_{n},\ g_{n})$ for their respective dual problems, we obtain
+		
+		$$\mathcal{A}^{P,Q}(f_{n},\ g_{n})-\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n})\leq \mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n})\leq \mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f,\ g).$$
+		
+		From the above bound, we see that
+		
+		$|S(P,\ Q)-S(P_{n},\ Q)|=|\mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n})|$
+		$$
+		\leq|\mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f,\ g)|+|\mathcal{A}^{P,Q}(f_{n},\ g_{n})-\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n})|.
+		$$
+		
+		All that is left is bounding the differences $|\mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f,\ g)|$ and $|\mathcal{A}^{P,Q}(f_{n},\ g_{n})- \mathcal{A}^{P_{n},Q}(f_{n},\ g_{n})|.$
+		
+		\begin{align*}
+			\mathcal{A}^{P,Q}(f,\ g)-\mathcal{A}^{P_{n},Q}(f,\ g) &=\int f(x)(\mathrm{d}P(x)-\mathrm{d}P_{n}(x)) \\
+			&\leq\sup_{u\in \mathcal{F}}|\int u(x)(\mathrm{d}P(x)-\mathrm{d}P_{n}(x))|.
+		\end{align*}
+		
+		and similarly,
+		
+		\begin{align*}
+			\mathcal{A}^{P,Q}(f_n,\ g_n)-\mathcal{A}^{P_{n},Q}(f_n,\ g_n) &=\int f_n(x)(\mathrm{d}P(x)-\mathrm{d}P_{n}(x)) \\
+			&\leq\sup_{u\in \mathcal{F}}|\int u(x)(\mathrm{d}P(x)-\mathrm{d}P_{n}(x))|.
+		\end{align*}
+		
+	\end{proof}
+	
+	\begin{corollary}
+		
+		Let $P, Q, P_{n}$, and $Q_{n}$ be probability distributions. Then
+		$$|S(P_{n}, Q_{n})-S(P, Q)| \lesssim \sup_{u\in \mathcal{F}}|\int u(x)(\mathrm{d}P(x)-\mathrm{d}P_{n}(x))|
+		+\sup_{v\in \mathcal{F}}|\int u(x)(\mathrm{d}Q(x)-\mathrm{d}Q_{n}(x))|
+		$$
+	\end{corollary}
+	
+	PROOF. By the triangle inequality,
+	$$|S(P_{n},\ Q_{n})-S(P,\ Q)|\leq|S(P,\ Q)-S(P_{n},\ Q)|+|S(P_{n},\ Q)-S(P_{n},\ Q_{n})|.$$
+	
+	almost surely. $\square $
+	\medskip
+	
+	The key result is the following covering number bound. Denote by $N(\varepsilon,\ \mathcal{F}^{s},\ L_{2}(P_{n}))$ the covering number with respect to the (random) metric $L_{2}(P_{n})$ defined by
+	
+	$\displaystyle \Vert f\Vert_{L_{2}(P_{n})}=\left(\frac{1}{n}\sum_{i=1}^{n}f(X_{i})^{2}\right)^{1/2}$
+	
+	\begin{prop}
+		Let $\mathcal{H}_{\sigma}$ be a Gaussian radial basis function RKHS with the kernel defined as $k(x,y)=e^{-\sigma^2 \left\|x-y\right\|_2^2}$. If $P_{n}$ is an empirical distribution, then, given the sample $X_{1}$, . . . , $X_{n}$, we have the bound
+		$$
+		\max_{f\in \mathcal{F}} \Vert f\Vert_{L_{2}(P_{n})}^{2}\leq \frac{K^2(P,Q)}{\lambda^2}\ .
+		$$ 
+	\end{prop}
+	
+	\begin{proof}
+		Denote $$f(x)=\langle f(t),K(x,t)\rangle \leq \left\|f\right\|_{\mathcal{H}}\max_{x\in X} \sqrt{k(x,x)}$$ and $k(x,x)=1$ if $k(x,y)=e^{-\sigma^2 \left\|x-y\right\|_2^2}$. Thus $\left|f(x)\right|\leq \left\|f\right\|_{\mathcal{H}}$ for all $x\in X$.
+	\end{proof}
+	
+	Assuming the RKHS is Gaussian like in the previous proposition, then we have the following
+	\begin{theorem}
+		Let $\sigma\geq 1$, $X\subset \mathbb{R}^d$ be a compact subset with nonempty interior, and $H_{\sigma}(X)$ be the RKHS of the Gaussian RBF kernel $k_{\sigma}$ on $X$. Then for all $0<p\leq 2$ and all $\delta>0$, there exists a constant $C_{p,\delta,d}>0$ independent of $\sigma$ such that for all $\epsilon>0$ we have 
+		$$
+		\sup_{T\in (X\times Y)^n} \log N(\varepsilon,\ \mathcal{F},\ L_{2}(P_{n}))\leq c_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}\epsilon^{-p}.
+		$$
+	\end{theorem}
+	
+	Using this result, we then have, by Gine and Nickl,
+	
+	\begin{align*}
+		E \displaystyle\Vert P-P_n\Vert_{\mathcal{F}}^{2}&\lesssim \frac{1}{n}E(\int_{0}^{\sqrt{\max_{f\in \mathcal{F}}\Vert f\Vert_{L_{2}(P_{n})}^{2}}}\sqrt{\log 2N(\epsilon,\mathcal{F},L_{2}(P_{n}))}\mathrm{d}\epsilon)^{2} \\
+		&\leq \frac{1}{n}E(\int_{0}^{K(P,Q)/\lambda}\sqrt{1+c_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}\epsilon^{-p}}\mathrm{d}\epsilon)^{2} \\
+		&\leq \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n}E(\int_{0}^{K(P,Q)/\lambda} \epsilon^{-p/2} \mathrm{d}\epsilon)^{2} \\
+		&= \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n(1-p/2)^2} \left(\frac{K(P,Q)}{\lambda}\right)^{2-p}
+	\end{align*}
+	
+	And one can notice here that the upper bound is $O(1/n)$.

@@ -1,0 +1,486 @@
+\chapter{Asymptotics for Prior Elicitation}
+
+This chapter is a self-contained paper submitted for publication at NeurIPS.
+
+\section{Statistical Elicitation}
+
+% Background summary
+% basics, typical terminologies etc
+Elicitation is the process of forming a probability distribution from a person's knowledge and beliefs. 
+We will focus on the case of elicitation to obtain a prior that will be used in a subsequent machine learning task, though most of the results will be applicable to other motivations for elicitation, but narrowing the language will simplify our discussion. %to be used a prior in modeling
+Classically, elicitation human-centered process with multiple roles.
+The \emph{modeler} who will ultimately do the modeling, with the elicited prior. 
+The \emph{facilitator} has a strategy and asks questions to gather information to use for inference.  
+The \emph{expert} has the knowledge that the facilitator will use. 
+A \emph{statistician} will train the expert on probability and provide feedback. 
+An individual may fill multiple roles, for example, a single individual commonly fills both the statistician and facilitator roles.  
+The expert may also be the modeler who will ultimately use the elicited prior.
+
+Elicitation is a multi-stage process, typified by the following.
+
+The modeler and the statistician will determine the target value in collaboration in the structuring and decomposition step. 
+
+
+
+During the elicitation phase there is further iteration over three steps: elicit summaries, fit a distribution, assess adequacy. 
+This step will be our focus, as the fitting and assessment steps are the primary role of the automated tool. 
+In higher dimensions, summaries are less intuitive and even cumbersome to communicate.
+We will, in our automated facilitator-statistican discussion, shift from eliciting summaries to eliciting samples. 
+Sample based elicitation has been applied in an experimental setting successfully for fitting beta distributions.
+
+
+
+Literature on elicitation spans making inferences from the type of information provided by elicitation and the relevant psychological literature.  
+The psychology of elicitation relates to how people characterize uncertainty (not consistently) to what we actually need in order to make inferences about uncertainty that are useful for further inferences. 
+In the Human Computer Interactive and Viszualization communities, elicitation has been studied in amazon turkers either to eval
+
+
+Toward the study of bayesian modeling in a broad sense, HCI researchers have built tools for eliciting specific forms of priors. 
+
+Studying how people set priors in practice revealed that the choice of visualization can impact how experienced Bayesian statisticians choose to set a prior. 
+In designing a more general prior elicitation tool, it will be important to understand what forms of information will facilitate good inferences and to balance that with what pscyhological insights about people to choose matching interfaces.  
+More work has examined what people are able to express reliably, and how visualization types impact the broad strategies of the expert. 
+Here we consider the learnability of classes of priors from different forms of evidence toward making tool design choices. 
+
+% We may represent uncertainty in many ways: probabilities, percentages, relative frequencies, odds, or natural frequencies. 
+% Mathematically, these are equivalent, but research has shown that these are not always equivalent when filtered through a human mind.
+% Frequencies seem to provide less biased estimates than probabilities. % get cite
+% A facilitator may ask for information from the expert directly or indirectly. 
+% Examples of direct techniques include direct estimation, response scales and probability wheels. 
+% Bets are an example of an indirect format to get the information from an expert.  
+% Rooted in the psychological literature, there are standard techniques for debiasing judgements. 
+% While understanding how to elicit the probability of an event is helpful in some cases, in a more general sense, we want to elicit a whole prior distribution. 
+% We might be interested in different things from an expert, in particular the literature considers two main cases: eliciting the probability of a specific event and eliciting a distribution. 
+
+\section{Sample Based Elicitation}
+
+Prior work using sample-based elicitation used a method of moments technique with weighted samples. 
+We propose a similar elicitation procedure, but consider a distinct inference technique. 
+Moving to a least squares based approach with a stated objective function for the prior enables cases where the moments do not exist. 
+% Moments do not always exist
+
+In order to build a general automated elicitation tool, we need to consider how the tool will learn from the expert. 
+In the end, this will be an online process learning from each sample sequentially and presenting the updated model to the user for feedback. 
+% As a first consideration of the learnability of this objective function we consider the case of learning from i.i.d. samples in batch. 
+While in general, learning from correlated samples can degrade performance relative to i.i.d samples, learning from coresets constructed with a diverse sampling strategy has been shown improve learning rates. 
+In elicitation, the examples will be provided by a human expert, given instructions, we assume this will result in samples that are more diverse than a sample directly from the distribution for two reasons. 
+First, an expert is unlikely to give an example that is very close to a previous sample, toward generating a representative sample that explains the range of their belief. 
+Second, the instructions can prompt the user to provide examples that are both likely and unlikely. 
+Therefore, by examining the i.i.d case we are obtaining a worst-case estimate of the learnability of the problem. 
+
+
+In this section we present our main analytical results. 
+First we will introduce our least squares based objective function. 
+Next, we consider the large sample behavior of the proposed estimator 
+% to ensure that our proposed elicitation process is viable in a broad sense. Generally, we 
+by evaluating the consistency of the estimator and show the conditions under which we achieve asymptotic normality. 
+Third we present a finite sample result. 
+
+\section*{A Least-Squares Based Approach to Elicitation}
+
+\subsection*{Proposed Objective Function}
+
+Assume that we elicit i.i.d. observations $x_i$ with corresponding sample likelihoods $z_i$ for $i=1,\ldots,n$. Assuming we have a parametric model class, our proposed method of estimating $\theta$ involves minimizing an objective function, which we illustrate below.
+
+Let $Q((\vec{x},\vec{z}),\theta)=\sum_i \left( l(x_i,\theta)-z_i \right)^2$
+
+Our proposed optimization problem is $$
+\hat{\theta} = \arg \min_{\theta} \sum_i \left( l(x_i,\theta)-z_i \right)^2 = \arg \min_{\theta} Q((\vec{x},\vec{z}), \theta),$$
+
+where $x_i,z_i$ is the $i$th sample and likelihood.
+
+$$\frac{dQ}{d\theta} = 2 \sum_i \left( (l(x_i,\theta)-z_i) \frac{\partial}{\partial \theta}l(x_i,\theta)\right) $$
+
+and let $\psi((x_i,z_i),\theta)=l(x_i,\theta)-z_i.$
+
+$\hat{\theta}$ is a solution to $$\sum_i \left( (l(x_i,\theta)-z_i) \frac{\partial}{\partial \theta}l(x_i,\theta)\right) = 0$$
+
+and
+
+$\theta_0$ solves $$\E_{\theta_0}\left[(l(x_i,\theta)-z_i) \frac{\partial}{\partial \theta}l(x_i,\theta)\right]=0$$
+
+\section*{Asymptotic Analysis}
+
+Let $\Omega$ be the parameter space with an open set $\omega$ such that $\theta_0$, the true parameter value, is an interior point.
+
+\subsection*{Consistency}
+
+Then if $\left( (l(x_i,\theta)-z_i) \frac{\partial}{\partial \theta}l(x_i,\theta)\right)$ is monotone in $\theta$, continuous in a neighborhood of $\theta_0$, and $\theta_0$ is an isolated root, $\hat{\theta} \xrightarrow{\mathcal{P}}\ \theta_0$.
+
+\subsection*{Asymptotic Normality}
+
+$$\frac{\partial}{\partial \theta} \psi((x,z),\theta) = \left[ \frac{\partial}{\partial \theta}l(x,\theta) \right]^2  + (l(x,\theta)-z) \frac{\partial^2}{\partial \theta^2}l(x,\theta)$$
+
+If $$\E_{\theta_0} \left[ \left[ \frac{\partial}{\partial \theta}l(x,\theta) \right]^2  + (l(x,\theta)-z) \frac{\partial^2}{\partial \theta^2}l(x,\theta) \right] $$ is finite and nonzero and 
+
+$$
+\E_{\theta_0} \left[ \left\lbrace \left[ \frac{\partial}{\partial \theta}l(x,\theta) \right]^2  + (l(x,\theta)-z) \frac{\partial^2}{\partial \theta^2}l(x,\theta)\right\rbrace^2 \right] < \infty
+$$,
+
+then $$\sqrt{n}(\hat{\theta}-\theta_0) \xrightarrow{\mathcal{L}}\ \mathcal{N}(0,\sigma_{\hat{\theta}}^2)$$
+
+where $$\sigma_{\hat{\theta}}^2 = \frac{\E_{\theta_0}[\psi^2((X,Z),\theta_0)]}{(\E_{\theta_0} [\frac{\partial}{\partial \theta} \psi((X,Z),\theta)|_{\theta=\theta_0}])^2}$$
+
+
+\subsection{Finite Sample}
+
+To do an elicitation, we will need to obtain a finite number of samples from an expert.
+While the large sample results give confidence of the general tractability of the problem, the finite sample results are important to understanding the realistic feasibility of implementing an automated elicitation tool.  
+
+
+For the finite sample result, the assumptions are the following \cite{Pinelis2017}:
+
+
+Let $\theta_{0}\in \Theta$ be the expert's target value of the parameter $\theta$, such that
+\begin{center}
+	$[\theta_{0}-\delta,\ \theta_{0}+\delta]\subseteq \theta^{\circ}$ 
+\end{center}
+for some real $\delta>0$, where $\theta^{\circ}$ denotes the interior of the subset $\Theta$ of $\mathbb{R}$. 
+
+For brevity, we will use $\mathrm{P}$ and $\mathrm{E}$ throughout defined as $\mathrm{P} :=\mathrm{P}_{\theta_{0}}$ and $\mathrm{E} :=\mathrm{E}_{\theta_{0}}.$
+
+For $x\in \mathcal{X}$ and $\theta\in \theta$, consider the function
+$$
+\ell_{X,Z}(\theta)=- (\ell_x(\theta)-z)^2
+$$
+
+\begin{enumerate}
+	\item The set $\mathcal{X}_{>0} :=\{x\in \mathcal{X}:p_{\theta}(x)>0\}$ is the same for all $\theta\in [\theta_{0}-\delta,\ \theta_{0}+\delta],$ and for each $x\in \mathcal{X}_{>0}$ the likelihood $l_{x}(\theta)$ are thrice differentiable in $\theta$ at each point $\theta\in [\theta_{0}-\delta,\ \theta_{0}+\delta].$
+	\item $\mathrm{E}\ell_{X,Z}^{'}(\theta_{0})^{2}=I_1(\theta_0)$ and $-\mathrm{E}\ell_{X,Z}^{''}(\theta_{0})=I_2(\theta_{0})\in (0,\infty)$.
+	\item $\mathrm{E}|\ell_{X,Z}'(\theta_{0})|^{3}+\mathrm{E}|\ell_{X,Z}^{''}(\theta_{0})|^{3}<\infty.$
+	\item $\mathrm{E} \sup |\ell_{X,Z}^{'''}(\theta)|^{3}<\infty.$
+	$$
+	\theta\in [\theta_0-\delta,\theta_0+\delta]
+	$$
+\end{enumerate}
+
+% \subsection{Main Result}
+Suppose that the above conditions hold and that $\ell_{X,Z}(\theta)$ is concave in $\theta\in \Theta$, for each $x,z\in \mathcal{X}\times \mathcal{Z}$. 
+
+
+Then
+
+$$|\mathrm{P}\left(\sqrt{n \frac{I_2(\theta_{0})^2}{I_1(\theta_0)}}(\hat{\theta}-\theta_{0})\leq z\right)-\Phi(z)|\leq\frac{C}{\sqrt{n}}$$
+
+for all real $z$, and
+
+$$|\mathrm{P}(\sqrt{n\frac{I_2(\theta_{0})^2}{I_1(\theta_0)}}(\hat{\theta}-\theta_{0})\leq z)-\Phi(z)|\leq\frac{C_{\omega}}{z^3 \sqrt{n}}$$
+
+for $z\in (0,\omega \sqrt{n}]$ for any $\omega\in (0,\infty)$. $C_{\omega}$ is a finite expression that depends on $\omega$ and neither $C$ and $C_{\omega}$ depend on $n$ or $z$.
+
+\section{Experiments}
+
+To validate our learnability results we provide synthetic data experiments.
+Throughout, we simulate the batch data that we could obtain from an elicitation by sampling a "target" distribution and computing the likelihood.
+Then we use that data to learn the parameters of the proposed distribution class.
+We assess the quality of the elicitation with the $L2$ error of the learned parameters and the KL divergence for the learned distribution. 
+We generate a number of batches of data each of a fixed size and then attempt to learn from that.  
+
+\subsection{Validating the estimator and the learning rate}
+
+First, we use exact samples without noise. We generate sample, likelihood pairs from the target distribution in fixed sizes and multiple batches. We used a batch size of 20. Then we ran the optimization process to see how well can we learn the true distribution from these samples as we increase the number of samples in those batches. 
+
+We varied the number of samples from 2 to 40 and had 20 batches. We wanted to see for how many batches out of 20 are we able to learn the true distribution. We saw that the rate of success of elicitation was directly related to the sample size as shown below.
+Second we add noise the likelihoods assuming that our expert can give realistic samples, but may be variably good .
+
+\section*{Proof of Theoretical Bound}
+Here, we provide a theoretical proof of the main asymptotic result. This follows the technique introduced in \cite{Pinelis2017} for maximum likelihood estimators. Pinelis briefly states that his result could be extended to M-estimators, and in the following, we fully exposit the proof for the general class of M-estimators, which requires adjustments to the assumptions in \cite{Pinelis2017}.
+
+This proof is organized as follows.
+
+\begin{enumerate}
+	\item We describe the general problem setting and assumptions required.
+	\item Then, we demonstrate tight bracketing of our M-estimator between two functions of the sum of independent random vectors.
+	\item Uniform and nonuniform optimal-order bounds on the convergence rate in the multivariate delta method are presented \cite{Pinelis2016}.
+	\item Applying the general bounds in the multivariate delta method, we can make bracketing work.
+	\item Lastly, we bound the remainder and show this is asymptotically negligible under certain conditions.
+\end{enumerate}
+
+\subsection*{Setting and Assumptions}
+
+Let $X, X_1, X_2, \ldots$ be random variables mapping from $(\Omega, \mathcal{A})$ to $(\mathcal{X},\mathcal{B})$ and let $(P_{\theta})_{\theta\in \Theta}$ be a parametric family of probability measures such that $X, X_1, X_2, \ldots$ are i.i.d. with respect to each of the measures $P_{\theta}$ with $\theta \in \Theta$. Importantly, $\Theta\subseteq \mathbb{R}$, i.e. the parameter space $\Theta$ is a subset of the real line.
+
+Let $E_{\theta}$ be the expectation with respect to $P_{\theta}$. For each $\theta\in \Theta$, $P_{\theta} X^{-1}$ of $X$ has a density $p_{\theta}$ with respect to a measure $\mu$ on $\mathcal{B}$.
+
+Because the extended real line $[-\infty,\infty]$ is compact, for each $n\in \mathbb{N}$ and point $x=x_n=(x_1,\ldots,x_n)\in \mathcal{X}^n$, the function $\Theta\ni \theta\mapsto \ell_{X,Z}(\theta) = \sum_{i=1}^n -(l_{x_i}(\theta)-z_i)^2 $ has at least one generalized maximizer $\hat{\theta}_n(x)$ in the closure of $\Theta$.
+
+Let $\theta_{0}\in \Theta$ be the expert's target value of the parameter $\theta$, such that
+\begin{center}
+	$[\theta_{0}-\delta,\ \theta_{0}+\delta]\subseteq \theta^{\circ}$ 
+\end{center}
+for some real $\delta>0$, where $\theta^{\circ}$ denotes the interior of the subset $\Theta$ of $\mathbb{R}$.
+
+For convenience, we provide the assumptions for $\ell$ again.
+
+\begin{enumerate}
+	\item The set $\mathcal{X}_{>0} :=\{x\in \mathcal{X}:p_{\theta}(x)>0\}$ is the same for all $\theta\in [\theta_{0}-\delta,\ \theta_{0}+\delta],$ and for each $x\in \mathcal{X}_{>0}$ $\ell_{x}(\theta)$ is thrice differentiable in $\theta$ at each point $\theta\in [\theta_{0}-\delta,\ \theta_{0}+\delta].$
+	\item $\mathrm{E}\ell_{X,Z}^{'}(\theta_{0})^{2}=I_1(\theta_0)$ and $-\mathrm{E}\ell_{X,Z}^{''}(\theta_{0})=I_2(\theta_{0})\in (0,\infty)$.
+	\item $\mathrm{E}|\ell_{X,Z}'(\theta_{0})|^{3}+\mathrm{E}|\ell_{X,Z}^{''}(\theta_{0})|^{3}<\infty.$
+	\item $\mathrm{E} \sup |\ell_{X,Z}^{'''}(\theta)|^{3}<\infty.$
+\end{enumerate}
+
+\medskip
+
+\subsection*{Tight Bracketing}
+
+Without loss of generality (w.l.o.g.), $\mathcal{X}_{>0}=\mathcal{X}$. Then on the event
+\begin{equation}\label{eqn:goodevent}
+G:=\{\hat{\theta}\in[\theta_{0}-\delta,\ \theta_{0}+\delta]\}
+\end{equation}
+($G$ for ''good event'') one must have
+
+\begin{equation}\label{eqn:taylor}
+0 =\ell_{\mathrm{x}}'(\displaystyle \hat{\theta})=\ell_{\mathrm{x}}'(\theta_{0})+(\hat{\theta}-\theta_{0})\ell_{\mathrm{x}}''(\theta_{0})+\frac{(\hat{\theta}-\theta_{0})^{2}}{2}\ell_{\mathrm{x}}'''(\theta_{0}+\xi(\hat{\theta}-\theta_{0}))
+\end{equation}
+
+\begin{equation}\label{eqn:taylor2}
+=n(\overline{Z}-(\hat{\theta}-\theta_{0})\overline{U}+\frac{(\hat{\theta}-\theta_{0})^{2}}{2}\overline{R})
+\end{equation}
+
+for some $\xi\in (0,1)$ as a function of the $X_i$'s, where $\overline{Z}=\frac{1}{n}\sum_{i=1}^n Z_i,\, \overline{U}=\frac{1}{n}\sum_{i=1}^{n}U_{i},\, \overline{R}:=\frac{1}{n}\sum_{i=1}^{n}R_{i},\,
+\overline{R^{*}}:=\sum_{i=1}^{n}R_{i}^{*},$
+
+\begin{equation}\label{eqn:Z}
+Z_i = \ell'_{X_i}(\theta_0),\quad U_i=-\ell''_{X_i}(\theta_0)
+\end{equation}
+
+\begin{equation}\label{eqn:R}
+R_i = \ell''_{X_i}(\theta_0 + \xi(\hat{\theta}-\theta_0))\in [-R_i^{*},R_i^{*}], \quad R_i^{*}=\sup_{\theta\in [\theta_0-\delta,\theta_0+\delta]} \abs{\ell'''_{X_i}(\theta)}.
+\end{equation}
+
+Looking at \eqref{eqn:taylor} and \eqref{eqn:taylor2}, one has a quadratic equation for $\hat{\theta}$.
+
+On the event $G$ one has
+\begin{align*}
+\hat{\theta}-\theta_{0}=\frac{\overline{Z}}{\overline{U}} &\textrm{ if } \overline{R}=0\, \&\, \overline{U}\neq 0, \\
+\hat{\theta}-\theta_{0}\in\{d_{+},\ d_{-}\} &\textrm{ if } \overline{R}\neq 0,
+\end{align*}
+
+where
+$$
+d_{\pm}:=\frac{\overline{U}\pm\sqrt{\overline{U}^{2}-2\overline{Z}\overline{R}}}{\overline{R}}.
+$$
+
+One defines a ''bad event'' by letting
+
+$B :=B_{1}\cup B_{2}$, where
+
+$B_{1} :=\{\overline{R}\neq 0,\hat{\theta}-\theta_{0}=d_{+}\}\cup\{\overline{U}\leq 0\}$ and $B_{2} :=\{\overline{U}^{2}\leq 2|\overline{Z}|\overline{R^{*}}\}.$
+
+On the event $B_1 \cap \{\overline{U}>0\}$, one sees $|\hat{\theta}-\theta_{0}|=|d_{+}|\geq \overline{U}/|\overline{R}|\geq\overline{U}/\overline{R^{*}}$
+
+By \eqref{eqn:goodevent},
+\begin{equation}\label{eqn:bound_intersection}
+\Prob(G\cap B_{1})\leq \Prob(\overline{U}\leq 0 \textrm{ or } \frac{\overline{U}}{\overline{R^{*}}}\leq \delta) =\Prob( \frac{\overline{U}}{\overline{R^{*}}}\leq \delta)=\Prob(\sum_{i=1}^{n}(U_{i}-\delta R_{i}^{*})\leq 0).
+\end{equation}
+
+And by the assumptions for $\ell$ and the definitions for $Z_i$, $U_i$, $R_i$, and $R^{*}_i$,
+
+\[
+\mathrm{E}U_{1}>0,\, \mathrm{E}|Z_{1}|^{3}<\infty,\, \mathrm{E}|U_{1}|^{3}<\infty,\, \mathrm{E}(R_{1}^{*})^{3}<\infty.
+\]
+
+Therefore, $\mathrm{E}R_{1}^{*}<\infty$. Choose $\delta>0$ to be small enough so that
+$$
+\delta_{1}:=\mathrm{E}(U_{i}-\delta R_{i}^{*})>0.
+$$
+Then, letting $Y_{i} :=(U_{i}-\delta R_{i}^{*})-\mathrm{E}(U_{i}-\delta R_{i}^{*})$, we use \eqref{eqn:bound_intersection} with Markov's inequality to have
+
+\begin{align*}
+\mathrm{P}(G\cap B_{1})\leq \mathrm{P}(\sum_{i=1}^{n}Y_{i}\leq-n\delta_{1})&\leq\frac{1}{(n\delta_{1})^{3}}\mathrm{E}|\sum_{i=1}^{n}Y_{i}|^{3}
+\\
+&\leq\frac{n\mathrm{E}|Y_{1}|^{3}+\sqrt{8/\pi}(n\mathrm{E}Y_{1}^{2})^{3/2}}{(n\delta_{1})^{3}}\leq\frac{\mathrm{C}}{n^{3/2}}
+\end{align*}
+
+where $\mathrm{C}:=(\mathrm{E}|Y_{1}|^{3}+\sqrt{8}/\pi(\mathrm{E}Y_{1}^{2})^{3/2})/\delta_{1}^{3}$, which depends on $\delta_{1}>0, \mathrm{E}Y_{1}^{2}<\infty,$ and $\mathrm{E}|Y_{1}|^{3}<\infty$. However, this does not depend on $n$.
+
+Now, one notices $B_{2}$ implies at least one of the following events:
+\begin{align*}
+B_{21} &=\displaystyle\{\overline{U}\leq\frac{1}{2}\mathrm{E}U_{1}\} \\
+B_{22} &=\{\overline{R^{*}}\geq 1+\mathrm{E}R_{1}^{*}\}, \textrm{ or}\\ 
+B_{23} &= \displaystyle \{|\overline{Z}|\geq\frac{1}{8}(\mathrm{E}U_{1})^{2}/(1+\mathrm{E}R_{1}^{*})\}. 
+\end{align*}
+
+So,
+\begin{equation}
+\Prob(B_{2})\leq \Prob(B_{21})+\Prob(B_{22})+\Prob(B_{23}).
+\end{equation}
+
+The bounding of each of the probabilities $\mathrm{P}(B_{21})$, $\mathrm{P}(B_{22})$ , $\mathrm{P}(B_{23})$ is quite similar to the bounding of $\mathrm{P}(G\cap B_{1})$ -- because 
+
+\begin{align*}
+\Prob(B_{21})&=\Prob(\sum_{i=1}^{n}Y_{i,21}\leq-n\delta_{21}), \\
+\Prob(B_{22})&=\Prob(\sum_{i=1}^{n}Y_{i,22}\geq n\delta_{22}) \textrm{ ,and } \\ 
+\Prob(B_{23})&= \Prob(\sum_{i=1}^{n}|Y_{i,23}|\geq n\delta_{23}).
+\end{align*} 
+
+It follows that 
+
+\begin{equation}\label{GandB}
+\mathrm{P}(G\cap B)\leq \mathrm{P}(G\cap B_{1})+\mathrm{P}(B_{2})\leq\frac{\mathrm{C}}{n^{3/2}}, 
+\end{equation}
+where $\mathrm{C}$ depends on $\ell$, the measure $\mu$, and the choice of $\theta_{0}-$ but not on $n.$
+
+
+On the other hand, if $\overline{R}\neq 0$ and $\overline{U}>0$, then $d_{-}=\displaystyle \frac{2\overline{Z}}{\overline{},U+\sqrt{\overline{U}^{2}-2\overline{Z}\overline{R}}}$. Here, the condition $\overline{U}>0$ is so the denominator of the latter ratio is nonzero. Thus, on the event $G\backslash B$ one has
+\begin{equation}\label{inclusionrelation}
+\overline{U}>0 \textrm{ and } \displaystyle \hat{\theta}-\theta_{0}=\frac{2\overline{Z}}{\overline{U}+\sqrt{\overline{U}^{2}-2\overline{Z}\overline{R}}}\in[T_{-},\ T_{+}]
+\end{equation}
+where
+\begin{equation}\label{Tpm}
+T_{\pm}\ :=\frac{2\overline{Z}}{\overline{U}+\sqrt{\overline{U}^{2}\mp 2|\overline{Z}|\overline{R^{*}}}
+}.
+\end{equation}
+
+\medskip
+
+\subsection*{General uniform and nonuniform bounds on the rate of convergence to normality for smooth nonlinear functions of sums of independent random vectors}
+
+Denote the standard normal distribution function (d.f.) by $\Phi$. For any $\mathbb{R}^{d}$-valued random vector $\zeta$,
+
+\[
+\Vert\zeta\Vert_{p} :=(\mathrm{E}\Vert\zeta\Vert^{p})^{1/p} \textrm{ for any real } p\geq 1,
+\]
+
+where $\Vert$ . $\Vert$ denotes the Euclidean norm on $\mathbb{R}^{d}.$
+
+Take any Borel-measurable functional $f:\mathbb{R}^{d}\rightarrow \mathbb{R}$ satisfying the following smoothness condition: there exist $\epsilon\in(0,\ \infty), M_{\epsilon}\in(0,\ \infty)$ , and a linear functional $L:\mathbb{R}^{d}\rightarrow \mathbb{R}$ such that
+
+\begin{theorem}[Smoothness Condition]
+	\begin{equation}\label{eqn:smoothness}
+	|f(\displaystyle \mathrm{x})-L(\mathrm{x})|\leq\frac{M_{\epsilon}}{2}\Vert \mathrm{x}\Vert^{2} \textrm{ for all } \mathrm{x}\in \mathbb{R}^{d} \textrm{ with } \Vert \mathrm{x}\Vert\leq\epsilon .
+	\end{equation}
+	
+\end{theorem}
+
+Thus, $f(0)=0$ and $L$ necessarily coincides with the first Fr\'{e}chet derivative, $f'(0)$ , of the function $f$ at $0$. Moreover, for the smoothness condition to hold, it is enough that 
+
+\[
+M_{\epsilon}\geq M_{\epsilon}^{*} :=\displaystyle \sup\{\frac{1}{\Vert \mathrm{x}\Vert^{2}}|\frac{\mathrm{d}^{2}}{\mathrm{d}t^{2}}f(\mathrm{x}+t\mathrm{x})|_{t=0}|\ :\ \mathrm{x}\in \mathbb{R}^{d},\ 0<\Vert \mathrm{x}\Vert\leq\epsilon\}.
+\]
+
+Notice that $f$ does not need to be twice differentiable at $0$. One example is if $d=1$ and $f(x)= \displaystyle \frac{x}{1+|x|} \textrm{ for } x\in \mathbb{R}.$
+
+
+Let $V, V_{1}$, . . . , $V_{n}$ be i.i.d. random vectors in $\mathbb{R}^{d}$, with $\E V=0$ and
+$$
+\overline{V}:=\frac{1}{n}\sum_{i=1}^{n}V_{i}.
+$$
+And let
+\begin{equation}\label{sigmatilde}
+\tilde{\sigma} :=\Vert L(V)\Vert_{2}, v_{3} :=\Vert V\Vert_{3}, \textrm{ and } \varsigma_{3} :=\displaystyle \frac{\Vert L(V)\Vert_{3}}{\tilde{\sigma}}.
+\end{equation}
+
+\begin{theorem}\label{berryesseen}
+	Suppose that the smoothness condition holds and that $\tilde{\sigma}>0$ and $v_{3}<\infty$. Then for all $z\in \mathbb{R}$
+	\begin{equation}\label{berryesseen1}
+	|\displaystyle \mathrm{P}(\frac{f(\overline{V})}{\tilde{\sigma}/\sqrt{n}}\leq z)-\Phi(z)|\leq\frac{\mathrm{C}}{\sqrt{n}},
+	\end{equation}
+	where $\mathrm{C}$ is a finite positive expression that depends only on the function $f$ and the moments $\tilde{\sigma}$, $\varsigma_{3}$, and $v_{3}$. Moreover, for any $\omega\in(0,\ \infty)$ and for all
+	\begin{equation}\label{omega}
+	z\in(0,\ \omega\sqrt{n}],
+	\end{equation}
+	
+	one has
+	
+	\begin{equation}\label{berryesseen2}
+	|\mathrm{P}(\frac{f(\overline{V})}{\tilde{\sigma}/\sqrt{n}}\leq z)-\Phi(z)|\leq\frac{\mathrm{C}_{\omega}}{z^{3}\sqrt{n}}
+	\end{equation}
+	
+	where $C_{\omega}$ is a positive, finite, and only depends on $f$ through the smoothness condition, the moments $\tilde{\sigma}$, $\varsigma_{3}$, and $v_3$, and $\omega$.
+\end{theorem}
+
+\subsection*{Applying bracketing}
+
+Now let $d=3$ and then let
+
+$$\mathcal{D} :=\{\mathrm{x}=(x_{1},\ x_{2},\ x_{3})\in \mathbb{R}^{d}=\mathbb{R}^{3}\ :\ x_{2}+\mathrm{E}U_{1}>0,\ (x_{2}+\mathrm{E}U_{1})^{2}>2|x_{1}||x_{3}+\mathrm{E}R_{1}^{*}|\}.$$
+
+By \eqref{eqn:R} and assumptions 2 and 4 for $\ell$ , $\mathrm{E}U_{1}=I_2(\theta_{0})\in(0,\ \infty)$ and $\mathrm{E}R_{1}^{*}\in[0,\ \infty$). So, for some real $\epsilon>0$, the set $\mathcal{D}$ contains the $\epsilon$-neighborhood of the origin $0$ of $\mathbb{R}^{3}.$
+
+Define functions $f\pm:\mathbb{R}^{3}\rightarrow \mathbb{R}$ by the formula
+
+\begin{equation}\label{definef}
+f_{\pm}(\displaystyle \mathrm{x})=f_{\pm}(x_{1},\ x_{2},\ x_{3})=\frac{2x_{1}}{x_{2}+\mathrm{E}U_{1}+\sqrt{(x_{2}+\mathrm{E}U_{1})^{2}\mp 2|x_{1}||x_{3}+\mathrm{E}R_{1}^{*}|}}
+\end{equation}
+
+for $\mathrm{x}=(x_{1},\ x_{2},\ x_{3})\in \mathcal{D}$, and let $f(\mathrm{x}) :=0$ if $\mathrm{x}\in \mathbb{R}^{3}\backslash \mathcal{D}$. 
+
+Clearly, $f_{\pm}(0)=0,$
+\begin{equation}\label{Lplusminus}
+L_{\pm}(\displaystyle \mathrm{x}):=f_{\pm}'(0)(\mathrm{x})=\frac{x_{1}}{\mathrm{E}U_{1}}=\frac{x_{1}}{I_2(\theta_{0})}
+\end{equation}
+for $\mathrm{x}=(x_{1},\ x_{2},\ x_{3})\in \mathbb{R}^{3}$, and the smoothness condition \eqref{eqn:smoothness} holds for some $\epsilon$ and $M_{\epsilon}$ in $(0,\ \infty)$ --because, as was noted above, $\mathrm{E}U_{1}=I_2(\theta_{0})\in(0,\ \infty)$ and $\mathrm{E}R_{1}^{*}\in[0,\ \infty$), and hence the denominator of the ratio in \eqref{definef} is bounded away from $0$ for $\mathrm{x}=(x_{1},\ x_{2},\ x_{3})$ in a neighborhood of $0.$
+
+Next, let
+\begin{equation}\label{Vi}
+V_{i}:=(Z_{i},\ U_{i}-\mathrm{E}U_{i},\ R_{i}^{*}-\mathrm{E}R_{i}^{*})
+\end{equation}
+for $i=1,\ldots,n$, with $Z_{i}, U_{i}, R_{i}^{*}$ as defined in \eqref{eqn:R} and \eqref{eqn:Z} . Then, by \eqref{sigmatilde}, \eqref{Lplusminus} , and condition 2 , for $f=f\pm,$
+\begin{equation}\label{sigmatilde1}
+\tilde{\sigma} = \sqrt{\frac{\mathrm{E}Z_{1}^{2}}{I_2(\theta_{0})^{2}}}=\frac{\sqrt{I_1(\theta_0)}}{I_2(\theta_{0})}>0
+\end{equation}
+
+and $ v_{3}^{3}=\mathrm{E}\Vert V\Vert^{3}<\infty$ by the third and fourth conditions. This shows that all the required conditions for \eqref{berryesseen} are satisfied for $ f=f\pm\cdot$.
+
+Moreover, by \eqref{Vi}, \eqref{definef}, and \eqref{Tpm},
+$$
+T_{\pm}=f_{\pm}(\overline{V})
+$$
+on the event $G\backslash B$. So, by the inclusion relation in \eqref{inclusionrelation} (which holds on the event $G\backslash B=(G^{\mathrm{c}}\cup B)^{\mathrm{c}}$, where $\mathrm{c}$ denotes the complement) and \eqref{sigmatilde1} , inequality \eqref{berryesseen1} in \ref{berryesseen} implies
+$$
+\mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)(\hat{\theta}-\theta_{0})\leq z)\leq \mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)f_{-}(\overline{V})\leq z)+\mathrm{P}(G^{\mathrm{c}}\cup B)
+$$
+$$
+\leq\Phi(z)+\frac{\mathrm{C}}{\sqrt{n}}+\mathrm{P}(G^{\mathrm{c}}\cup B)
+$$
+and, quite similarly,
+$$
+\mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)(\hat{\theta}-\theta_{0})\leq z)\geq \mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)f_{+}(\overline{V})\leq z)-\mathrm{P}(G^{\mathrm{c}}\cup B)
+$$
+$$
+\geq\Phi(z)-\frac{\mathrm{C}}{\sqrt{n}}-\mathrm{P}(G^{\mathrm{c}}\cup B)\ ,
+$$
+for all real $z$. Note that $\mathrm{P}(G^{\mathrm{c}}\cup B)=\mathrm{P}(G^{\mathrm{c}})+\mathrm{P}(G\cap B)$ . It follows now by \eqref{eqn:goodevent} and \eqref{GandB} that
+\begin{equation}
+|\displaystyle \mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)(\hat{\theta}-\theta_{0})\leq z)-\Phi(z)|\leq\frac{\mathrm{C}}{\sqrt{n}}+\mathrm{P}(|\hat{\theta}-\theta_{0}|>\delta)
+\end{equation}
+for all real $z$. Quite similarly, but using \eqref{berryesseen2} instead of \eqref{berryesseen1} , one has
+\begin{equation}
+|\displaystyle \mathrm{P}(\sqrt{n/I_1(\theta_{0})}I_2(\theta_0)(\hat{\theta}-\theta_{0})\leq z)-\Phi(z)|\leq\frac{\mathrm{C}}{z^{3}\sqrt{n}}+\mathrm{P}(|\hat{\theta}-\theta_{0}|>\delta)
+\end{equation}
+for $z$ as in \eqref{omega}.
+
+Given rather standard regularity conditions, the remainder term $\mathrm{P}(|\theta-\theta_{0}|>\delta)$ typically decreases exponentially fast in $n$ and thus is negligible as compared with the (''error'' term $\displaystyle \frac{\mathrm{c}}{\sqrt{n}}$, and even with the (''error'' term $\displaystyle \frac{\mathrm{c}}{z^{3}\sqrt{n}}-$ under condition \eqref{omega} . Some details on this can be found in the following section.
+
+\subsection*{Bounding the remainder: concave case}
+
+Before we proceed, let us use the following assumptions:
+
+\begin{enumerate}
+	\item $\ell_{x,z}(\theta)$ is concave in $\theta\in\theta$, for each $x\in \mathcal{X}$ and $z\in \mathcal{Z}$
+	\item $$
+	\mathrm{E}\frac{\exp(\ell_{X,Z}(\theta_{0}\pm h))}{\exp(\ell_{X,Z}(\theta_{0}))} < 1.$$
+\end{enumerate}
+
+Suppose that the $\ell_{x,z}(\theta)$ is concave in $\theta\in\theta$, for each $x\in \mathcal{X}$ and $z\in \mathcal{Z}$. By assumption 2 , $\mathrm{E}\ell_{X}''(\theta_{0})\neq 0$. Hence, $\mathrm{P}(\ell_{X,Z}(\theta_{0}+h)\neq\ell_{X,Z}(\theta_{0}))>0$ for some $h\in(0,\ \delta)$ . The concavity of $\ell_{x,z}(\theta)$ in $\theta$ implies that of $\ell_{X,Z}(\theta)$ . So, if $\hat{\theta}>\theta_{0}+\delta$, then $\ell_{X,Z}(\theta_{0}+h)\geq\ell_{X,Z}(\theta_{0})$ .
+
+Therefore,
+$$
+\mathrm{P}(\hat{\theta}>\theta_{0}+\delta)\leq \mathrm{P}(\ell_{X,Z}(\theta_{0}+h)\geq\ell_{X,Z}(\theta_{0}))=\mathrm{P}(\prod_{i=1}^{n}\sqrt{\frac{\exp(\ell_{X_i,Z_i}(\theta_{0}+h))}{\exp(\ell_{X_i,Z_i}(\theta_{0})}}\geq 1)
+$$
+
+$$
+\leq \mathrm{E}\prod_{i=1}^{n}\sqrt{\frac{\exp(\ell_{X_i,Z_i}(\theta_{0}+h))}{\exp(\ell_{X_i,Z_i}(\theta_{0})}}=\lambda_{+}^{n},
+$$
+where
+$$
+\lambda_{+}:=\mathrm{E}\sqrt{\frac{\exp(\ell_{X,Z}(\theta_{0}+h))}{\exp(\ell_{X,Z}(\theta_{0})}}<\sqrt{\mathrm{E}\frac{\exp(\ell_{X,Z}(\theta_{0}+h))}{\exp(\ell_{X,Z}(\theta_{0}))}} < 1;$$
+the inequality here is an instance of a strict version of the Cauchy-Schwarz inequality, which holds because $\mathrm{P}(\ell_{X,Z}(\theta_{0}+h)\neq\ell_{X,Z}(\theta_{0}))>0$. Similarly, $\mathrm{P}(\hat{\theta}<\theta_{0}-\delta)\leq\lambda_{-}^{n}$ for some $\lambda_{-}\in[0,1$), and so,
+\begin{center}
+	$\mathrm{P}(|\hat{\theta}-\theta_{0}|>\delta)\leq 2\lambda^{n}$   (6.1)
+\end{center}
+for $\lambda :=\displaystyle \max(\lambda_{+},\ \lambda_{-})\in[0,1)$ .
+
+\subsection*{Bounding the remainder: general case}
+One may also establish upper bounds on the large-deviation probability without assuming concavity of $\ell$.

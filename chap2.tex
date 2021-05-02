@@ -1,0 +1,258 @@
+\chapter{An Alternative Means of Regularization for Domain Adaptation Problems}
+
+\section*{Introduction}
+Previously, we explored applications of entropic regularization for the Wasserstein distance (Sinkhorn) in domain adaptation. In particular, we derived a new generalization bound for target error with respect to the Sinkhorn divergence. However, for domain adaptation, entropic regularization may not be the ideal route to take.
+ 
+When we prescribe a divergence measure for domain adaptation, the scenario we seek to penalize against is when the source $S$ and target $T$ distributions are not identical. However, with the entropic regularization, one is penalizing against $S$ and $T$ being independent. In this chapter, we propose an alternative regularization that may be more suitable for domain adaptation problems.
+
+If $S$ and $T$ are identical in distribution, which is the ideal setting in machine learning, then there exists an identity mapping between the two. Thus, it makes sense to use a regularization that penalizes the deviation between our transport map and the identity map.
+
+\newpage
+
+\section*{Existence and Uniqueness of an Optimal Transport Map}
+Our approach relies on Brenier's theorem, which concerns the existence and uniqueness of optimal maps.
+
+\begin{theorem}{Brenier's Theorem}
+	
+	Let $\mu$ and $\nu$ be absolutely continuous probability measures on $\mathbb{R}^d$ with respect to the Lebesgue measure and $\nu$ has bounded support. There exists a convex function $\phi: \mathbb{R}^d\to \mathbb{R}$ such that its gradient, $\nabla \phi$, is the optimal transport map from $\mu$ to $\nu$.  
+	
+\end{theorem}
+
+We call $\phi$ a Kantorovich potential.
+
+\begin{corollary}{Existence of Solution to Monge Problem}
+	
+Under the above assumptions, $\nabla \phi$ uniquely solves the Monge problem.
+
+\[
+\int_X \abs{x-\nabla\phi(x)}^2\,d\mu(x) = \int_{T_{\#}\mu=\nu}\abs{x-T(x)}^2\,d\mu(x)
+\]
+	
+\end{corollary}
+
+\section*{Convex Analysis Prerequisites}
+
+Before we continue, we introduce some concepts from convex analysis that will be needed going forward.
+
+\begin{definition}
+	Let $f:\,X\to \mathbb{R}\cup +\infty$ be a lower semicontinuous function. The Fenchel-Legendre transform $f^{*}: X^{*}\to \mathbb{R}\cup +\infty$ is defined by
+	$$
+	f^{*}(x^{*}) = \sup_{x\in X} [\ang*{x^{*},x}-f(x)]
+	$$
+	
+	This $f^{*}$ is always convex.
+\end{definition}
+
+\begin{definition}
+	The subdifferential of a lower semi-continuous convex function $\phi$ at $x\in \textrm{dom} \phi$ is defined by
+	
+	$$
+	\partial \phi(x) = \{ x^{*}\in X^{*}: \phi(y)-\phi(x)\geq \ang*{x^{*},y-x} \}
+	$$
+\end{definition}
+
+\begin{corollary}
+	Let $f:\,X\to \mathbb{R}\cup \{+\infty\}$ be a convex function. Then for any $x\in \textrm{int dom }f$,
+	
+	$$ \partial f(x)\neq \emptyset.$$
+\end{corollary}
+
+\begin{theorem}[Fenchel-Young inequality]
+	$$f(x)+f^{*}(x^{*})\geq \ang*{x^{*},x}$$
+\end{theorem}
+
+\begin{corollary}[Fenchel-Young equality]
+	$$f(x)+f^{*}(x^{*})= \ang*{x^{*},x}$$ iff
+	$$x^{*}\in \partial f(x).$$
+\end{corollary}
+
+\begin{theorem}
+	Let $v(y) = \inf_x [f(x)+g(x+y)].$ The Fenchel primal problem is
+	$$p = v(0) = \inf_x [f(x)+g(x)].$$
+	
+	The dual problem is
+	$$d = v^{**}(0)=\sup_{y^{*}} [-f^{*}(y^{*})-g^{*}(-y^{*})].$$
+\end{theorem}
+
+\begin{proof}
+	Calculate $v^{*}(-y^{*}) = \sup_{x,y}[\ang*{-y^{*},y}-f(x)-g(x+y)].$
+	
+	Let $u = x+y$, so we have
+	\begin{align*}
+	v^{*}(-y^{*}) &= \sup_{x,u} \ang*{-y^{*},u-x} - f(x) - g(u) \\
+	&= \sup_x [\ang*{y^{*},x}-f(x)]+\sup_u [\ang*{-y^{*},u}-g(u)] \\
+	&= f^{*}(y^{*}) + g^{*}(-y^{*}).
+	\end{align*}
+	
+	Thus,
+	$$d = v^{**}(0) = \sup_{-y^{*}}[0 - v^{*}(-y^{*})] = \sup_{-y^{*}}[-f^{*}(y^{*})-g^{*}(-y^{*})].$$
+	
+	Weak duality $p\geq d$ follows immediately. Strong duality $p=d$ requires $\partial v(0)\neq \emptyset$, i.e.
+	$$0\in \textrm{int dom }v = \textrm{int}[\textrm{dom } g-\textrm{dom} f].$$
+\end{proof}
+
+\begin{proof}[Strong duality criterion]
+	Here we prove $0\in \textrm{int dom }v = \textrm{int}[\textrm{dom } g-\textrm{dom} f]$ implies $\partial v(0)\neq \emptyset$. Let $-y^{*}\in \partial v(0)$ we have
+	$$
+	f(x)+g(x+y)\geq v(y)\geq p-\ang*{y^{*},y}
+	$$
+	Letting $u=x+y$, we have
+	$$p\leq f(x)-\ang*{y^{*},x}+g(u)+\ang*{y^{*},u}
+	$$ and taking infimum with respect to $x,u$, we have
+	$$
+	p\leq -f^{*}(y^{*})-g^{*}(-y^{*})\leq d\leq p.
+	$$
+	This concludes the proof.
+\end{proof}
+
+\section*{Derivation of Primal Formulation}
+
+The goal is to find the primal formulation for the following optimization problem: 
+$$ \inf_{u,v} \left[ \int u \, ds + \int v \, dt + \lambda (\norm{u}_H^2 + \norm{v}_H^2)\right],\, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y). $$ The arguments that follow are similar to those used to prove Kantorovich duality.
+
+Let $$\phi_c = \{ (u,v) \in C(X)\times C(Y): \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y)\}$$.
+%$E^{*} = M(X\times Y)$ is the set of regular Radon measures with total variation norm.
+
+In the next few lines, $z \in E = C(X\times Y)$ is the set of continuous functions on $X\times Y$ with sup. norm and $\pi\in E^{*} = M(X\times Y)$ is the set of regular Radon measures with total variation norm.
+
+$$f(z) = \begin{cases}
+\lambda( \left\|u\right\|_H^2 + \left\|v\right\|_H^2) + \int u\,ds + \int v\,dt, \, z(x,y)=u(x)+v(y) \\
++\infty, \, \textrm{ otherwise.}
+\end{cases}$$
+
+$$g(z) = \begin{cases}
+0, \, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - z(x,y)\leq c(x,y) \\
++\infty, \, \textrm{ otherwise.}
+\end{cases}$$
+
+$$f(z)+g(z) = \begin{cases}
+\int_X u\,ds + \int_Y v\,dt + \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2), \, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - u(x) - v(y)\leq c(x,y) \\
+\infty, \textrm{ otherwise.}
+\end{cases}$$
+
+$$\inf_{z\in E} [f(z)+g(z)] = \inf_{(u,v)\in \Phi_c} \left\{ \int_X u\,ds + \int_Y v\,dt + \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2) \right\}$$
+
+\begin{align*}
+g^{*}(-\pi) &= \sup_{z\in E} \left[ -\int_{X\times Y} z\,d\pi - g(z)\right] \\
+&= \sup_{z\in E} \left[ - \int_{X\times Y} z\,d\pi :\, \frac{1}{2}\norm{x}^2 + \frac{1}{2}\norm{y}^2 - c(x,y)\leq z(x,y) \right] \\
+&= \begin{cases}
+\int_{X\times Y} \left[c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2\right] \,d\pi,\, \pi\in M_{+}(X\times Y) \\
++\infty, \, \textrm{otherwise}
+\end{cases}
+\end{align*}
+
+\begin{align*}
+f^{*}(\pi) &= \sup_{z\in E} \left[ \int_{X\times Y} z\,d\pi - f(z)\right] \\
+&= \sup_{z\in E} \left[ \int_{X\times Y} z(x,y)\,d\pi(x,y) - \int_X u\,ds - \int_Y v\,dt - \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2) :\, z= u\oplus v \right] \\
+&= \begin{cases}
+- \lambda(\left\|u\right\|_H^2 + \left\|v\right\|_H^2), \, \pi\in \Pi(s,t) \\
+-\inf_u (\int u\,ds - \int u\,d\pi + \lambda \norm{u}_H^2) - \inf_v (\int v\,dt - \int v\,d\pi + \lambda \norm{v}_H^2), \, \textrm{otherwise}
+\end{cases}
+\end{align*}
+
+When finite, the last line (when $\pi$ is not a coupling) can be rewritten as
+$$\frac{\sup_{\norm{u}=1} (\int u\,ds - \int u\,d\pi)^2}{2\lambda} + \frac{\sup_{\norm{v}=1}(\int v\,dt - \int v\,d\pi)^2}{2\lambda}$$ if finite. Otherwise, $f^{*}(\pi)=+\infty$.
+
+The dual problem is $\sup_{\pi\in E^{*}} \left[ -f^{*}(\pi)-g^{*}(-\pi)\right] $, which, from the above, is
+$$ \sup_{\pi\in E^{*}} \left\lbrace - \int_{X\times Y} c\,d\pi - \int_X \varphi\,d\mu - \int_Y \psi\,d\nu + \int_{X\times Y} (\varphi(x)+\psi(y))\,d\pi + \lambda(\norm{\varphi}_H^2+\norm{\psi}_H^2)\right\rbrace . $$
+
+\subsection*{What does the dual of f look like?}
+
+If the previous claim holds,
+
+$$
+f^{*}(\pi) = \frac{1}{4\lambda} \left(Q(s,\pi_1) + Q(t,\pi_2)\right)
+$$ where $$Q(s,\pi_1) = \int k(x,y)\,ds(x) ds(y) + \int k(x,y)\,d\pi_1(x) d\pi_1(y) - 2 \int k(x,y)\,ds(x)d\pi_1(y)$$ and similarly for $Q(t,\pi_2)$.
+
+Then our dual problem is
+\begin{align*}
+\sup_{\pi\in E^{*}}(-f^{*}(\pi) - g^{*}(-\pi)) &= \sup_{\pi\in M_{+}} \left[ -\frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) - \int \left( c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 \right)\,d\pi \right] \\
+&= \inf_{\pi\in M_{+}} \left[ \frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int \left( c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 \right)\,d\pi \right]
+\end{align*}
+
+If $c(x,y)=\frac{1}{2}\norm{x-y}^2$, then $c(x,y)-\frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 = x^{T}y$, which seems more tractable to work with. The question now is how to minimize 
+$$
+\frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int x^{T}y\,d\pi(x,y).
+$$
+
+\subsection*{Inner product space of signed measures}
+Define the inner product with respect to signed measures $m,n$ on $\mathcal{X}$ as $$\ang{m,n} = \int \tilde{k}(u,v)\,dm(u)\,dn(v).$$
+
+and
+
+$$\norm{s\otimes \pi_2 - \pi}^2 = Q(s,\pi_1) = \norm{s-\pi_1}^2.$$
+
+If we're looking at $\mathcal{X}^2$, then we have
+$$
+\ang{m,n} = \int \tilde{k}((u_1,u_2),(v_1,v_2))\,dm(u_1,u_2)\,dn(v_1,v_2)
+$$
+
+and
+
+$$\norm{s\otimes \pi_2 - \pi}^2 = \int \tilde{k}((u_1,u_2),(v_1,v_2))\,d(s(u_1)\pi_2(u_2)-\pi(v_1,v_2))$$
+
+Then our problem reduces to showing $$\inf_m \left\lbrace \ang{m,s-\pi_1} + \lambda \ang{m,m}\right\rbrace  = -\frac{1}{4\lambda} \ang{s-\pi_1,s-\pi_1}.$$
+
+\begin{proof}
+	\begin{align*}
+	\ang{m,s-\pi_1} + \lambda\ang{m,m} &= \lambda(\ang{m,m}+\ang{m,\frac{s-\pi_1}{\lambda}}) \\
+	&= \lambda (\norm{m + \frac{s-\pi_1}{2\lambda}}^2 - \norm{\frac{s-\pi_1}{2\lambda}}^2)
+	\end{align*}
+	
+	Choosing $m = \frac{\pi_1 - s}{2\lambda}$, we obtain the desired minimum.
+\end{proof}
+\subsection*{Discrete setting}
+
+What if we take $\pi_1$ and $\pi_2$ to be discrete measures? Then we can represent these by $\pi_1 = \Pi 1$ and $\pi_2^T=1^{T}\Pi$, i.e. taking the row and column marginals of $\Pi$.
+
+Our optimization problem then becomes $$\inf_{\Pi} \frac{1}{4\lambda} (\norm{s-\Pi 1}^2+\norm{t-\Pi^{T} 1}^2) + tr(A^{T}\Pi).$$
+
+\section*{Alternative Optimization Problem}
+$f(\Pi,\lambda)=\dfrac{(\Pi\vec{1}-s)^{T}K(\Pi\vec{1}-s)+(\Pi^{T}\vec{1}-t)^{T}K(\Pi^{T}\vec{1}-t)}{4\tau}-Tr[\Pi K]+\lambda(1-\vec{1}^{T}\Pi1)-v_{1}E_{1}^{T}\Pi E_{1}-v_{2}E_{2}^{T}\Pi E_{1}-v_{3}E_{1}^{T}\Pi E_{2}-v_{4}E_{2}^{T}\Pi E_{2}$
+
+where $E_{1}=\left(\begin{array}{c}
+1\\
+0
+\end{array}\right)$ and $E_{2}=\left(\begin{array}{c}
+0\\
+1
+\end{array}\right)$ (assuming this is the 2D setting).
+
+$\frac{df}{d\Pi}=2K(\Pi\vec{1}-s)\vec{1}^{T}+2K(\Pi^{T}\vec{1}-t)\vec{1}^{T}-K-\lambda\vec{1}\vec{1^{T}}=2K[(\Pi+\Pi^{T})\vec{1}-(s+t)]\vec{1}^{T}-K-\lambda11^{T}-v_{1}\left(\begin{array}{cc}
+1 & 0\\
+0 & 0
+\end{array}\right)-v_{2}\left(\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right)-v_{3}\left(\begin{array}{cc}
+0 & 1\\
+0 & 0
+\end{array}\right)-v_{4}\left(\begin{array}{cc}
+0 & 0\\
+0 & 1
+\end{array}\right)$
+
+If $K=I$, then by KKT we have 
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{1}+1)=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{2})=0$
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{3})=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{4}+1)=0$
+
+And it follows that
+
+$v_{1}+1=v_{3}$
+
+$v_{4}+1=v_{2}$
+
+and also
+
+$\frac{1}{2\tau}-1=v_{1}+v_{2}+2\lambda=v_{3}+v_{4}+2\lambda$.
+
+If $\pi_{11},\pi_{22}=\frac{s_{1}+t_{1}}{2},\frac{s_{2}+t_{2}}{2}$,
+then $\pi_{11}+\pi_{22}=1$ and thus $\pi_{12}=\pi_{21}=0$. Letting
+$v_{1}=v_{4}=0$ and $v_{2}=v_{3}=1$, this satisfies slackness constraints.
+The previous discrete optimization 

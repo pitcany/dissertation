@@ -1,0 +1,56 @@
+%% LyX 2.3.4.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{babel}
+\begin{document}
+$f(\Pi,\lambda)=\dfrac{(\Pi\vec{1}-s)^{T}K(\Pi\vec{1}-s)+(\Pi^{T}\vec{1}-t)^{T}K(\Pi^{T}\vec{1}-t)}{4\tau}-Tr[\Pi K]+\lambda(1-\vec{1}^{T}\Pi1)-v_{1}E_{1}^{T}\Pi E_{1}-v_{2}E_{2}^{T}\Pi E_{1}-v_{3}E_{1}^{T}\Pi E_{2}-v_{4}E_{2}^{T}\Pi E_{2}$
+
+where $E_{1}=\left(\begin{array}{c}
+1\\
+0
+\end{array}\right)$ and $E_{2}=\left(\begin{array}{c}
+0\\
+1
+\end{array}\right)$ (assuming this is the 2D setting).
+
+$\frac{df}{d\Pi}=2K(\Pi\vec{1}-s)\vec{1}^{T}+2K(\Pi^{T}\vec{1}-t)\vec{1}^{T}-K-\lambda\vec{1}\vec{1^{T}}=2K[(\Pi+\Pi^{T})\vec{1}-(s+t)]\vec{1}^{T}-K-\lambda11^{T}-v_{1}\left(\begin{array}{cc}
+1 & 0\\
+0 & 0
+\end{array}\right)-v_{2}\left(\begin{array}{cc}
+0 & 0\\
+1 & 0
+\end{array}\right)-v_{3}\left(\begin{array}{cc}
+0 & 1\\
+0 & 0
+\end{array}\right)-v_{4}\left(\begin{array}{cc}
+0 & 0\\
+0 & 1
+\end{array}\right)$
+
+If $K=I$, then by KKT we have 
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{1}+1)=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{2})=0$
+
+$\frac{\pi_{11}-\pi_{22}-(s_{1}+t_{1})+1}{2\tau}-(\lambda+v_{3})=0$
+
+$\frac{\pi_{22}-\pi_{11}-(s_{2}+t_{2})+1}{2\tau}-(\lambda+v_{4}+1)=0$
+
+And it follows that
+
+$v_{1}+1=v_{3}$
+
+$v_{4}+1=v_{2}$
+
+and also
+
+$\frac{1}{2\tau}-1=v_{1}+v_{2}+2\lambda=v_{3}+v_{4}+2\lambda$.
+
+If $\pi_{11},\pi_{22}=\frac{s_{1}+t_{1}}{2},\frac{s_{2}+t_{2}}{2}$,
+then $\pi_{11}+\pi_{22}=1$ and thus $\pi_{12}=\pi_{21}=0$. Letting
+$v_{1}=v_{4}=0$ and $v_{2}=v_{3}=1$, this satisfies slackness constraints.
+\end{document}

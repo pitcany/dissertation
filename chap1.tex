@@ -1,0 +1,364 @@
+\chapter{Theoretical Analysis of Domain Adaptation with Sinkhorn Divergence}
+
+In this chapter, we discuss some of our first results when using a entropic-based divergence. In the past, generalization bounds were provided with respect to the Wasserstein metric, but the empirical computation involved a regularization step, which was previously unaccounted for when deriving bounds. In this work, we provide a theoretical analysis of the generalization bound with respect to the entropic regularization in the unsupervised domain adaptation setting.
+
+\section*{Why Use Optimal Transport in Domain Adaptation?}
+Optimal transport is capable of taking into consideration the geometry of the data. In domain adaptation problems, this is helpful, especially since when dealing with a source and target distribution, a natural idea is to look for a nonlinear transformation between the two distributions. This makes optimal transport distances (i.e. Wasserstein) highly promising. Another concern is that the source and target distributions lack a shared support. It makes sense to use a distance that does not require a shared support and the Wasserstein is one such distance. This property distinguishes it from other divergences such as Maximum Mean Discrepancy or Kullback-Leibler, which usually require a common support.
+
+\section{Notation and Preliminaries}
+
+\begin{definition}{Reproducing Kernel Hilbert Space}
+	
+	Let $X$ be an arbitrary set and $H$ a Hilbert space of real-valued functions on $X$.  The evaluation functional over the Hilbert space of functions $H$ is a linear functional that evaluates each function at a point $x$,
+	
+	\[
+	L_{x} : f \mapsto f(x)  \text{   } \forall f \in H.
+	\]
+	
+	We say that $H$ is a reproducing kernel Hilbert space if, for all $x \in X$, $L_{x}$ is continuous at any $f\in H$ or, equivalently, if $L_x$ is a bounded operator on $H$, i.e. there exists some $M > 0$ such that
+	
+	\[
+	|L_{x}(f)| := |f(x)| \le M \|f\|_H \quad \forall f \in H.
+	\]
+
+\end{definition}
+
+\begin{definition}{Kullback-Leibler Divergence}
+	If $P$ and $Q$ are probability measures on a set $\mathcal{X}$, and $P$ is absolutely continuous with respect to $Q$, then the Kullback-Liebler divergence from $Q$ to $P$ is
+	\[
+	D_{KL}(P \parallel Q)=\int_{\mathcal{X}} \log \left( \frac{dP}{dQ}\right) \, dP.
+	\]
+\end{definition}
+
+\begin{definition}{Maximum mean discrepancy}
+	
+	MMD represents distances between distributions as distances between mean embeddings of features. If we have distributions $p$ and $q$ over a set $\mathcal{X}$, the MMD is defined by a feature map $\varphi: \mathcal{X}\to \mathcal{H}$ where $\mathcal{H}$ is a reproducing kernel Hilbert space.
+	\[
+	MMD(p,q) = \norm{ \E_{X\sim p}[\varphi(X)] - \E_{Y\sim q}[\varphi(Y)] }_{\mathcal{H}}
+	\]
+	
+	We can alternatively characterize the MMD as follows:
+	\begin{align*}
+	MMD(p,q) &= \norm{ \E_{X\sim p}[\varphi(X)] - \E_{Y\sim q}[\varphi(Y)] }_{\mathcal{H}} \\
+	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq 1} \ang*{f,\E_{X\sim p}[\varphi(X)] - \E_{Y\sim q}[\varphi(Y)]}_{\mathcal{H}} \\
+	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq 1} \bkt*{\ang*{f,\E_{X\sim p}[\varphi(X)]}_{\mathcal{H}} - \ang*{f,\E_{Y\sim q}[\varphi(Y)]}_{\mathcal{H}} } \\
+	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq 1} \bkt*{ \E_{X\sim p}[f(X)] - \E_{Y\sim q}[f(Y)] }
+	\end{align*}
+\end{definition}
+
+The alternative characterization holds because of the reproducing property: 
+$\ang{f,\varphi(x)}_{\mathcal{H}}=f(x)$ for any
+$f\in \mathcal{H}$. The second line holds since $\sup_{f:\norm{f}\leq 1} \ang{f,g}_{\mathcal{H}} = \norm{g}$ is attained when $f=g/\norm{g}$. The fourth relies on Bochner integrability, but assuming our kernel or distributional support is bounded, this is true. The last line is a byproduct of the reproducing property.
+
+The following extension of Wasserstein to empirical measures will be used when contrasting empirical to theoretical distances.
+
+\begin{definition}{Discrete Wasserstein} \cite{Redko2017}
+	
+	If we deal with empirical measures $\hat{\mu}_{S}=\frac{1}{N_{S}}\sum_{i=1}^{N_{S}}\delta_{x_{\mathrm{s}}^{i}}$ and $\hat{\mu}_{T}=\frac{1}{N_{T}}\sum_{i=1}^{N_{T}}\delta_{x_{T}^{i}}$ represented by the uniformly weighted sums of $N_{S}$ and $N_{T}$ Diracs with mass at locations $x_{S}^{i}$ and $x_{T}^{i}$ respectively, then the Kantorovich problem is defined in terms of the inner product between the coupling matrix $\gamma$ and the cost matrix $C$:
+	
+	$$
+	W_{1}(\hat{\mu}_{S},\hat{\mu}_{T})=\min_{\gamma\in\Pi(\hat{\mu}_s,\hat{\mu}_{T})} \langle C,\ \gamma\rangle_{F}
+	$$
+	
+	where $\langle \, , \, \rangle_F$ denotes the Frobenius inner product, $\Pi(\hat{\mu}_s,\hat{\mu}_{T})=\{\gamma\in \mathbb{R}_{+}^{N_{\mathrm{S}}\times N_{T}}|\gamma 1=\hat{\mu}_{S}, \gamma^{T}1= \hat{\mu}_{T}\}$ is a set of doubly stochastic matrices and $C$ is a dissimilarity matrix, i.e., $C_{ij}= c(x_{S}^{i},\ x_{T}^{j})$, defining the energy needed to move a probability mass from $x_{S}^{i}$ to $x_{T}^{j}$.
+	
+\end{definition}
+
+\begin{definition}[Expected Loss]
+	Let $l$ be a convex loss-function. Given a distribution $\mu_D$, a hypothesis $h\in H$ and a labeling function $f_D$ (which may be a hypothesis), the expected loss is defined as
+	
+	\[
+	\epsilon_D(h,f_D) = \E_{X\sim \mu_D}[l(h(x),f_D(x))].
+	\]
+\end{definition}
+
+\medskip
+
+Our source and target spaces are denoted by $S$ and $T$ respectively. $S$ has a distribution $\mu_S$ and $T$ has as its underlying distribution, $\mu_T$. Our loss function is denoted by $\ell: \mathbb{R}\times \mathcal{Y}\to \mathbb{R}^{+}$.
+
+We also use a $\Gamma$ operator to represent expectation, i.e. $\Gamma f = E_{\pi}[f(X)]$ where $X\sim \pi$.
+
+\medskip
+
+
+The following interpretation of expected loss using RKHS properties was used to derive earlier bounds.
+
+\begin{definition}[RKHS interpretation]
+	Assume $l \in \mathcal{H}_{k^q}$ where $\mathcal{H}_{k^q}$ is an RKHS with kernel $k^q: \Omega\times \Omega\to \mathbb{R}$ induced by $\phi: \Omega\to \mathcal{H}_{k^q}$ and $k^q(x,y) = \ang*{\phi(x),\phi(y)}_{\mathcal{H}_{k^q}}$.
+	
+	With this definition, it is immediate that,
+	$$ \epsilon_S(h,f_S) = \E_{x\sim \mu_S}\bkt*{l(h(x),f_S(x))} = \E_{x\sim \mu_S}\bkt*{\ang*{\phi(x),l}_{\mathcal{H}_{k^q}}} $$
+	
+	and
+	
+	$$ \epsilon_T(h,f_T) = \E_{y\sim \mu_T}\bkt*{l(h(y),f_T(y))} = \E_{y\sim \mu_T}\bkt*{\ang*{\phi(y),l}_{\mathcal{H}_{k^q}}} .$$
+\end{definition}
+
+\section*{Prior Work}
+
+First, we introduce some past results pertaining to risk bounds with respect to the Wasserstein distance. As we will see, the choice of the cost function is key in deriving theoretical bounds.
+
+\subsection*{First Theoretical Bounds \cite{Redko2017}}
+The key assumption here is that of the cost function. Another assumption here is that the true labeling function $f$ lies within a unit ball of an RKHS, i.e. \[\mathcal{F} = \{f\in \mathcal{H}_k: \, \norm{f}_{\mathcal{H}_k}\leq 1\},\] where $\mathcal{H}_k$ is an RKHS with kernel $k$.
+
+In this scenario, we have the following specifications:
+\begin{itemize}
+	\item Let $\mu_S, \mu_T\in \mathcal{P}(X)$ be two probability measures on $\mathbb{R}^d$.
+	\item \[c(x,x') = \norm*{\phi(x)-\phi(x')}_{\mathcal{H}_{k_l}}.\] 
+	\begin{itemize}
+		\item $\mathcal{H}_{k_l}$ is an RKHS.
+		\item $k_l: \Omega\times \Omega\to \mathbb{R}$ is a kernel function such that \[k_l(x,x')=\ang*{\phi(x),\phi(x')}_{\mathcal{H}_{k_l}}\]
+	\end{itemize}
+	\item \[l(h(x),f(x)) = \abs*{h(x)-f(x)}^q,\, q>0\] and thus the loss function is convex, bounded, symmetric, and satisfies triangle inequality
+	\item If $\Omega$ is separable and $k_l(x,x')\in [0,K]$ for some $K\in \mathbb{R}$, then for all $x,x'\in \Omega$,
+	\[
+	\E_D[\sqrt{k_l(x,x')}]<\infty
+	\] for $D=S$ or $T$.
+\end{itemize}
+
+Before we continue, let us briefly discuss the use of the aforementioned cost function. One sees that
+
+\begin{align*}
+c(x,x')&=\norm{\phi(x)-\phi(x')}_{\mathcal{H}} \\
+&= \sqrt{\ang{\phi(x)-\phi(x'),\phi(x)-\phi(x')}_{\mathcal{H}}} \\
+&= \sqrt{k(x,x)-2k(x,x')+k(x',x')}.
+\end{align*}
+
+One can show there is a one-to-one relationship between the choice of a positive-definite kernel $k$ and the cost function $c$.
+
+Secondly, $l_{h,f}:x\to l(h(x),f(x))$ belongs to an RKHS. $(h,f)\in \mathcal{F}^2$ and $l$ is a nonlinear mapping of $\mathcal{H}_k$.
+
+\medskip
+
+\begin{lemma}
+	If the above assumptions hold, then, for all $h,f\in \mathcal{H}_{k_l}$, 
+	\[ \epsilon_T(h,f)\leq \epsilon_S(h,f) + W_1(\mu_S,\mu_T). \]
+\end{lemma}
+
+With the use of a concentration inequality on Wasserstein distances \cite{Bolley2007}, empirical risk bounds are obtained.
+
+\begin{theorem}
+	Let $\mu$ be a probability measure on $\mathbb{R}^d$ such that
+	\[
+	\int_{\mathbb{R}^d} e^{\alpha \norm{x}^2}\,d\mu < \infty, \, \exists \alpha > 0
+	\]
+	and let $\hat{\mu}=\frac{1}{N}\sum_{i=1}^N \delta_{X_i}$ be the empirical measure on $\{x_i\}$.
+	
+	Then for all $d'>d$ and all $\xi < \sqrt{2}$, there exists $N_0(d')$ and $\alpha > 0$ with
+	\[
+	\int e^{\alpha c(x,x')}\,d\mu(x) < \infty
+	\]
+	for a fixed $x'$ such that for all $\epsilon > 0$ and all $N\geq N_0 \max \{\epsilon^{-(d'+2),1}\}$,
+	
+	\[
+	\Pr[W_1(\mu,\hat{\mu})>\epsilon] \leq e^{-\frac{\xi}{2} N\epsilon^2}
+	\]
+\end{theorem}
+
+\subsection*{Joint Distribution Domain Adaptation (JDOT)}
+This is the approach taken in \cite{Courty2017} and also the problem we study in the rest of this chapter with regularization. In this setting, one works with unsupervised domain adaptation between joint distributions. The inspiration behind this method is that the assumption that  conditional distributions are preserved, i.e. $P_S(Y|T(X))\approx P_T(Y|T(X))$, may not necessarily hold.
+\begin{itemize}
+	\item Now the cost function used is \[\alpha d(x_s,x_t) + L(y_s,y_t).\]
+	\item The unsupervised domain adaptation problem is studied here, so the target labels represented by $y_t$ are not known. Thus, one cannot find an optimal coupling.
+	\item It does not matter that an optimal coupling is not found since the goal here is to estimate a mapping on the target data.
+\end{itemize}
+%%EDIT THIS MORE
+%fix citation
+
+%end
+\section*{Uniform empirical risk bounds on RKHS}
+Using properties of the Rademacher complexities of functions in an RKHS, we can avoid bounding empirical risks w.r.t Wasserstein distance.
+
+$$ \sup_{f\in F} \abs{\E f(X) - \frac{1}{n}\sum_{i=1}^n f(X_i)} = \norm{P-P_n}_F. $$
+
+$$ \E \norm{P-P_n}_{F}\leq 2\norm{R_n}_F $$
+
+Let $F = \left\{f\in \mathcal{H} | \norm{f}_{H}\leq B\right\}$
+
+$$ \E \bkt*{\norm{R_n}_{F} | X_1,\ldots,X_n} \leq \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}. $$
+
+\begin{proof}
+	\begin{align*}
+	\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i)} \\
+	&= \sup_{f\in F} \abs{\frac{1}{n} \sum_{i=1}^n \epsilon_i \ang*{k(X_i,\cdot),f}} \\
+	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}} \\
+	&= B\sqrt{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)}
+	\end{align*}
+	
+	By Jensen's
+	
+	\begin{align*}
+	\E \bkt*{ \norm{R_n}_F | X_{1}^{n}} &\leq B\sqrt{\E \bkt*{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)|X_{1}^{n}}} \\
+	&= B \sqrt{\frac{1}{n^2} \sum_i k(X_i,X_i)} \\
+	&= \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}
+	\end{align*}
+\end{proof}
+
+%\begin{align*}
+%\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i) \\
+%	&= \sup_{f\in F} \abs{\frac{1}{n} \sum_{i=1}^n \epsilon_i \ang*{k(X_i,\cdot),f}} \\
+%	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}}
+%\end{align*}
+
+Taking expectations of both sides,
+$$ \E \bkt*{\norm{R_n}_{F}}\leq \frac{B}{n}\E \bkt*{\sqrt{tr(K)}} $$
+
+and if our kernel $k$ is bounded above by $M$, then
+$$ \E \bkt*{ \norm{R_n}_F } \leq \frac{B}{n} \sqrt{nM} = B\sqrt{M/n}. $$
+
+\section{Generalization Bounds}
+\label{generalization-bounds}
+
+Our claim is that we can get guarantees when doing a dual minimization of the Wasserstein distance with the specified cost function $\alpha d(x_s,x_t) + l(y_s,f(x_t))$ from $S$ to $T_{f}$. 
+\[
+(\hat{\Gamma},\hat{f})=\arg\min_{\Gamma,f}\Gamma\left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]
+\]
+over all couplings that preserve the marginals on $S$ ($x_{s},y_{s})$ and $T_{X}$ $(x_{t})$. Let $\hat{\Gamma}$ be the optimal joint distribution over $(x_{s},y_{s},x_{t})$ above. Now define $\hat{\hat{\Gamma}}$ on $(x_{s},y_{s},x_{t},y_{t})$ to be a coupling with the same marginal over $(x_{s},y_{s},x_{t})$ as $\hat{\Gamma}$ and the correct marginals on $T$ ($x_t,y_t$). Let $\Gamma^{*}$ be an arbitrary coupling on the same variables which preserves the marginal distributions on $S$ ($x_{s},y_{s}$)and $T$ (i.e., $x_{t},y_t$). For now, let's assume we're dealing with absolutely continuous distributions here so we don't have existence issues. Fix $f^*\in F$.
+
+The main results in this paper are bounds on the expected loss with respect to Sinkhorn and Wasserstein divergences.
+
+\subsection{Error bounds with respect to Wasserstein distance}
+\begin{theorem}
+	\[
+	err_{T}(\hat{f}) \leq err_{T}(f^{*})+W(S,T)+\hat{\hat{\Gamma}}\left(-\alpha d(x_{s},x_{t})+l(y_{s},y_{t})\right)
+	\] where $\hat{\hat\Gamma}$ is the expectation operator with respect to a coupling with matching marginals on $T$ and the same marginal on $(x_s,y_s,x_t)$ as $\hat{\Gamma}$.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+	err_{T}(\hat{f}) &= \hat{\hat{\Gamma}} l (y_t,\hat f(x_t)) \\
+	& \leq \Gamma^{*}\left[\alpha
+	d(x_{s},x_{t})+l(y_{t},f^{*}(x_{t}))+l(y_{t},y_{s})\right]
+	- \hat{\hat{\Gamma}}\left[\alpha d(x_{s},x_{t})-l(y_{s},y_{t})\right] \\
+	& = err_{T}(f^{*})+\alpha\left(\Gamma^{*}d(x_{s},x_{t})
+	-\hat{\hat{\Gamma}}d(x_{s},x_{t})\right)
+	+\Gamma^{*}l(y_{s},y_{t})+\hat{\hat{\Gamma}}l(y_{s},y_{t}).
+	\end{align*}
+	
+	There, by choosing $\Gamma^*$ as the optimal coupling between $S$ and $T$, that is,
+	\[
+	W(S,T) = \Gamma^*\left(\alpha d(x_{s},x_{t}) +
+	l(y_{s},y_{t})\right),
+	\]
+	then we get the upper bound
+	\begin{align*}
+	err_{T}(\hat{f})
+	& \leq err_{T}(f^{*})+W(S,T)+\hat{\hat{\Gamma}}\left(-\alpha
+	d(x_{s},x_{t})+l(y_{s},y_{t})\right).
+	\end{align*}
+\end{proof}
+
+\subsection{Entropic Regularization}
+
+One means of addressing the intractability of OT is by using an entropic regularization.
+
+\begin{definition}[Entropic Regularization of Wasserstein]
+	$$W_{\epsilon}(\alpha,\beta) = \min_{\pi \in \Pi(\alpha,\beta)} \int_{\mathcal{X}\times \mathcal{Y}} c(x,y)d\pi(x,y) + \epsilon H(\pi | \alpha \otimes \beta)$$
+	where $$H(\pi | \alpha \otimes \beta) = \int_{\mathcal{X}\times \mathcal{Y}} \log \paren{\frac{d\pi(x,y)}{d\alpha(x)d\beta(y)}}d\pi(x,y).$$
+\end{definition}
+
+If we use the relative entropy as a regularizer, then we can formulate the dual of regularized OT as the maximization of an expectation problem \cite{Genevay2018}.
+
+\begin{align*}
+W_{\epsilon}(\alpha,\beta) &=\max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})}\int_{\mathcal{X}} u(x)\mathrm{d}\alpha(x)+\int_{y}v(y)\mathrm{d}\beta(y) \\
+&-\varepsilon \int_{\mathcal{X}\times \mathcal{Y}} e^{\frac{u(x)+v(y)-c(x,y)}{\epsilon}}\mathrm{d}\alpha(x)\mathrm{d}\beta(y) + \varepsilon\\
+&= \max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})} \mathrm{E}_{\alpha \otimes \beta} [f_{\epsilon}^{XY}(u,\ v)]+\epsilon
+\end{align*}
+
+
+where $f_{\epsilon}^{xy}(u,\ v)=u(x)+v(y)- \epsilon e^{\frac{u(x)+v(y)[minus]\mathrm{c}(x,y)}{\epsilon}}.$
+
+Since $W_{\epsilon}(\alpha,\alpha)\neq 0$, we can normalize this by defining the Sinkhorn divergence as in the definition below.
+\begin{definition}[Sinkhorn Divergence]
+\[
+\bar{W}_{\epsilon}(\alpha,\beta)=W_{\epsilon}(\alpha,\beta)-\frac{1}{2}(W_{\epsilon}(\alpha,\alpha)+W_{\epsilon}(\beta,\beta))
+\] 
+\end{definition}
+
+\subsection{Sample Dependent Sinkhorn Bounds}
+
+The keys for achieving generalization bounds in this section are the following two lemmas \cite{Genevay2018}: 
+\begin{lemma}
+	\label{divergence_sinkhorn_from_wasserstein}
+	Let $\alpha$ and $\beta$ be probability measures on $\mathcal{X}$ and $\mathcal{Y}$ subsets of $\mathbb{R}^d$ such that $\abs{X}=\abs{Y}\leq D$ and assume that $c$ is L-Lipschitz w.r.t $x$ and $y$. Then
+	$$W_{\epsilon}(\alpha,\beta)-W(\alpha,\beta) \leq 2\epsilon d \log \paren*{\frac{\epsilon^2 L D}{\sqrt{d}\epsilon}}$$ where $\mathcal{X}$ and $\mathcal{Y}$ are subsets of $\mathbb{R}^d$ with diameters at most $D$ and $c$ is $L$-lipschitz w.r.t $x$ and $y$.
+\end{lemma}
+
+and
+
+\begin{lemma}
+	Let $\hat{\alpha_n}$ and $\hat{\beta_n}$ be empirical measures for $\alpha$ and $\beta$ with size $n$ for each.
+	
+	\[
+	\abs{W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})-W_{\epsilon}(\alpha,\beta)} \leq 6B \frac{\lambda K}{\sqrt{n}} + C\sqrt{\frac{2 \log\frac{1}{\delta}}{n}}
+	\] with probability at least $1-\delta$.
+\end{lemma}
+
+\subsection*{New Generalization Bound}
+
+\subsection*{Applying regularization to our minimization problem}
+
+%Let's try to minimize
+%\[
+%(\hat{\Gamma},\hat{f})=\arg\min_{\Gamma,f}\Gamma\left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma)|S\otimes T_X)
+%\]
+%
+%and see how the expression compares to \[
+%\Gamma_n \left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma_n)|S\otimes T_X)
+%\]
+%
+%To clarify here, $\Gamma$ is the operator representing expectation w.r.t the joint distribution, $\pi(\Gamma)$.
+%
+%\begin{align*}
+%\hat{\hat{\Gamma}}\left[\alpha
+%d(x_{s},x_{t})+l(y_{t},\hat{f}(x_{t}))-l(y_{s},y_{t})\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) & \leq
+%\hat{\hat{\Gamma}}\left[\alpha
+%d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) \\
+%& =\hat{\Gamma}\left[\alpha d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\Gamma})|S\otimes T_X)\\
+%&\leq \hat{\Gamma}_n (\alpha d(x_s,x_t) + l(y_s,\hat{f}(x_t))) + \epsilon + ? \\
+%& \leq \Gamma_n^{*} (\alpha d(x_s,x_t) + l(y_s,f^{*}(x_t))) + \epsilon + \epsilon + ?\\
+%&\leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})+l(y_{s},f^{*}(x_{t}))\right] + 2\epsilon + ?\\
+%& \leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})
+%+l(y_{t},f^{*}(x_{t}))+l(y_{t},y_{s})\right] + 2\epsilon + ?
+%\end{align*}
+
+Letting $c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t) + l(y_s,f(x_t))$, we'll apply the technique from Geneway's paper "Sample Complexity of Sinkhorn Distances" to give sample bounds on the Sinkhorn distance.
+
+The difference here is we'll also show that our $f_{\epsilon}$ is lipschitz in $f$, which comes up in $c_f$ defined earlier.
+
+$$W_{\epsilon}(S,T_X) = \max_{u\in c(S),v\in c(T_X)} \E_{S\otimes T_X} [f_{\epsilon}^{S,T_X}(u,v)]+\epsilon$$
+
+$$f_{\epsilon}^{S,T_X}(u,v) = u(x_s,y_s)+v(x_t)-\epsilon \exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$$
+
+$$c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t)+l(y_s,f(x_t))$$
+$$u(x_s,y_s)\leq L\norm{(x_s,y_s)}$$
+$$v(x_t) \leq \max_{x_s,y_s} u(x_s,y_s)-c_f(x_s,y_s,x_t)$$
+
+Things to note here:
+I need to check if it matters that $S$ and $T_X$ have different dimensions because in the paper, the two had equal dimension. Now, I'm using $S$ to replace $\mathcal{X}$ and $T_X$ for $\mathcal{Y}$.
+
+We also know that on the subset where $u$ and $v$ are optimal, $u\oplus v\leq 2L\norm{S}+\norm{c}_{\infty}$. Call this subset $\mathcal{A}$.
+
+And let $Q=\exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$ so $\abs{Q}\leq \exp\paren{2\frac{L\abs{S}+\norm{c}_{\infty}}{\epsilon}}.$
+
+$$\frac{\partial f_{\epsilon}}{\partial f} = -\epsilon \frac{\partial Q}{\partial f} = -\epsilon \cdot Q \cdot (1/\epsilon) \cdot \frac{\partial c}{\partial f} = -Q \frac{\partial c(f)}{\partial f} = -Q \frac{\partial l(f)}{\partial f}$$
+
+Thus $$\abs{\frac{\partial f_{\epsilon}}{\partial f}}\leq \abs{Q}M,$$ as long as $\abs{l'(f)} \leq M.$
+
+The above shows that if our loss function $l$ is Lipschitz w.r.t. $f$, then so is $f_{\epsilon}$ and we can then apply \ref{divergence_sinkhorn_from_wasserstein}, as long as $f$ is in an RKHS. To be more precise, $\norm{\nabla f^{\epsilon}(u,v)}\leq \max(1+M,\abs{Q}M)$.
+
+Also recall $\norm{u}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and $\norm{v}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and we have, by using
+
+$$ \E \bkt{\sup_{g\in G} \E l(g,X) - \frac{1}{n} \sum l(g,X_i)} \leq 2B\E R(G(X_1^n)) $$,
+
+$$ \E \abs{W_{\epsilon}(\alpha,\beta) - W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})} \leq 3 \frac{2B\lambda}{n} \E \sqrt{\sum_{i=1}^n k(X_i,X_i)} $$
+
+where $B\leq \max(1+M,\abs{Q}M)$, $\lambda$ is bounded since the norms of the potentials are bounded by $O(\max(1,\frac{1}{\epsilon^{d/2}}))$ and $f$ has bounded norm as well (still need to figure out an exact upper bound here).
+
+After justifying the above two lemmas, we can then provide bounds w.r.t $W_{\epsilon}$ because
+
+$$err_{T}(\hat{f}) + 4\epsilon d + 2\epsilon d \log(\frac{LD}{\sqrt{d}\epsilon}) \leq err_{T}(f^{*})+W_{\epsilon}(S,T)+\hat{\hat{\Gamma}}\left(-\alpha
+d(x_{s},x_{t})+l(y_{s},y_{t})\right)$$
+
+%\section*{Interpolation Between OT and MMD}
+%Depending on the regularization strength $\epsilon$, we can %interpolate between OT and MMD using the Sinkhorn.
