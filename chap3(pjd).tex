@@ -7,7 +7,7 @@ Previously, we discussed two methods of regularized optimal transport for domain
 	\item Regularization with respect to dual potentials
 \end{itemize}
 
-However, the emphasis earlier was not on finding the explicit mapping between datasets. One may instead seek to directly estimate the Monge map between source and target datasets. In the next section, we describe prior work done and suggest another regularization scheme that incorporates the explicit transport map.
+However, the emphasis earlier was not on finding the explicit mapping between datasets. One may instead seek to directly estimate the Monge map between source and target datasets. In the next section, we describe prior work done and propose another regularization scheme that incorporates the explicit transport map.
 
 \section*{Linear Monge Mappings}
 Previous work \cite{Flamary2019} estimated the linear Monge mapping between distributions and used this to provide a domain adaptation generalization bound.
@@ -15,7 +15,7 @@ Previous work \cite{Flamary2019} estimated the linear Monge mapping between dist
 We conjecture that their result about the optimal transport map can be extended to say that this particular function of the second moments of the source and target distributions gives the optimal linear transport map, even if the optimal transport map isn't linear.
 
 This corresponds to finding a solution to
-$$\min_A (E_P 1/2 x'Ax + E_Q 1/2 y'A^{-1}y),$$ which can be rewritten as 
+$$\min_A (E_P \frac{1}{2} x'Ax + E_Q \frac{1}{2} y'A^{-1}y),$$ which can be rewritten as 
 $$\min_A Tr(A E_P xx' + A^{-1} E_Q yy')/2.$$
 
 \section*{Notation}
@@ -122,44 +122,44 @@ These conditions are the following:
 	\item There exists a contraction operator $K$ with $\norm{K}\leq 1$ such that $$M=\Sigma_{P}^{1/2}K\Sigma_{Q}^{1/2}.$$
 \end{enumerate}
 
-\subsection*{General Case}
-Back to our setting, we don't necessarily know the covariance matrices on the marginals.
-
-Consider the discrete setting where the distributions $\mu$ and $\nu$ can be represented by probability vectors $p$ and $q$. Also let $X$ and $Y$ represent random vectors from $\mu$ and $\nu$ and define the respective covariance matrices as $\Sigma_X$ and $\Sigma_Y$.
-
-Transform $X$ and $Y$ as follows
-\begin{align*}
-	\tilde{X} &= diag(\sqrt{p})X \\
-	\tilde{Y} &= diag(\sqrt{q})Y \\
-	\tilde{P} &= diag(1/\sqrt{p})\cdot diag(1/\sqrt{q})
-\end{align*}
-
-Let $$K=(X^{\perp}diag(\sqrt{p})X)^{-1/2}(X^{\perp}PY)(Y^{\perp}diag(\sqrt{q})Y)^{-1/2}.$$
-
-Note that
-$$\tilde{X}^{\perp}\tilde{P}\tilde{Y}=X^{\perp}PY=\Sigma_{XY}=\Sigma_X^{1/2}K\Sigma_Y^{1/2}$$
-
-We now want to solve the following optimization problem:
-
-Maximize $$\norm{K\Sigma_{\nu}^{1/2}}_{\mathcal{F}}$$ where
-$P$ satisfies constraints 
-\begin{align*}
-	P\vec{1} &=p \\
-	P^{\perp}\vec{1} &=q.
-\end{align*}
-
-\subsection*{Pythagorean identity for Wasserstein}
-
-\begin{equation}
-	W(P,Q)=\inf_T[d(P,T_{\#}P)+W(T_{\#}P,Q)].
-\end{equation}
-
-Indeed, 
-\begin{align*}
-	d(P,T_{\#}P)+W(T_{\#}P,Q)&=\inf_\gamma\Big[\sqrt{\int_{S\times S}(x-T(x))^2\gamma(dx,dy)}+\sqrt{\int_{S\times S}(T(x)-y)^2\gamma(dx,dy)}\Big] \\
-	&\ge\inf_\gamma\sqrt{\int_{S\times S}(x-y)^2\gamma(dx,dy)}=W(P,Q)
-\end{align*}
-where $\inf\limits_\gamma$ is taken over all couplings $\gamma$ of $P$ and $Q$. So, the right-hand side of (1) is no less than its left-hand side. On the other hand, taking $T$ to be the identity map of $S$, we see that the right-hand side of (1) is no greater than its left-hand side. Thus, (1) is proved. 
+%\subsection*{General Case}
+%Back to our setting, we don't necessarily know the covariance matrices on the marginals.
+%
+%Consider the discrete setting where the distributions $\mu$ and $\nu$ can be represented by probability vectors $p$ and $q$. Also let $X$ and $Y$ represent random vectors from $\mu$ and $\nu$ and define the respective covariance matrices as $\Sigma_X$ and $\Sigma_Y$.
+%
+%Transform $X$ and $Y$ as follows
+%\begin{align*}
+%	\tilde{X} &= diag(\sqrt{p})X \\
+%	\tilde{Y} &= diag(\sqrt{q})Y \\
+%	\tilde{P} &= diag(1/\sqrt{p})\cdot diag(1/\sqrt{q})
+%\end{align*}
+%
+%Let $$K=(X^{\perp}diag(\sqrt{p})X)^{-1/2}(X^{\perp}PY)(Y^{\perp}diag(\sqrt{q})Y)^{-1/2}.$$
+%
+%Note that
+%$$\tilde{X}^{\perp}\tilde{P}\tilde{Y}=X^{\perp}PY=\Sigma_{XY}=\Sigma_X^{1/2}K\Sigma_Y^{1/2}$$
+%
+%We now want to solve the following optimization problem:
+%
+%Maximize $$\norm{K\Sigma_{\nu}^{1/2}}_{\mathcal{F}}$$ where
+%$P$ satisfies constraints 
+%\begin{align*}
+%	P\vec{1} &=p \\
+%	P^{\perp}\vec{1} &=q.
+%\end{align*}
+%
+%\subsection*{Pythagorean identity for Wasserstein}
+%
+%\begin{equation}
+%	W(P,Q)=\inf_T[d(P,T_{\#}P)+W(T_{\#}P,Q)].
+%\end{equation}
+%
+%Indeed, 
+%\begin{align*}
+%	d(P,T_{\#}P)+W(T_{\#}P,Q)&=\inf_\gamma\Big[\sqrt{\int_{S\times S}(x-T(x))^2\gamma(dx,dy)}+\sqrt{\int_{S\times S}(T(x)-y)^2\gamma(dx,dy)}\Big] \\
+%	&\ge\inf_\gamma\sqrt{\int_{S\times S}(x-y)^2\gamma(dx,dy)}=W(P,Q)
+%\end{align*}
+%where $\inf\limits_\gamma$ is taken over all couplings $\gamma$ of $P$ and $Q$. So, the right-hand side of (1) is no less than its left-hand side. On the other hand, taking $T$ to be the identity map of $S$, we see that the right-hand side of (1) is no greater than its left-hand side. Thus, (1) is proved. 
 
 %
 %\section*{A Two-Step Computation for Wasserstein}

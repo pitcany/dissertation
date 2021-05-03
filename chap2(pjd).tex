@@ -178,7 +178,9 @@ Then our dual problem is
 &= \inf_{\pi\in M_{+}} \left[ \frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int \left( c(x,y) - \frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 \right)\,d\pi \right]
 \end{align*}
 
-If $c(x,y)=\frac{1}{2}\norm{x-y}^2$, then $c(x,y)-\frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 = x^{T}y$, which seems more tractable to work with. The question now is how to minimize 
+From here on, we assume our cost function is the square-loss, i.e. $c(x,y)=\frac{1}{2}\norm{x-y}^2$. It immediately follows that $c(x,y)-\frac{1}{2}\norm{x}^2 - \frac{1}{2}\norm{y}^2 = x^{T}y$
+
+The question now is how to minimize 
 $$
 \frac{1}{4\lambda} (Q(s,\pi_1)+Q(t,\pi_2)) + \int x^{T}y\,d\pi(x,y).
 $$
@@ -497,15 +499,19 @@ In the following, we provide some sample code that demonstrates these results em
 
 
 \section{Sample Complexity Bound}
-	In our case, we regularize with respect to the norms of the dual potentials in an RKHS $H$,
+
+	\subsection*{Introduction}
+	Previously, we investigated the dual form of the dual norm regularized optimal transport and examined some of its fundamental properties. Now, we transition to establishing finite sample guarantees. In particular, we show that our convergence rate is faster than that of unregularized OT under certain conditions.
+
+	Our quantity can be expressed as follows, where we regularize by the norms of the dual potentials $f,g$ in an RKHS $H$,
 	$$S(P,\displaystyle \ Q)=\sup_{f\in L_{1}(P) \cap H,g\in L_{1}(Q) \cap H}\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H).$$
 	
 	%We focus throughout on subgaussian probability measures. We say that a distribution $P\in \mathcal{P}(\mathbb{R}^{d})$ is $\sigma^{2}$-subgaussian for $\sigma\geq 0$ if $E_{P}e^{\frac{||X\Vert^{2}}{2d\sigma^{2}}}\leq 2$. By Jensen's inequality, if $E_{pe}2d\sigma^{2}\leq C$ for any constant $C\geq 2$, then $P$ is $C\sigma^{2}$-subgaussian. Note that if $P$ is subgaussian, then $ E_{P}e^{v^{\mathrm{T}}X}<\infty$ for all $v\in \mathbb{R}^{d}$. Conversely, standard results (see, e.g., ) imply that our definition is satisfied if $E_{P}e^{u^{\mathrm{T}}X}\leq e^{\Vert u\Vert^{2}\sigma^{2}/2}$ for all $u\in \mathbb{R}^{d}.$
 	
-	Unregularized OT suffers from the curse of dimensionality: in general, the Wasserstein distance $W_{2}^{2}(P_{n},\ Q_{n})$ converges to $W_{2}^{2}(P,\ Q)$ no faster than $n^{-1/d}$ for measures in $\mathbb{R}^{d}.$
+	\subsection*{Proof Technique}
+	 The proof technique here is inspired by work on entropic optimal transport sample complexity \cite{Mena2019}. First, we use a simple argument to remove the regularization terms. Then we examine the empirical process over some set that the optimal potentials belong to. Key to our results are the establishment of uniform bounds of the potential functions. And since these potentials are in an RKHS, we can exploit the structure of the RKHS to establish empirical process bounds. After controlling the potentials, we use a chaining bound.
 	
-	Others have studied entropic OT and have shown that entropic OT converges faster than the unregularized counterpart. Here, we regularize with respect to the RKHS norms of the potentials instead of entropy. The proof technique however is inspired by Loubes and Barrio and Weed and Mena. First, we use a simple argument to remove the regularization terms. Then we examine the empirical process over some set that the optimal potentials belong to. Key to our results are the establishment of uniform bounds of the potential functions. And since these potentials are in an RKHS, we can exploit the structure of the RKHS to avoid controlling the Holder norms or bounding the derivatives in order to establish empirical process bounds. After controlling the potentials, a chaining bound completes our proof.
-	
+	\subsection*{Uniform bounds on the optimal potentials}
 	\begin{prop}
 		The optimal $f,g$, denoted $f^*,g^*$, of $$\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H)$$ lie in a RKHS ball of radius $K(P,Q)/\lambda$, where 
 		$$
@@ -522,7 +528,7 @@ In the following, we provide some sample code that demonstrates these results em
 		Assuming $c(x,y)\geq 0$, we get $$\lambda(\left\|f^*\right\|+\left\|g^*\right\|)\leq K(P,Q)$$ which implies that $f^*$ and $g^*$ lie in an RKHS ball of radius $K(P,Q)/\lambda$.
 	\end{proof}
 	
-	We denote by $\mathcal{F}$ the set of functions in the RKHS ball with radius $K(P,Q)/\lambda$. The following proposition shows that it suffices to control an empirical process indexed by this set.
+	We denote by $\mathcal{F}$ the set of functions in the RKHS ball with radius $\frac{\max(K(P,Q),K(P_n,Q))}{\lambda}$. The following proposition shows that it suffices to control an empirical process indexed by this set.
 	
 	\begin{prop}
 		Let $P, Q$, and $P_{n}$ be probability distributions.
@@ -538,7 +544,7 @@ In the following, we provide some sample code that demonstrates these results em
 		
 		$\displaystyle \mathcal{A}^{\alpha,\beta}(u,\ v)=\int u(x)\mathrm{d}\alpha(x)+\int v(y)\mathrm{d}\beta(y)-\lambda(\left\|u\right\|_H+\left\|v\right\|_H).$
 		
-		Denote by $(f_{n},\ g_{n})$ a pair of optimal potentials for $(P_{n},\ Q)$ and $(f,\ g)$ for $(P,\ Q)$, respectively. We can choose smooth optimal potentials $(f,\ g)$ and $(f_{n},\ g_{n})$ so that the condition $()$ holds for all $x, y\in \mathbb{R}^{d}.$ We earlier showed that $f$, $f_n\in \mathcal{F}$.
+		Denote by $(f_{n},\ g_{n})$ a pair of optimal potentials for $(P_{n},\ Q)$ and $(f,\ g)$ for $(P,\ Q)$, respectively. We can choose smooth optimal potentials $(f,\ g)$ and $(f_{n},\ g_{n})$ to lie in the RKHS balls with radii $K(P,Q)/\lambda$ and $K(P_n,Q)/\lambda$ respectively for all $x, y\in \mathbb{R}^{d}.$ Thus $f$, $f_n\in \mathcal{F}$.
 		
 		Strong duality implies that $S(P,\ Q)=\mathcal{A}^{P,Q}(f,\ g)$ and $S(P_{n},\ Q)=\mathcal{A}^{P_{n},Q}(f_{n},\ g_{n}).$
 		
@@ -583,14 +589,19 @@ In the following, we provide some sample code that demonstrates these results em
 	almost surely. $\square $
 	\medskip
 	
-	The key result is the following covering number bound. Denote by $N(\varepsilon,\ \mathcal{F}^{s},\ L_{2}(P_{n}))$ the covering number with respect to the (random) metric $L_{2}(P_{n})$ defined by
+	\subsection*{Bounding the empirical process}
+	Denote by $N(\varepsilon,\ \mathcal{F}^{s},\ L_{2}(P_{n}))$ the covering number with respect to the (random) metric $L_{2}(P_{n})$ defined by
 	
 	$\displaystyle \Vert f\Vert_{L_{2}(P_{n})}=\left(\frac{1}{n}\sum_{i=1}^{n}f(X_{i})^{2}\right)^{1/2}$
+	
+	The empirical process bounds established in this chapter rely on our reproducing kernel hilbert space (RKHS) having a special structure. Particularly, the reason we assumed that the RKHS exhibits a Gaussian radial basis function kernel will soon be clear.
+	
+	From here onwards, define $K=\max(K(P,Q),K(P_n,Q))$. Our first preliminary result is the following proposition:
 	
 	\begin{prop}
 		Let $\mathcal{H}_{\sigma}$ be a Gaussian radial basis function RKHS with the kernel defined as $k(x,y)=e^{-\sigma^2 \left\|x-y\right\|_2^2}$. If $P_{n}$ is an empirical distribution, then, given the sample $X_{1}$, . . . , $X_{n}$, we have the bound
 		$$
-		\max_{f\in \mathcal{F}} \Vert f\Vert_{L_{2}(P_{n})}^{2}\leq \frac{K^2(P,Q)}{\lambda^2}\ .
+		\max_{f\in \mathcal{F}} \Vert f\Vert_{L_{2}(P_{n})}^{2}\leq \frac{K^2}{\lambda^2}\ .
 		$$ 
 	\end{prop}
 	
@@ -598,21 +609,21 @@ In the following, we provide some sample code that demonstrates these results em
 		Denote $$f(x)=\langle f(t),K(x,t)\rangle \leq \left\|f\right\|_{\mathcal{H}}\max_{x\in X} \sqrt{k(x,x)}$$ and $k(x,x)=1$ if $k(x,y)=e^{-\sigma^2 \left\|x-y\right\|_2^2}$. Thus $\left|f(x)\right|\leq \left\|f\right\|_{\mathcal{H}}$ for all $x\in X$.
 	\end{proof}
 	
-	Assuming the RKHS is Gaussian like in the previous proposition, then we have the following
-	\begin{theorem}
+	Assuming the RKHS is Gaussian like in the previous proposition, then we have the covering number bound.
+	\begin{theorem} \cite{Steinwart2007}
 		Let $\sigma\geq 1$, $X\subset \mathbb{R}^d$ be a compact subset with nonempty interior, and $H_{\sigma}(X)$ be the RKHS of the Gaussian RBF kernel $k_{\sigma}$ on $X$. Then for all $0<p\leq 2$ and all $\delta>0$, there exists a constant $C_{p,\delta,d}>0$ independent of $\sigma$ such that for all $\epsilon>0$ we have 
 		$$
 		\sup_{T\in (X\times Y)^n} \log N(\varepsilon,\ \mathcal{F},\ L_{2}(P_{n}))\leq c_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}\epsilon^{-p}.
 		$$
 	\end{theorem}
 	
-	Using this result, we then have, by Gine and Nickl,
+	Using this result, we then have, by the use of a chaining bound \cite{Gine2016},
 	
 	\begin{align*}
 		E \displaystyle\Vert P-P_n\Vert_{\mathcal{F}}^{2}&\lesssim \frac{1}{n}E(\int_{0}^{\sqrt{\max_{f\in \mathcal{F}}\Vert f\Vert_{L_{2}(P_{n})}^{2}}}\sqrt{\log 2N(\epsilon,\mathcal{F},L_{2}(P_{n}))}\mathrm{d}\epsilon)^{2} \\
-		&\leq \frac{1}{n}E(\int_{0}^{K(P,Q)/\lambda}\sqrt{1+c_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}\epsilon^{-p}}\mathrm{d}\epsilon)^{2} \\
-		&\leq \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n}E(\int_{0}^{K(P,Q)/\lambda} \epsilon^{-p/2} \mathrm{d}\epsilon)^{2} \\
-		&= \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n(1-p/2)^2} \left(\frac{K(P,Q)}{\lambda}\right)^{2-p}
+		&\leq \frac{1}{n}E(\int_{0}^{K/\lambda}\sqrt{1+c_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}\epsilon^{-p}}\mathrm{d}\epsilon)^{2} \\
+		&\leq \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n}E(\int_{0}^{K/\lambda} \epsilon^{-p/2} \mathrm{d}\epsilon)^{2} \\
+		&= \frac{c'_{p,\delta,d} \sigma^{(1-p/2)(1+\delta)d}}{n(1-p/2)^2} \left(\frac{K}{\lambda}\right)^{2-p}
 	\end{align*}
 	
-	And one can notice here that the upper bound is $O(1/n)$.
+	Here, $c_{p,\delta,d}$ and $c'_{p,\delta,d}$ denote constants with respect to $n$. One can notice here that the upper bound is $O(1/n)$.

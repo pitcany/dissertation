@@ -334,8 +334,10 @@ $$c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t)+l(y_s,f(x_t))$$
 $$u(x_s,y_s)\leq L\norm{(x_s,y_s)}$$
 $$v(x_t) \leq \max_{x_s,y_s} u(x_s,y_s)-c_f(x_s,y_s,x_t)$$
 
-Things to note:
-We must determine if it changes the problem if $S$ and $T_X$ have different dimensions, because in the literature, the two have equal dimension. Now, $S$ is used to replace $\mathcal{X}$ and $T_X$ for $\mathcal{Y}$.
+%Things to note:
+%We must determine if it changes the problem if $S$ and $T_X$ have different dimensions, because in the literature, the two have equal dimension. 
+
+Now, $S$ is used to replace $\mathcal{X}$ and $T_X$ for $\mathcal{Y}$. For simplicity, we will assume $S$ and $T_X$ have the same dimension.
 
 We also know that on the subset where $u$ and $v$ are optimal, $u\oplus v\leq 2L\norm{S}+\norm{c}_{\infty}$. Call this subset $\mathcal{A}$.
 
@@ -353,9 +355,11 @@ $$ \E \bkt{\sup_{g\in G} \E l(g,X) - \frac{1}{n} \sum l(g,X_i)} \leq 2B\E R(G(X_
 
 $$ \E \abs{W_{\epsilon}(\alpha,\beta) - W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})} \leq 3 \frac{2B\lambda}{n} \E \sqrt{\sum_{i=1}^n k(X_i,X_i)} $$
 
-where $B\leq \max(1+M,\abs{Q}M)$, $\lambda$ is bounded since the norms of the potentials are bounded by $O(\max(1,\frac{1}{\epsilon^{d/2}}))$ and $f$ has bounded norm as well (still need to figure out an exact upper bound here).
+where $B\leq \max(1+M,\abs{Q}M)$, $\lambda$ is bounded since the norms of the potentials are bounded by $O(\max(1,\frac{1}{\epsilon^{d/2}}))$ and $f$ has bounded norm as well.
 
-After justifying the above two lemmas, we can then provide bounds w.r.t $W_{\epsilon}$ because
+%(still need to figure out an exact upper bound on f here).
+
+After justifying the above two lemmas, we can then provide bounds with respect to $W_{\epsilon}$ because
 
 $$err_{T}(\hat{f}) + 4\epsilon d + 2\epsilon d \log(\frac{LD}{\sqrt{d}\epsilon}) \leq err_{T}(f^{*})+W_{\epsilon}(S,T)+\hat{\hat{\Gamma}}\left(-\alpha
 d(x_{s},x_{t})+l(y_{s},y_{t})\right)$$
