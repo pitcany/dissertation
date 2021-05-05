@@ -22,46 +22,46 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Notation and Preliminaries}{11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Generalization Bounds}{16}%
+\contentsline {section}{\numberline {2.2}Preliminary Generalization Bounds}{15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Error bounds with respect to Wasserstein distance}{17}%
+\contentsline {subsection}{Error bounds with respect to Wasserstein distance}{16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Entropic Regularization}{17}%
+\contentsline {subsection}{Entropic Regularization}{16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Sample Dependent Sinkhorn Bounds}{18}%
+\contentsline {subsection}{Sample Dependent Sinkhorn Bounds}{17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {3}An Alternative Means of Regularization for Domain Adaptation Problems}{21}%
+\contentsline {chapter}{\chapternumberline {3}An Alternative Means of Regularization for Domain Adaptation Problems}{18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introduction}{21}%
+\contentsline {section}{\numberline {3.1}Introduction}{18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Existence and Uniqueness of an Optimal Transport Map}{22}%
+\contentsline {section}{\numberline {3.2}Existence and Uniqueness of an Optimal Transport Map}{19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Convex Analysis Prerequisites}{22}%
+\contentsline {section}{\numberline {3.3}Convex Analysis Prerequisites}{19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Derivation of Primal Formulation}{24}%
+\contentsline {section}{\numberline {3.4}Derivation of Primal Formulation}{21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{What does the dual of f look like?}{25}%
+\contentsline {subsection}{What does the dual of f look like?}{22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Inner product space of signed measures}{26}%
+\contentsline {subsection}{Inner product space of signed measures}{23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Discrete Setting}{26}%
+\contentsline {subsection}{Discrete Setting}{23}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}An Alternative Optimization Problem}{27}%
+\contentsline {section}{\numberline {3.5}An Alternative Optimization Problem}{24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Sample Complexity Bound}{33}%
+\contentsline {section}{\numberline {3.6}Sample Complexity Bound}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {4}Domain adaptation using Monge mappings}{37}%
+\contentsline {chapter}{\chapternumberline {4}Domain adaptation using Monge mappings}{34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {5}Asymptotics for Prior Elicitation}{43}%
+\contentsline {chapter}{\chapternumberline {5}Asymptotics for Prior Elicitation}{39}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Statistical Elicitation}{43}%
+\contentsline {section}{\numberline {5.1}Statistical Elicitation}{39}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Sample Based Elicitation}{44}%
+\contentsline {section}{\numberline {5.2}Sample Based Elicitation}{40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Finite Sample}{46}%
+\contentsline {subsection}{Finite Sample}{42}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Experiments}{47}%
+\contentsline {section}{\numberline {5.3}Experiments}{43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Validating the estimator and the learning rate}{47}%
+\contentsline {subsection}{Validating the estimator and the learning rate}{43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{55}%
+\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{51}%

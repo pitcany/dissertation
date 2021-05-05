@@ -12,15 +12,29 @@ However, the emphasis earlier was not on finding the explicit mapping between da
 \section*{Linear Monge Mappings}
 Previous work \cite{Flamary2019} estimated the linear Monge mapping between distributions and used this to provide a domain adaptation generalization bound.
 
-We conjecture that their result about the optimal transport map can be extended to say that this particular function of the second moments of the source and target distributions gives the optimal linear transport map, even if the optimal transport map isn't linear.
+We show why estimating the linear Monge map may be of importance if we know the second-order moments. In particular, the optimal linear transport map is the optimal transport map in this setting.
 
-This corresponds to finding a solution to
-$$\min_A (E_P \frac{1}{2} x'Ax + E_Q \frac{1}{2} y'A^{-1}y),$$ which can be rewritten as 
-$$\min_A Tr(A E_P xx' + A^{-1} E_Q yy')/2.$$
+%We conjecture that their result about the optimal transport map can be extended to say that this particular function of the second moments of the source and target distributions gives the optimal linear transport map, even if the optimal transport map isn't linear.
+
+%This corresponds to finding a solution to
+%$$\min_A (E_P \frac{1}{2} x'Ax + E_Q \frac{1}{2} y'A^{-1}y),$$ which can be rewritten as 
+%$$\min_A Tr(A E_P xx' + A^{-1} E_Q yy')/2.$$
 
 \section*{Notation}
 
-Let $A$ and $B$ be positive matrices. And define the fidelity $F(A,B) = tr(A^{1/2}BA^{1/2})^{1/2}$. Also let $A\#B=A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$.
+Let $A$ and $B$ be positive matrices.
+
+\begin{definition}
+	An $n\times n$ symmetric matrix $M$ is a positive matrix if and only if $x^{'} M x>0$ for all $x\in \mathbb{R}^n$.
+\end{definition}
+
+And we also introduce the concept of fidelity measure between matrices. 
+
+\begin{definition}[Fidelity]
+	If $A$ and $B$ are positive matrices, then the fidelity $F(A,B) = tr(A^{1/2}BA^{1/2})^{1/2}$.
+\end{definition}
+
+Also let $A\#B=A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$ be the matrix geometric mean.
 
 \section*{Minimizing over set of linear maps \cite{Bhatia2019}}
 Let $x$ and $y$ be random vectors with values in $\mathbb{C}^{n}$, each having zero mean WLOG, and with covariance matrices $A$ and $B$, respectively. This last statement means that
@@ -101,26 +115,26 @@ $$
 $$
 If $T$ is the optimal transport map from $A$ to $B$, then $TAT=B$. This shows that the covariance matrix of the vector $y$ is $B.$
 
-\section*{Which cross-covariance matrices are feasible with given marginal distributions?}
-
-If we have marginal distributions $P$ and $Q$ we want to determine possible cross-covariances between the two distributions. Let $M$ denote the cross-covariance between $\mu$ and $\nu$.
-
-\subsection*{What if we knew the marginal covariances?}
-In the case where we know $\Sigma_{P}$ and $\Sigma_{Q}$, we have necessary and sufficient conditions for the block matrix
-$$
-\left( \begin{matrix}
-	\Sigma_{P} & M \\
-	M^{*} & \Sigma_{Q}
-\end{matrix}\right) 
-$$
-
-to be PSD. 
-
-These conditions are the following:
-\begin{enumerate}
-	\item $A\geq M\Sigma_{Q}^{-1}M^{*}$
-	\item There exists a contraction operator $K$ with $\norm{K}\leq 1$ such that $$M=\Sigma_{P}^{1/2}K\Sigma_{Q}^{1/2}.$$
-\end{enumerate}
+%\section*{Which cross-covariance matrices are feasible with given marginal distributions?}
+%
+%If we have marginal distributions $P$ and $Q$ we want to determine possible cross-covariances between the two distributions. Let $M$ denote the cross-covariance between $\mu$ and $\nu$.
+%
+%\subsection*{What if we knew the marginal covariances?}
+%In the case where we know $\Sigma_{P}$ and $\Sigma_{Q}$, we have necessary and sufficient conditions for the block matrix
+%$$
+%\left( \begin{matrix}
+%	\Sigma_{P} & M \\
+%	M^{*} & \Sigma_{Q}
+%\end{matrix}\right) 
+%$$
+%
+%to be PSD. 
+%
+%These conditions are the following:
+%\begin{enumerate}
+%	\item $A\geq M\Sigma_{Q}^{-1}M^{*}$
+%	\item There exists a contraction operator $K$ with $\norm{K}\leq 1$ such that $$M=\Sigma_{P}^{1/2}K\Sigma_{Q}^{1/2}.$$
+%\end{enumerate}
 
 %\subsection*{General Case}
 %Back to our setting, we don't necessarily know the covariance matrices on the marginals.

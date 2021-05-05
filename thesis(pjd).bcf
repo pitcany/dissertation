@@ -2190,21 +2190,22 @@
     <bcf:citekey order="6">Ben-David2007</bcf:citekey>
     <bcf:citekey order="7">Ben-David2007</bcf:citekey>
     <bcf:citekey order="8">Panaretos2020</bcf:citekey>
-    <bcf:citekey order="9">Redko2017</bcf:citekey>
+    <bcf:citekey order="9">Genevay2018</bcf:citekey>
     <bcf:citekey order="10">Redko2017</bcf:citekey>
-    <bcf:citekey order="11">Bolley2007</bcf:citekey>
-    <bcf:citekey order="12">Courty2017</bcf:citekey>
-    <bcf:citekey order="13">Genevay2018</bcf:citekey>
+    <bcf:citekey order="11">Redko2017</bcf:citekey>
+    <bcf:citekey order="12">Bolley2007</bcf:citekey>
+    <bcf:citekey order="13">Courty2017</bcf:citekey>
     <bcf:citekey order="14">Genevay2018</bcf:citekey>
-    <bcf:citekey order="15">Mena2019</bcf:citekey>
-    <bcf:citekey order="16">Steinwart2007</bcf:citekey>
-    <bcf:citekey order="17">Gine2016</bcf:citekey>
-    <bcf:citekey order="18">Flamary2019</bcf:citekey>
-    <bcf:citekey order="19">Bhatia2019</bcf:citekey>
-    <bcf:citekey order="20">Pinelis2017</bcf:citekey>
+    <bcf:citekey order="15">Genevay2018</bcf:citekey>
+    <bcf:citekey order="16">Mena2019</bcf:citekey>
+    <bcf:citekey order="17">Steinwart2007</bcf:citekey>
+    <bcf:citekey order="18">Gine2016</bcf:citekey>
+    <bcf:citekey order="19">Flamary2019</bcf:citekey>
+    <bcf:citekey order="20">Bhatia2019</bcf:citekey>
     <bcf:citekey order="21">Pinelis2017</bcf:citekey>
     <bcf:citekey order="22">Pinelis2017</bcf:citekey>
-    <bcf:citekey order="23">Pinelis2016</bcf:citekey>
+    <bcf:citekey order="23">Pinelis2017</bcf:citekey>
+    <bcf:citekey order="24">Pinelis2016</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

@@ -1,6 +1,8 @@
 \chapter{Theoretical Analysis of Domain Adaptation with Sinkhorn Divergence}
 
-In this chapter, we discuss some of our first results when using a entropic-based Sinkhorn divergence. In the past, generalization bounds were provided with respect to the Wasserstein metric, but the empirical computation involved a regularization step, which was previously unaccounted for when deriving bounds. In this work, we provide a theoretical analysis of the generalization bound with respect to the entropic regularization in the unsupervised domain adaptation setting.
+Previously, we gave a glimpse at domain adaptation and briefly discussed optimal transport, without tying the two concepts together. Thus, we give a more in-depth introduction here to how optimal transport and domain adaptation are linked. Then, we introduce entropic-based optimal transport, otherwise known as Sinkhorn divergence \cite{Genevay2018}. Primarily, we focus on sample complexity results involving this type of divergence.
+
+%In the past, generalization bounds were provided with respect to the Wasserstein metric, but the empirical computation involved a regularization step, which was previously unaccounted for when deriving bounds.
 
 \section*{Why Use Optimal Transport in Domain Adaptation?}
 Optimal transport is capable of taking into consideration the geometry of the data. In domain adaptation problems, this is helpful, especially since when dealing with a source and target distribution, a natural idea is to look for a nonlinear transformation between the two distributions. This makes optimal transport distances (e.g. Wasserstein) highly promising. Another concern is that the source and target distributions lack a shared support. Using a distance that does not require a shared support makes sense, and the Wasserstein is one such distance. This property distinguishes it from other divergences, such as Maximum Mean Discrepancy or Kullback-Leibler, which usually require a common support.
@@ -166,47 +168,47 @@ JDOT is the approach taken in \cite{Courty2017} and is the problem, with regular
 %fix citation
 
 %end
-\section*{Uniform empirical risk bounds on RKHS}
-Using properties of the Rademacher complexities of functions in an RKHS, we can avoid bounding empirical risks w.r.t Wasserstein distance.
-
-$$ \sup_{f\in F} \abs{\E f(X) - \frac{1}{n}\sum_{i=1}^n f(X_i)} = \norm{P-P_n}_F. $$
-
-$$ \E \norm{P-P_n}_{F}\leq 2\norm{R_n}_F $$
-
-Let $F = \left\{f\in \mathcal{H} | \norm{f}_{H}\leq B\right\}$
-
-$$ \E \bkt*{\norm{R_n}_{F} | X_1,\ldots,X_n} \leq \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}. $$
-
-\begin{proof}
-	\begin{align*}
-	\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i)} \\
-	&= \sup_{f\in F} \abs{\frac{1}{n} \sum_{i=1}^n \epsilon_i \ang*{k(X_i,\cdot),f}} \\
-	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}} \\
-	&= B\sqrt{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)}
-	\end{align*}
-	
-	By Jensen's
-	
-	\begin{align*}
-	\E \bkt*{ \norm{R_n}_F | X_{1}^{n}} &\leq B\sqrt{\E \bkt*{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)|X_{1}^{n}}} \\
-	&= B \sqrt{\frac{1}{n^2} \sum_i k(X_i,X_i)} \\
-	&= \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}
-	\end{align*}
-\end{proof}
-
-%\begin{align*}
-%\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i) \\
+%\section*{Uniform empirical risk bounds on RKHS}
+%Using properties of the Rademacher complexities of functions in an RKHS, we can avoid bounding empirical risks w.r.t Wasserstein distance.
+%
+%$$ \sup_{f\in F} \abs{\E f(X) - \frac{1}{n}\sum_{i=1}^n f(X_i)} = \norm{P-P_n}_F. $$
+%
+%$$ \E \norm{P-P_n}_{F}\leq 2\norm{R_n}_F $$
+%
+%Let $F = \left\{f\in \mathcal{H} | \norm{f}_{H}\leq B\right\}$
+%
+%$$ \E \bkt*{\norm{R_n}_{F} | X_1,\ldots,X_n} \leq \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}. $$
+%
+%\begin{proof}
+%	\begin{align*}
+%	\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i)} \\
 %	&= \sup_{f\in F} \abs{\frac{1}{n} \sum_{i=1}^n \epsilon_i \ang*{k(X_i,\cdot),f}} \\
-%	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}}
-%\end{align*}
+%	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}} \\
+%	&= B\sqrt{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)}
+%	\end{align*}
+%	
+%	By Jensen's
+%	
+%	\begin{align*}
+%	\E \bkt*{ \norm{R_n}_F | X_{1}^{n}} &\leq B\sqrt{\E \bkt*{\frac{1}{n^2} \sum_{i,j} \epsilon_i \epsilon_j k(X_i,X_j)|X_{1}^{n}}} \\
+%	&= B \sqrt{\frac{1}{n^2} \sum_i k(X_i,X_i)} \\
+%	&= \frac{B}{\sqrt{n}} \sqrt{\frac{tr(K)}{n}}
+%	\end{align*}
+%\end{proof}
+%
+%%\begin{align*}
+%%\norm{R_n}_F &= \sup_{f\in F} \abs*{ \frac{1}{n} \sum_{i=1}^n \epsilon_i f(X_i) \\
+%%	&= \sup_{f\in F} \abs{\frac{1}{n} \sum_{i=1}^n \epsilon_i \ang*{k(X_i,\cdot),f}} \\
+%%	&= \sup_{f\in \mathcal{H}:\norm{f}_{\mathcal{H}}\leq B} \abs*{\ang*{\frac{1}{n}\sum_{i=1}^n \epsilon_i k(X_i,\cdot),f}}
+%%\end{align*}
+%
+%Taking expectations of both sides,
+%$$ \E \bkt*{\norm{R_n}_{F}}\leq \frac{B}{n}\E \bkt*{\sqrt{tr(K)}} $$
+%
+%and if our kernel $k$ is bounded above by $M$, then
+%$$ \E \bkt*{ \norm{R_n}_F } \leq \frac{B}{n} \sqrt{nM} = B\sqrt{M/n}. $$
 
-Taking expectations of both sides,
-$$ \E \bkt*{\norm{R_n}_{F}}\leq \frac{B}{n}\E \bkt*{\sqrt{tr(K)}} $$
-
-and if our kernel $k$ is bounded above by $M$, then
-$$ \E \bkt*{ \norm{R_n}_F } \leq \frac{B}{n} \sqrt{nM} = B\sqrt{M/n}. $$
-
-\section{Generalization Bounds}
+\section{Preliminary Generalization Bounds}
 \label{generalization-bounds}
 
 Our claim is that we can get guarantees when doing a dual minimization of the Wasserstein distance with the specified cost function $\alpha d(x_s,x_t) + l(y_s,f(x_t))$ from $S$ to $T_{f}$. 
@@ -214,8 +216,6 @@ Our claim is that we can get guarantees when doing a dual minimization of the Wa
 (\hat{\Gamma},\hat{f})=\arg\min_{\Gamma,f}\Gamma\left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]
 \]
 over all couplings that preserve the marginals on $S$ ($x_{s},y_{s})$ and $T_{X}$ $(x_{t})$. Let $\hat{\Gamma}$ be the optimal joint distribution over $(x_{s},y_{s},x_{t})$ above. Now define $\hat{\hat{\Gamma}}$ on $(x_{s},y_{s},x_{t},y_{t})$ to be a coupling with the same marginal over $(x_{s},y_{s},x_{t})$ as $\hat{\Gamma}$ and the correct marginals on $T$ ($x_t,y_t$). Let $\Gamma^{*}$ be an arbitrary coupling on the same variables which preserves the marginal distributions on $S$ ($x_{s},y_{s}$)and $T$ (i.e., $x_{t},y_t$). For now, let's assume we're dealing with absolutely continuous distributions here so we don't have existence issues. Fix $f^*\in F$.
-
-The main results in this paper are bounds on the expected loss with respect to Sinkhorn and Wasserstein divergences.
 
 \subsection{Error bounds with respect to Wasserstein distance}
 \begin{theorem}
@@ -294,75 +294,75 @@ and
 	\] with probability at least $1-\delta$.
 \end{lemma}
 
-\subsection*{New Generalization Bound}
-
-\subsection*{Applying regularization to our minimization problem}
-
-%Let's try to minimize
-%\[
-%(\hat{\Gamma},\hat{f})=\arg\min_{\Gamma,f}\Gamma\left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma)|S\otimes T_X)
-%\]
+%\subsection*{New Generalization Bound}
 %
-%and see how the expression compares to \[
-%\Gamma_n \left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma_n)|S\otimes T_X)
-%\]
+%\subsection*{Applying regularization to our minimization problem}
 %
-%To clarify here, $\Gamma$ is the operator representing expectation w.r.t the joint distribution, $\pi(\Gamma)$.
+%%Let's try to minimize
+%%\[
+%%(\hat{\Gamma},\hat{f})=\arg\min_{\Gamma,f}\Gamma\left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma)|S\otimes T_X)
+%%\]
+%%
+%%and see how the expression compares to \[
+%%\Gamma_n \left[\alpha d(x_{s},x_{t})+l(y_{s},f(x_{t}))\right]+H(\pi(\Gamma_n)|S\otimes T_X)
+%%\]
+%%
+%%To clarify here, $\Gamma$ is the operator representing expectation w.r.t the joint distribution, $\pi(\Gamma)$.
+%%
+%%\begin{align*}
+%%\hat{\hat{\Gamma}}\left[\alpha
+%%d(x_{s},x_{t})+l(y_{t},\hat{f}(x_{t}))-l(y_{s},y_{t})\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) & \leq
+%%\hat{\hat{\Gamma}}\left[\alpha
+%%d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) \\
+%%& =\hat{\Gamma}\left[\alpha d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\Gamma})|S\otimes T_X)\\
+%%&\leq \hat{\Gamma}_n (\alpha d(x_s,x_t) + l(y_s,\hat{f}(x_t))) + \epsilon + ? \\
+%%& \leq \Gamma_n^{*} (\alpha d(x_s,x_t) + l(y_s,f^{*}(x_t))) + \epsilon + \epsilon + ?\\
+%%&\leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})+l(y_{s},f^{*}(x_{t}))\right] + 2\epsilon + ?\\
+%%& \leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})
+%%+l(y_{t},f^{*}(x_{t}))+l(y_{t},y_{s})\right] + 2\epsilon + ?
+%%\end{align*}
 %
-%\begin{align*}
-%\hat{\hat{\Gamma}}\left[\alpha
-%d(x_{s},x_{t})+l(y_{t},\hat{f}(x_{t}))-l(y_{s},y_{t})\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) & \leq
-%\hat{\hat{\Gamma}}\left[\alpha
-%d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\hat{\Gamma}})|S\otimes T_X) \\
-%& =\hat{\Gamma}\left[\alpha d(x_{s},x_{t})+l(y_{s},\hat{f}(x_{t}))\right] + H(\pi(\hat{\Gamma})|S\otimes T_X)\\
-%&\leq \hat{\Gamma}_n (\alpha d(x_s,x_t) + l(y_s,\hat{f}(x_t))) + \epsilon + ? \\
-%& \leq \Gamma_n^{*} (\alpha d(x_s,x_t) + l(y_s,f^{*}(x_t))) + \epsilon + \epsilon + ?\\
-%&\leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})+l(y_{s},f^{*}(x_{t}))\right] + 2\epsilon + ?\\
-%& \leq\Gamma^{*}\left[\alpha d(x_{s},x_{t})
-%+l(y_{t},f^{*}(x_{t}))+l(y_{t},y_{s})\right] + 2\epsilon + ?
-%\end{align*}
-
-Letting $c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t) + l(y_s,f(x_t))$, we'll apply the technique from Geneway's paper "Sample Complexity of Sinkhorn Distances" to give sample bounds on the Sinkhorn distance.
-
-The difference here is we'll also show that our $f_{\epsilon}$ is lipschitz in $f$, which comes up in $c_f$ defined earlier.
-
-$$W_{\epsilon}(S,T_X) = \max_{u\in c(S),v\in c(T_X)} \E_{S\otimes T_X} [f_{\epsilon}^{S,T_X}(u,v)]+\epsilon$$
-
-$$f_{\epsilon}^{S,T_X}(u,v) = u(x_s,y_s)+v(x_t)-\epsilon \exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$$
-
-$$c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t)+l(y_s,f(x_t))$$
-$$u(x_s,y_s)\leq L\norm{(x_s,y_s)}$$
-$$v(x_t) \leq \max_{x_s,y_s} u(x_s,y_s)-c_f(x_s,y_s,x_t)$$
-
-%Things to note:
-%We must determine if it changes the problem if $S$ and $T_X$ have different dimensions, because in the literature, the two have equal dimension. 
-
-Now, $S$ is used to replace $\mathcal{X}$ and $T_X$ for $\mathcal{Y}$. For simplicity, we will assume $S$ and $T_X$ have the same dimension.
-
-We also know that on the subset where $u$ and $v$ are optimal, $u\oplus v\leq 2L\norm{S}+\norm{c}_{\infty}$. Call this subset $\mathcal{A}$.
-
-And let $Q=\exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$ so $\abs{Q}\leq \exp\paren{2\frac{L\abs{S}+\norm{c}_{\infty}}{\epsilon}}.$
-
-$$\frac{\partial f_{\epsilon}}{\partial f} = -\epsilon \frac{\partial Q}{\partial f} = -\epsilon \cdot Q \cdot (1/\epsilon) \cdot \frac{\partial c}{\partial f} = -Q \frac{\partial c(f)}{\partial f} = -Q \frac{\partial l(f)}{\partial f}$$
-
-Thus $$\abs{\frac{\partial f_{\epsilon}}{\partial f}}\leq \abs{Q}M,$$ as long as $\abs{l'(f)} \leq M.$
-
-The above shows that if our loss function $l$ is Lipschitz w.r.t. $f$, then so is $f_{\epsilon}$ and we can then apply \ref{divergence_sinkhorn_from_wasserstein}, as long as $f$ is in an RKHS. To be more precise, $\norm{\nabla f^{\epsilon}(u,v)}\leq \max(1+M,\abs{Q}M)$.
-
-Also recall $\norm{u}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and $\norm{v}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and we have, by using
-
-$$ \E \bkt{\sup_{g\in G} \E l(g,X) - \frac{1}{n} \sum l(g,X_i)} \leq 2B\E R(G(X_1^n)) $$,
-
-$$ \E \abs{W_{\epsilon}(\alpha,\beta) - W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})} \leq 3 \frac{2B\lambda}{n} \E \sqrt{\sum_{i=1}^n k(X_i,X_i)} $$
-
-where $B\leq \max(1+M,\abs{Q}M)$, $\lambda$ is bounded since the norms of the potentials are bounded by $O(\max(1,\frac{1}{\epsilon^{d/2}}))$ and $f$ has bounded norm as well.
-
-%(still need to figure out an exact upper bound on f here).
-
-After justifying the above two lemmas, we can then provide bounds with respect to $W_{\epsilon}$ because
-
-$$err_{T}(\hat{f}) + 4\epsilon d + 2\epsilon d \log(\frac{LD}{\sqrt{d}\epsilon}) \leq err_{T}(f^{*})+W_{\epsilon}(S,T)+\hat{\hat{\Gamma}}\left(-\alpha
-d(x_{s},x_{t})+l(y_{s},y_{t})\right)$$
+%Letting $c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t) + l(y_s,f(x_t))$, we'll apply the technique from Geneway's paper "Sample Complexity of Sinkhorn Distances" to give sample bounds on the Sinkhorn distance.
+%
+%The difference here is we'll also show that our $f_{\epsilon}$ is lipschitz in $f$, which comes up in $c_f$ defined earlier.
+%
+%$$W_{\epsilon}(S,T_X) = \max_{u\in c(S),v\in c(T_X)} \E_{S\otimes T_X} [f_{\epsilon}^{S,T_X}(u,v)]+\epsilon$$
+%
+%$$f_{\epsilon}^{S,T_X}(u,v) = u(x_s,y_s)+v(x_t)-\epsilon \exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$$
+%
+%$$c_f(x_s,y_s,x_t) = \alpha d(x_s,x_t)+l(y_s,f(x_t))$$
+%$$u(x_s,y_s)\leq L\norm{(x_s,y_s)}$$
+%$$v(x_t) \leq \max_{x_s,y_s} u(x_s,y_s)-c_f(x_s,y_s,x_t)$$
+%
+%%Things to note:
+%%We must determine if it changes the problem if $S$ and $T_X$ have different dimensions, because in the literature, the two have equal dimension. 
+%
+%Now, $S$ is used to replace $\mathcal{X}$ and $T_X$ for $\mathcal{Y}$. For simplicity, we will assume $S$ and $T_X$ have the same dimension.
+%
+%We also know that on the subset where $u$ and $v$ are optimal, $u\oplus v\leq 2L\norm{S}+\norm{c}_{\infty}$. Call this subset $\mathcal{A}$.
+%
+%And let $Q=\exp \paren*{\frac{u(x_s,y_s)+v(x_t)-c(x_s,y_s,x_t)}{\epsilon}}$ so $\abs{Q}\leq \exp\paren{2\frac{L\abs{S}+\norm{c}_{\infty}}{\epsilon}}.$
+%
+%$$\frac{\partial f_{\epsilon}}{\partial f} = -\epsilon \frac{\partial Q}{\partial f} = -\epsilon \cdot Q \cdot (1/\epsilon) \cdot \frac{\partial c}{\partial f} = -Q \frac{\partial c(f)}{\partial f} = -Q \frac{\partial l(f)}{\partial f}$$
+%
+%Thus $$\abs{\frac{\partial f_{\epsilon}}{\partial f}}\leq \abs{Q}M,$$ as long as $\abs{l'(f)} \leq M.$
+%
+%The above shows that if our loss function $l$ is Lipschitz w.r.t. $f$, then so is $f_{\epsilon}$ and we can then apply \ref{divergence_sinkhorn_from_wasserstein}, as long as $f$ is in an RKHS. To be more precise, $\norm{\nabla f^{\epsilon}(u,v)}\leq \max(1+M,\abs{Q}M)$.
+%
+%Also recall $\norm{u}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and $\norm{v}_{H^s}=O(1+\frac{1}{\epsilon^{s-1}})$ and we have, by using
+%
+%$$ \E \bkt{\sup_{g\in G} \E l(g,X) - \frac{1}{n} \sum l(g,X_i)} \leq 2B\E R(G(X_1^n)) $$,
+%
+%$$ \E \abs{W_{\epsilon}(\alpha,\beta) - W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})} \leq 3 \frac{2B\lambda}{n} \E \sqrt{\sum_{i=1}^n k(X_i,X_i)} $$
+%
+%where $B\leq \max(1+M,\abs{Q}M)$, $\lambda$ is bounded since the norms of the potentials are bounded by $O(\max(1,\frac{1}{\epsilon^{d/2}}))$ and $f$ has bounded norm as well.
+%
+%%(still need to figure out an exact upper bound on f here).
+%
+%After justifying the above two lemmas, we can then provide bounds with respect to $W_{\epsilon}$ because
+%
+%$$err_{T}(\hat{f}) + 4\epsilon d + 2\epsilon d \log(\frac{LD}{\sqrt{d}\epsilon}) \leq err_{T}(f^{*})+W_{\epsilon}(S,T)+\hat{\hat{\Gamma}}\left(-\alpha
+%d(x_{s},x_{t})+l(y_{s},y_{t})\right)$$
 
 %\section*{Interpolation Between OT and MMD}
 %Depending on the regularization strength $\epsilon$, we can %interpolate between OT and MMD using the Sinkhorn.
