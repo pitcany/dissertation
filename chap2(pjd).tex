@@ -497,6 +497,46 @@ In the following, we provide some sample code that demonstrates these results em
 	
 \end{lstlisting}
 
+\section{Error Bounds}
+
+We seek to determine bounds on the difference between our RKHS dual regularized optimal transport problem
+$$S(P,\displaystyle \ Q)=\sup_{f\in H,g\in H}\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H),\quad f\oplus g\leq c $$
+
+and the unregularized OT,
+
+$$OT(P,\displaystyle \ Q)=\sup_{f\in H,g\in H}\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y),\quad f\oplus g\leq c. $$
+
+We see that the difference between these two quantities is dependent on the norms of the dual potentials for the unregularized and regularized optimal transport problem. The proof here is similar to that of \cite{Sonthalia2020} but here, we generalize from the discrete setting.
+\begin{theorem}
+	$$
+	\lambda(\left\|f^{*}\right\|_H + \left\|g^{*}\right\|_H) \leq OT(P,Q)-S(P,Q)\leq \lambda(\left\|f_0\right\|_H+\left\|g_0\right\|_H)
+	$$
+\end{theorem}
+
+\begin{proof}
+	Let $f_0, g_0$ be dual solutions to $OT(P,Q)$ and $f^{*},g^{*}$ be corresponding solutions to $S(P,Q)$. Since $f^{*},g^{*}$ satisfy the constraint $f^{*}\oplus g^{*}\leq c$, we have
+	
+	$$\int f^{*}(x)\mathrm{d}P(x)+\int g^{*}(y)\mathrm{d}Q(y) \leq \int f_0(x)\mathrm{d}P(x)+\int g_0(y)\mathrm{d}Q(y) = OT(P,Q)$$
+	
+	Subtracting $\lambda(\left\|f^{*}\right\| + \left\|g^{*}\right\|)$ from both sides gives us
+	
+	\begin{align*}
+		S(P,Q)&=\int f^{*}(x)\mathrm{d}P(x)+\int g^{*}(y)\mathrm{d}Q(y) - \lambda(\left\|f^{*}\right\|_H + \left\|g^{*}\right\|_H) \\
+		&\leq \int f_0(x)\mathrm{d}P(x)+\int g_0(y)\mathrm{d}Q(y) - \lambda(\left\|f^{*}\right\|_H + \left\|g^{*}\right\|_H) \\
+		&= OT(P,Q) - \lambda(\left\|f^{*}\right\| + \left\|g^{*}\right\|)
+	\end{align*}
+	
+	Thus we have $OT(P,Q)-S(P,Q)\geq \lambda(\left\|f^{*}\right\| + \left\|g^{*}\right\|)$.
+	
+	Next, note that
+	$$
+	-\int f_0(x)\mathrm{d}P(x)-\int g_0(y)\mathrm{d}Q(y)+\lambda(\left\|f_0\right\|_H+\left\|g_0\right\|_H) \geq -S(P,Q).
+	$$
+	
+	Rearranging this gives us $OT(P,Q)-S(P,Q)\leq \lambda(\left\|f_0\right\|_H+\left\|g_0\right\|_H).$
+	
+	Combining these two inequalities, we get our desired bound.
+\end{proof}
 
 \section{Sample Complexity Bound}
 
@@ -507,6 +547,8 @@ In the following, we provide some sample code that demonstrates these results em
 	$$S(P,\displaystyle \ Q)=\sup_{f\in L_{1}(P) \cap H,g\in L_{1}(Q) \cap H}\int f(x)\mathrm{d}P(x)+\int g(y)\mathrm{d}Q(y)-\lambda(\left\|f\right\|_H+\left\|g\right\|_H).$$
 	
 	%We focus throughout on subgaussian probability measures. We say that a distribution $P\in \mathcal{P}(\mathbb{R}^{d})$ is $\sigma^{2}$-subgaussian for $\sigma\geq 0$ if $E_{P}e^{\frac{||X\Vert^{2}}{2d\sigma^{2}}}\leq 2$. By Jensen's inequality, if $E_{pe}2d\sigma^{2}\leq C$ for any constant $C\geq 2$, then $P$ is $C\sigma^{2}$-subgaussian. Note that if $P$ is subgaussian, then $ E_{P}e^{v^{\mathrm{T}}X}<\infty$ for all $v\in \mathbb{R}^{d}$. Conversely, standard results (see, e.g., ) imply that our definition is satisfied if $E_{P}e^{u^{\mathrm{T}}X}\leq e^{\Vert u\Vert^{2}\sigma^{2}/2}$ for all $u\in \mathbb{R}^{d}.$
+	
+	Throughout this section, we assume $P$ and $Q$ are measures on subsets $\mathcal{X}$ and $\mathcal{Y}$ in $\mathbb{R}^d$ such that $\left|X\right|=\left|Y\right|=D$.
 	
 	\subsection*{Proof Technique}
 	 The proof technique here is inspired by work on entropic optimal transport sample complexity \cite{Mena2019}. First, we use a simple argument to remove the regularization terms. Then we examine the empirical process over some set that the optimal potentials belong to. Key to our results are the establishment of uniform bounds of the potential functions. And since these potentials are in an RKHS, we can exploit the structure of the RKHS to establish empirical process bounds. After controlling the potentials, we use a chaining bound.

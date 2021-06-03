@@ -48,20 +48,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}An Alternative Optimization Problem}{24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Sample Complexity Bound}{30}%
+\contentsline {section}{\numberline {3.6}Error Bounds}{30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {4}Domain adaptation using Monge mappings}{34}%
+\contentsline {section}{\numberline {3.7}Sample Complexity Bound}{31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {5}Asymptotics for Prior Elicitation}{39}%
+\contentsline {chapter}{\chapternumberline {4}Domain adaptation using Monge mappings}{35}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Statistical Elicitation}{39}%
+\contentsline {chapter}{\chapternumberline {5}Asymptotics for Prior Elicitation}{40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Sample Based Elicitation}{40}%
+\contentsline {section}{\numberline {5.1}Statistical Elicitation}{40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Finite Sample}{42}%
+\contentsline {section}{\numberline {5.2}Sample Based Elicitation}{41}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Experiments}{43}%
+\contentsline {subsection}{Finite Sample}{43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Validating the estimator and the learning rate}{43}%
+\contentsline {section}{\numberline {5.3}Experiments}{44}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{51}%
+\contentsline {subsection}{Validating the estimator and the learning rate}{44}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{52}%

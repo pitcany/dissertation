@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 07:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 07:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1112,10 +1112,19 @@ Overfull \vbox (14.49998pt too high) has occurred while \output is active []
 
 [29]
 
-LaTeX Warning: Citation 'Mena2019' on page 30 undefined on input line 512.
+LaTeX Warning: Citation 'Sonthalia2020' on page 30 undefined on input line 509.
 
 
-Overfull \hbox (6.4985pt too wide) detected at line 526
+
+Overfull \vbox (14.49998pt too high) has occurred while \output is active []
+
+
+[30]
+
+LaTeX Warning: Citation 'Mena2019' on page 31 undefined on input line 554.
+
+
+Overfull \hbox (6.4985pt too wide) detected at line 568
 []
  []
 
@@ -1123,73 +1132,73 @@ Overfull \hbox (6.4985pt too wide) detected at line 526
 Overfull \vbox (14.49998pt too high) has occurred while \output is active []
 
 
-[30]
-Overfull \vbox (14.49998pt too high) has occurred while \output is active []
-
-
 [31]
-
-LaTeX Warning: Citation 'Steinwart2007' on page 32 undefined on input line 613.
-
-
-
 Overfull \vbox (14.49998pt too high) has occurred while \output is active []
 
 
 [32]
 
-LaTeX Warning: Citation 'Gine2016' on page 33 undefined on input line 620.
+LaTeX Warning: Citation 'Steinwart2007' on page 33 undefined on input line 655.
+
+
+
+Overfull \vbox (14.49998pt too high) has occurred while \output is active []
+
+
+[33]
+
+LaTeX Warning: Citation 'Gine2016' on page 34 undefined on input line 662.
 
 )
 Overfull \vbox (14.49998pt too high) has occurred while \output is active []
 
 
-[33]
+[34]
 \openout2 = `chap3(pjd).aux'.
 
  (./chap3(pjd).tex
 
-LaTeX Warning: Citation 'Flamary2019' on page 34 undefined on input line 13.
+LaTeX Warning: Citation 'Flamary2019' on page 35 undefined on input line 13.
 
-[34
+[35
 
 
 
 ]
 
-LaTeX Warning: Citation 'Bhatia2019' on page 35 undefined on input line 39.
+LaTeX Warning: Citation 'Bhatia2019' on page 36 undefined on input line 39.
 
-[35] [36] [37]) [38]
+[36] [37] [38]) [39]
 \openout2 = `chap4(pjd).aux'.
 
- (./chap4(pjd).tex [39
+ (./chap4(pjd).tex [40
 
 
 
-] [40] [41]
+] [41] [42]
 
-LaTeX Warning: Citation 'Pinelis2017' on page 42 undefined on input line 112.
+LaTeX Warning: Citation 'Pinelis2017' on page 43 undefined on input line 112.
 
-[42]
+[43]
 Overfull \hbox (1.69795pt too wide) in paragraph at lines 152--153
 \OT1/cmr/m/n/12 To val-i-date our learn-abil-ity re-sults, we per-formed ex-per
 -i-ments us-ing syn-thetic data. Through-
  []
 
 
-LaTeX Warning: Citation 'Pinelis2017' on page 43 undefined on input line 161.
+LaTeX Warning: Citation 'Pinelis2017' on page 44 undefined on input line 161.
 
 
-LaTeX Warning: Citation 'Pinelis2017' on page 43 undefined on input line 161.
+LaTeX Warning: Citation 'Pinelis2017' on page 44 undefined on input line 161.
 
-[43]
+[44]
 
-LaTeX Warning: Citation 'Pinelis2016' on page 44 undefined on input line 168.
+LaTeX Warning: Citation 'Pinelis2016' on page 45 undefined on input line 168.
 
-[44] [45] [46] [47] [48] [49]) [50]
+[45] [46] [47] [48] [49] [50]) [51]
 \openout2 = `chap5(pjd).aux'.
 
- (./chap5(pjd).tex) [51
+ (./chap5(pjd).tex) [52
 
 
 
@@ -1233,7 +1242,7 @@ Package logreq Info: Writing requests to 'thesis(pjd).run.xml'.
 Here is how much of TeX's memory you used:
  15655 strings out of 483107
  254150 string characters out of 5964631
- 957415 words of memory out of 5000000
+ 957443 words of memory out of 5000000
  30482 multiletter control sequences out of 15000+600000
  543445 words of font info for 65 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
@@ -1254,10 +1263,10 @@ y6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis(pjd).pdf (60 pages, 636709 bytes).
+Output written on thesis(pjd).pdf (61 pages, 639352 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
+ 281 PDF objects out of 1000 (max. 8388607)
+ 190 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
