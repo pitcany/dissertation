@@ -22,11 +22,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Notation and Preliminaries}{11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Preliminary Generalization Bounds}{15}%
+\contentsline {section}{\numberline {2.2}Entropic Regularization}{15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Preliminary Generalization Bounds}{16}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Error bounds with respect to Wasserstein distance}{16}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Entropic Regularization}{16}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Sample Dependent Sinkhorn Bounds}{17}%
 \defcounter {refsection}{0}\relax 

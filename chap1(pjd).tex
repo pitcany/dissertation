@@ -158,7 +158,7 @@ With the use of a concentration inequality on Wasserstein distances \cite{Bolley
 \end{theorem}
 
 \subsection*{Joint Distribution Domain Adaptation (JDOT)}
-JDOT is the approach taken in \cite{Courty2017} and is the problem, with regularization, that we study in the rest of this chapter. In this setting, one works with unsupervised domain adaptation between joint distributions. The inspiration behind this method is that the assumption that  conditional distributions are preserved, i.e. $P_S(Y|T(X))\approx P_T(Y|T(X))$, may not necessarily hold true.
+JDOT is the approach taken in \cite{Courty2017}. In this setting, one works with unsupervised domain adaptation between joint distributions. The inspiration behind this method is that the assumption that  conditional distributions are preserved, i.e. $P_S(Y|T(X))\approx P_T(Y|T(X))$, may not necessarily hold true.
 \begin{itemize}
 	\item Now the cost function used is \[\alpha d(x_s,x_t) + L(y_s,y_t).\]
 	\item The unsupervised domain adaptation problem is studied here, so the target labels represented by $y_t$ are not known. Thus, one cannot find an optimal coupling.
@@ -208,6 +208,36 @@ JDOT is the approach taken in \cite{Courty2017} and is the problem, with regular
 %and if our kernel $k$ is bounded above by $M$, then
 %$$ \E \bkt*{ \norm{R_n}_F } \leq \frac{B}{n} \sqrt{nM} = B\sqrt{M/n}. $$
 
+
+\section{Entropic Regularization}
+
+A fundamental limitation of the optimal transportation methods for domain adaptation is that they turn out to be computationally difficult. For example, in the discrete optimal transport problem, assuming $P$ and $Q$ were of size $n$, algorithms such as the simplex algorithm and Hungarian algorithm have a complexity of at most $O(n^3 \log(n))$.
+
+One way of addressing the intractability of OT is by using an entropic regularization.
+
+\begin{definition}[Entropic Regularization of Wasserstein]
+	$$W_{\epsilon}(\alpha,\beta) = \min_{\pi \in \Pi(\alpha,\beta)} \int_{\mathcal{X}\times \mathcal{Y}} c(x,y)d\pi(x,y) + \epsilon H(\pi | \alpha \otimes \beta)$$
+	where $$H(\pi | \alpha \otimes \beta) = \int_{\mathcal{X}\times \mathcal{Y}} \log \paren{\frac{d\pi(x,y)}{d\alpha(x)d\beta(y)}}d\pi(x,y).$$
+\end{definition}
+
+If we use the relative entropy as a regularizer, then we can formulate the dual of regularized OT as the maximization of an expectation problem \cite{Genevay2018}.
+
+\begin{align*}
+	W_{\epsilon}(\alpha,\beta) &=\max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})}\int_{\mathcal{X}} u(x)\mathrm{d}\alpha(x)+\int_{y}v(y)\mathrm{d}\beta(y) \\
+	&-\varepsilon \int_{\mathcal{X}\times \mathcal{Y}} e^{\frac{u(x)+v(y)-c(x,y)}{\epsilon}}\mathrm{d}\alpha(x)\mathrm{d}\beta(y) + \varepsilon\\
+	&= \max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})} \mathrm{E}_{\alpha \otimes \beta} [f_{\epsilon}^{XY}(u,\ v)]+\epsilon
+\end{align*}
+
+
+where $f_{\epsilon}^{xy}(u,\ v)=u(x)+v(y)- \epsilon e^{\frac{u(x)+v(y)[minus]\mathrm{c}(x,y)}{\epsilon}}.$
+
+Since $W_{\epsilon}(\alpha,\alpha)\neq 0$, we can normalize this by defining the Sinkhorn divergence as in the definition below.
+\begin{definition}[Sinkhorn Divergence]
+	\[
+	\bar{W}_{\epsilon}(\alpha,\beta)=W_{\epsilon}(\alpha,\beta)-\frac{1}{2}(W_{\epsilon}(\alpha,\alpha)+W_{\epsilon}(\beta,\beta))
+	\] 
+\end{definition}
+
 \section{Preliminary Generalization Bounds}
 \label{generalization-bounds}
 
@@ -247,33 +277,6 @@ over all couplings that preserve the marginals on $S$ ($x_{s},y_{s})$ and $T_{X}
 	d(x_{s},x_{t})+l(y_{s},y_{t})\right).
 	\end{align*}
 \end{proof}
-
-\subsection{Entropic Regularization}
-
-One means of addressing the intractability of OT is by using an entropic regularization.
-
-\begin{definition}[Entropic Regularization of Wasserstein]
-	$$W_{\epsilon}(\alpha,\beta) = \min_{\pi \in \Pi(\alpha,\beta)} \int_{\mathcal{X}\times \mathcal{Y}} c(x,y)d\pi(x,y) + \epsilon H(\pi | \alpha \otimes \beta)$$
-	where $$H(\pi | \alpha \otimes \beta) = \int_{\mathcal{X}\times \mathcal{Y}} \log \paren{\frac{d\pi(x,y)}{d\alpha(x)d\beta(y)}}d\pi(x,y).$$
-\end{definition}
-
-If we use the relative entropy as a regularizer, then we can formulate the dual of regularized OT as the maximization of an expectation problem \cite{Genevay2018}.
-
-\begin{align*}
-W_{\epsilon}(\alpha,\beta) &=\max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})}\int_{\mathcal{X}} u(x)\mathrm{d}\alpha(x)+\int_{y}v(y)\mathrm{d}\beta(y) \\
-&-\varepsilon \int_{\mathcal{X}\times \mathcal{Y}} e^{\frac{u(x)+v(y)-c(x,y)}{\epsilon}}\mathrm{d}\alpha(x)\mathrm{d}\beta(y) + \varepsilon\\
-&= \max_{u\in C(\mathcal{X}),v\in C(\mathcal{Y})} \mathrm{E}_{\alpha \otimes \beta} [f_{\epsilon}^{XY}(u,\ v)]+\epsilon
-\end{align*}
-
-
-where $f_{\epsilon}^{xy}(u,\ v)=u(x)+v(y)- \epsilon e^{\frac{u(x)+v(y)[minus]\mathrm{c}(x,y)}{\epsilon}}.$
-
-Since $W_{\epsilon}(\alpha,\alpha)\neq 0$, we can normalize this by defining the Sinkhorn divergence as in the definition below.
-\begin{definition}[Sinkhorn Divergence]
-\[
-\bar{W}_{\epsilon}(\alpha,\beta)=W_{\epsilon}(\alpha,\beta)-\frac{1}{2}(W_{\epsilon}(\alpha,\alpha)+W_{\epsilon}(\beta,\beta))
-\] 
-\end{definition}
 
 \subsection{Sample Dependent Sinkhorn Bounds}
 
