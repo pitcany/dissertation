@@ -1,0 +1,14 @@
+% citation macros
+\ProvidesPackage{AVTenvironments}
+
+\newif\ifenvironments@nonumber
+\DeclareOption{nonumber}{\environments@nonumbertrue}
+
+\ProcessOptions\relax
+
+% change authoryear format
+\ifenvironments@nonumber
+\def\[#1\]{\in@{&}{#1}\ifin@\begin{align*}#1\end{align*}\else\in@{\\}{#1}\ifin@\begin{gather*}#1\end{gather*}\else\begin{equation*}#1\end{equation*}\fi\fi}
+\else
+\def\[#1\]{\in@{&}{#1}\ifin@\begin{align}#1\end{align}\else\in@{\\}{#1}\ifin@\begin{gather}#1\end{gather}\else\begin{equation}#1\end{equation}\fi\fi}
+\fi

@@ -1,0 +1,1549 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{journals/siamma/AguehC11}{article}{}
+      \name{author}{2}{}{%
+        {{hash=55dc5e08dca22ad1cf9b2bb5c82f9f65}{%
+           family={Agueh},
+           familyi={A\bibinitperiod},
+           given={Martial},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d027dfbe9c99227553491e26498ca2ec}{%
+           family={Carlier},
+           familyi={C\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{059bc4094f9880b527133c4d56b7dbee}
+      \strng{fullhash}{059bc4094f9880b527133c4d56b7dbee}
+      \strng{bibnamehash}{059bc4094f9880b527133c4d56b7dbee}
+      \strng{authorbibnamehash}{059bc4094f9880b527133c4d56b7dbee}
+      \strng{authornamehash}{059bc4094f9880b527133c4d56b7dbee}
+      \strng{authorfullhash}{059bc4094f9880b527133c4d56b7dbee}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Mathematical Analysis}
+      \field{number}{2}
+      \field{title}{Barycenters in the Wasserstein Space.}
+      \field{volume}{43}
+      \field{year}{2011}
+      \field{pages}{904\bibrangedash 924}
+      \range{pages}{21}
+    \endentry
+    \entry{altschulernpbary}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9ac4c398f59ef97f12fc9c0442e989fe}{%
+           family={Altschuler},
+           familyi={A\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ac08054abfd86a5fc3ee8e85fcc065b6}{%
+           family={Boix-Adsera},
+           familyi={B\bibinithyphendelim A\bibinitperiod},
+           given={Enric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{66fa34dbfff2641efe183c2683e5ec42}
+      \strng{fullhash}{66fa34dbfff2641efe183c2683e5ec42}
+      \strng{bibnamehash}{66fa34dbfff2641efe183c2683e5ec42}
+      \strng{authorbibnamehash}{66fa34dbfff2641efe183c2683e5ec42}
+      \strng{authornamehash}{66fa34dbfff2641efe183c2683e5ec42}
+      \strng{authorfullhash}{66fa34dbfff2641efe183c2683e5ec42}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:2101.01100}
+      \field{title}{Wasserstein Barycenters are NP-hard to Compute}
+      \field{year}{2021}
+    \endentry
+    \entry{altschuler_mm_np}{article}{}
+      \name{author}{2}{}{%
+        {{hash=33ab9b2b0e22d60d46a4d186722f2e2b}{%
+           family={Altschuler},
+           familyi={A\bibinitperiod},
+           given={Jason\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=8ed04183844c7c30cfc0d0d0cfeff1d4}{%
+           family={Boix-Adser{à}},
+           familyi={B\bibinithyphendelim A\bibinitperiod},
+           given={Enric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{890289139d833dd2109c644b015716b3}
+      \strng{fullhash}{890289139d833dd2109c644b015716b3}
+      \strng{bibnamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authorbibnamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authornamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authorfullhash}{890289139d833dd2109c644b015716b3}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:2012.05398}
+      \field{title}{Hardness results for Multimarginal Optimal Transport problems}
+      \field{year}{2020}
+    \endentry
+    \entry{altschuler_mm}{article}{}
+      \name{author}{2}{}{%
+        {{hash=33ab9b2b0e22d60d46a4d186722f2e2b}{%
+           family={Altschuler},
+           familyi={A\bibinitperiod},
+           given={Jason\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=8ed04183844c7c30cfc0d0d0cfeff1d4}{%
+           family={Boix-Adser{à}},
+           familyi={B\bibinithyphendelim A\bibinitperiod},
+           given={Enric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{890289139d833dd2109c644b015716b3}
+      \strng{fullhash}{890289139d833dd2109c644b015716b3}
+      \strng{bibnamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authorbibnamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authornamehash}{890289139d833dd2109c644b015716b3}
+      \strng{authorfullhash}{890289139d833dd2109c644b015716b3}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:2008.03006}
+      \field{title}{Polynomial-time Algorithms for Multimarginal Optimal Transport Problems with Structure}
+      \field{year}{2020}
+    \endentry
+    \entry{Ben-David2007}{article}{}
+      \name{author}{4}{}{%
+        {{hash=509866d90ae18bfca30c6f4cdc846529}{%
+           family={Ben-David},
+           familyi={B\bibinithyphendelim D\bibinitperiod},
+           given={Shai},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4cf8cf8b1e08936da7cbd269f4327216}{%
+           family={Blitzer},
+           familyi={B\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=16e0c91cca40e2931e13a4c18e98530b}{%
+           family={Crammer},
+           familyi={C\bibinitperiod},
+           given={Koby},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3ef139cfd819ad7d3af54f3d2e9507b9}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Fernando},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{511eb878704b7c365628ece184c6f4f8}
+      \strng{fullhash}{758b2a0d5979dadbc7ec582a1e46ca5a}
+      \strng{bibnamehash}{511eb878704b7c365628ece184c6f4f8}
+      \strng{authorbibnamehash}{511eb878704b7c365628ece184c6f4f8}
+      \strng{authornamehash}{511eb878704b7c365628ece184c6f4f8}
+      \strng{authorfullhash}{758b2a0d5979dadbc7ec582a1e46ca5a}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Discriminative learning methods for classification perform well when training and test data are drawn from the same distribution. In many situations, though, we have labeled training data for a source domain, and we wish to learn a classifier which performs well on a target domain with a different distribution. Under what conditions can we adapt a classifier trained on the source domain for use in the target domain? Intuitively, a good feature representation is a crucial factor in the success of domain adaptation. We formalize this intuition theoretically with a generalization bound for domain adaption. Our theory illustrates the tradeoffs inherent in designing a representation for domain adaptation and gives a new justification for a recently proposed model. It also points toward a promising new model for domain adaptation: one which explicitly minimizes the difference between the source and target domains, while at the same time maximizing the margin of the training set.}
+      \field{isbn}{9780262195683}
+      \field{issn}{10495258}
+      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{title}{{Analysis of representations for domain adaptation}}
+      \field{year}{2007}
+      \field{pages}{137\bibrangedash 144}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.7551/mitpress/7503.003.0022
+      \endverb
+      \verb{file}
+      \verb :home/pitcany/Downloads/NIPS-2006-analysis-of-representations-for-domain-adaptation-Paper.pdf:pdf
+      \endverb
+    \endentry
+    \entry{benamou:hal-01096124}{article}{}
+      \name{author}{5}{}{%
+        {{hash=7f3e9ddf472f6a6bf5e139c85c46ca87}{%
+           family={Benamou},
+           familyi={B\bibinitperiod},
+           given={Jean-David},
+           giveni={J\bibinithyphendelim D\bibinitperiod}}}%
+        {{hash=d027dfbe9c99227553491e26498ca2ec}{%
+           family={Carlier},
+           familyi={C\bibinitperiod},
+           given={Guillaume},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5d3b49f9e415c7dafcac99b3998e1dac}{%
+           family={Nenna},
+           familyi={N\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8381a1d2d66d734a8454d63ac3344f53}{%
+           family={Peyr{é}},
+           familyi={P\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{697b1874a8098cf76628fa36c2db5a2a}
+      \strng{fullhash}{8860a4ed1260c6cbdd437b85d2803a89}
+      \strng{bibnamehash}{697b1874a8098cf76628fa36c2db5a2a}
+      \strng{authorbibnamehash}{697b1874a8098cf76628fa36c2db5a2a}
+      \strng{authornamehash}{697b1874a8098cf76628fa36c2db5a2a}
+      \strng{authorfullhash}{8860a4ed1260c6cbdd437b85d2803a89}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Scientific Computing}
+      \field{number}{2}
+      \field{title}{Iterative {B}regman Projections for Regularized Transportation Problems}
+      \field{volume}{37}
+      \field{year}{2015}
+      \field{pages}{A1111\bibrangedash A1138}
+      \range{pages}{-1}
+    \endentry
+    \entry{generalizedmet}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b4fac3fe61b792bfff3522ffc535b052}{%
+           family={Bento},
+           familyi={B\bibinitperiod},
+           given={José},
+           giveni={J\bibinitperiod}}}%
+        {{hash=4b33b59f452a92634178cd6124bbe595}{%
+           family={Mi},
+           familyi={M\bibinitperiod},
+           given={Liang},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{65bae3c64b600d9f434c501184a4875e}
+      \strng{fullhash}{65bae3c64b600d9f434c501184a4875e}
+      \strng{bibnamehash}{65bae3c64b600d9f434c501184a4875e}
+      \strng{authorbibnamehash}{65bae3c64b600d9f434c501184a4875e}
+      \strng{authornamehash}{65bae3c64b600d9f434c501184a4875e}
+      \strng{authorfullhash}{65bae3c64b600d9f434c501184a4875e}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:2001.11114}
+      \field{title}{Multi-Marginal Optimal Transport Defines a Generalized Metric}
+      \field{year}{2020}
+    \endentry
+    \entry{Bhatia2019}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ed4d8449545075ef39b8cef568d44b39}{%
+           family={Bhatia},
+           familyi={B\bibinitperiod},
+           given={Rajendra},
+           giveni={R\bibinitperiod}}}%
+        {{hash=820802c4872f083622f31cfbe4d0fd4c}{%
+           family={Jain},
+           familyi={J\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=efb0ce8823838f9eab056a0d4bcfc7a6}{%
+           family={Lim},
+           familyi={L\bibinitperiod},
+           given={Yongdo},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{68a206fea90d746251424852a7f59f55}
+      \strng{fullhash}{68a206fea90d746251424852a7f59f55}
+      \strng{bibnamehash}{68a206fea90d746251424852a7f59f55}
+      \strng{authorbibnamehash}{68a206fea90d746251424852a7f59f55}
+      \strng{authornamehash}{68a206fea90d746251424852a7f59f55}
+      \strng{authorfullhash}{68a206fea90d746251424852a7f59f55}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The metric d(A,B)=trA+trB−2tr(A1∕2BA1∕2)1∕21∕2 on the manifold of n×n positive definite matrices arises in various optimisation problems, in quantum information and in the theory of optimal transport. It is also related to Riemannian geometry. In the first part of this paper we study this metric from the perspective of matrix analysis, simplifying and unifying various proofs. Then we develop a theory of a mean of two, and a barycentre of several, positive definite matrices with respect to this metric. We explain some recent work on a fixed point iteration for computing this Wasserstein barycentre. Our emphasis is on ideas natural to matrix analysis.}
+      \field{eprinttype}{arXiv}
+      \field{issn}{07230869}
+      \field{journaltitle}{Expositiones Mathematicae}
+      \field{number}{2}
+      \field{title}{{On the Bures–Wasserstein distance between positive definite matrices}}
+      \field{volume}{37}
+      \field{year}{2019}
+      \field{pages}{165\bibrangedash 191}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1016/j.exmath.2018.01.002
+      \endverb
+      \verb{eprint}
+      \verb 1712.01504
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/1712.01504.pdf:pdf
+      \endverb
+      \keyw{Bures distance,Coupling problem,Fidelity,Optimal transport,Positive definite matrices,Wasserstein metric}
+    \endentry
+    \entry{Bolley2007}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a03a035b02a2cd31f92197c86ed744bd}{%
+           family={Bolley},
+           familyi={B\bibinitperiod},
+           given={Fran{ç}ois},
+           giveni={F\bibinitperiod}}}%
+        {{hash=11e80e3c7774a8217cad72fa59bbf078}{%
+           family={Guillin},
+           familyi={G\bibinitperiod},
+           given={Arnaud},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9a5829eabef68d560b86bf71527fd874}{%
+           family={Villani},
+           familyi={V\bibinitperiod},
+           given={C{é}dric},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{5c746f629044497378682d727efcc996}
+      \strng{fullhash}{5c746f629044497378682d727efcc996}
+      \strng{bibnamehash}{5c746f629044497378682d727efcc996}
+      \strng{authorbibnamehash}{5c746f629044497378682d727efcc996}
+      \strng{authornamehash}{5c746f629044497378682d727efcc996}
+      \strng{authorfullhash}{5c746f629044497378682d727efcc996}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We establish quantitative concentration estimates for the empirical measure of many independent variables, in transportation distances. As an application, we provide some error bounds for particle simulations in a model mean field problem. The tools include coupling arguments, as well as regularity and moment estimates for solutions of certain diffusive partial differential equations. © 2006 Springer-Verlag.}
+      \field{eprintclass}{math}
+      \field{eprinttype}{arXiv}
+      \field{issn}{01788051}
+      \field{journaltitle}{Probability Theory and Related Fields}
+      \field{number}{3-4}
+      \field{title}{{Quantitative concentration inequalities for empirical measures on non-compact spaces}}
+      \field{volume}{137}
+      \field{year}{2007}
+      \field{pages}{541\bibrangedash 593}
+      \range{pages}{53}
+      \verb{doi}
+      \verb 10.1007/s00440-006-0004-7
+      \endverb
+      \verb{eprint}
+      \verb 0503123
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/bgv.pdf:pdf
+      \endverb
+      \keyw{Sanov Theorem,Transport inequalities}
+    \endentry
+    \entry{bonneel}{article}{}
+      \name{author}{4}{}{%
+        {{hash=456294a520915dcd804df006080ed7a8}{%
+           family={Bonneel},
+           familyi={B\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=06fd080755a1b9c1b651376e0acdd4f7}{%
+           family={Rabin},
+           familyi={R\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8381a1d2d66d734a8454d63ac3344f53}{%
+           family={Peyr{é}},
+           familyi={P\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b996af7e283eefe990aabf24ef52e032}{%
+           family={Pfister},
+           familyi={P\bibinitperiod},
+           given={Hanspeter},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{8a125a6988dfb1edd97f5aa063adf919}
+      \strng{fullhash}{fe6b114a593a5babf931d75a4b33054b}
+      \strng{bibnamehash}{8a125a6988dfb1edd97f5aa063adf919}
+      \strng{authorbibnamehash}{8a125a6988dfb1edd97f5aa063adf919}
+      \strng{authornamehash}{8a125a6988dfb1edd97f5aa063adf919}
+      \strng{authorfullhash}{fe6b114a593a5babf931d75a4b33054b}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Mathematical Imaging and Vision}
+      \field{number}{1}
+      \field{title}{{Sliced and Radon Wasserstein Barycenters of Measures}}
+      \field{volume}{51}
+      \field{year}{2015}
+      \field{pages}{22\bibrangedash 45}
+      \range{pages}{24}
+    \endentry
+    \entry{bonnottee}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=dc2d88c3676524a8f5ad34822f70f7a3}{%
+           family={Bonnotte},
+           familyi={B\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \strng{fullhash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \strng{bibnamehash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \strng{authorbibnamehash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \strng{authornamehash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \strng{authorfullhash}{dc2d88c3676524a8f5ad34822f70f7a3}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unidimensional and Evolution Methods for Optimal Transportation}
+      \field{year}{2013}
+    \endentry
+    \entry{bunne2019}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=2cff1b6d337a498b01ad3e96848ee5dd}{%
+           family={Bunne},
+           familyi={B\bibinitperiod},
+           given={Charlotte},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a3427bc5741ffeca269dd9c3288d7ee2}{%
+           family={Alvarez-Melis},
+           familyi={A\bibinithyphendelim M\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=112eb0b147c4a7f674d015a86e5dea70}{%
+           family={Krause},
+           familyi={K\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=83a44c18acfaa38fa9f6ba76cfdc0132}{%
+           family={Jegelka},
+           familyi={J\bibinitperiod},
+           given={Stefanie},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{291b2989a7696856337a87aad68f072e}
+      \strng{fullhash}{bdb23b0b91739023db3ff3ea17b89d86}
+      \strng{bibnamehash}{291b2989a7696856337a87aad68f072e}
+      \strng{authorbibnamehash}{291b2989a7696856337a87aad68f072e}
+      \strng{authornamehash}{291b2989a7696856337a87aad68f072e}
+      \strng{authorfullhash}{bdb23b0b91739023db3ff3ea17b89d86}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ICML}
+      \field{title}{Learning Generative Models across Incomparable Spaces}
+      \field{year}{2019}
+    \endentry
+    \entry{mwgan}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=35d8812656bb60257ba4de9c39ee200a}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Jiezhang},
+           giveni={J\bibinitperiod}}}%
+        {{hash=53d74859a98e935d50d5a713af46b4c6}{%
+           family={Mo},
+           familyi={M\bibinitperiod},
+           given={Langyuan},
+           giveni={L\bibinitperiod}}}%
+        {{hash=614fdf51ce9628d993d9e0dc779c15a2}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yifan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=429d15e3b6390d1b4dacc28eceb697c2}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Kui},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9e49384c78f6861746fe787b12339aed}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Chunhua},
+           giveni={C\bibinitperiod}}}%
+        {{hash=32e90a739d356bc8193f43c142aa0598}{%
+           family={Tan},
+           familyi={T\bibinitperiod},
+           given={Mingkui},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{c987d1f662d88c3de88c8bab3eb832d2}
+      \strng{fullhash}{1fde6431ac688f63a97c054b26f50b64}
+      \strng{bibnamehash}{c987d1f662d88c3de88c8bab3eb832d2}
+      \strng{authorbibnamehash}{c987d1f662d88c3de88c8bab3eb832d2}
+      \strng{authornamehash}{c987d1f662d88c3de88c8bab3eb832d2}
+      \strng{authorfullhash}{1fde6431ac688f63a97c054b26f50b64}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{NeurIPS}
+      \field{title}{Multi-marginal Wasserstein GAN}
+      \field{year}{2019}
+    \endentry
+    \entry{Courty2017}{article}{}
+      \name{author}{4}{}{%
+        {{hash=b5231a6c7af3f041f02b5945fb649993}{%
+           family={Courty},
+           familyi={C\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=b10fa2e29995598ae81df7c518ad5786}{%
+           family={Flamary},
+           familyi={F\bibinitperiod},
+           given={R{é}mi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1b1cadcf76e13516bb1be6fdf871e4ba}{%
+           family={Habrard},
+           familyi={H\bibinitperiod},
+           given={Amaury},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3648fa225ee2d24112d704656de2279e}{%
+           family={Rakotomamonjy},
+           familyi={R\bibinitperiod},
+           given={Alain},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{76e55a63eb78ee12bde2d4a1d2aa697f}
+      \strng{fullhash}{d4b393cc4669ebce443b7434b95cd6b9}
+      \strng{bibnamehash}{76e55a63eb78ee12bde2d4a1d2aa697f}
+      \strng{authorbibnamehash}{76e55a63eb78ee12bde2d4a1d2aa697f}
+      \strng{authornamehash}{76e55a63eb78ee12bde2d4a1d2aa697f}
+      \strng{authorfullhash}{d4b393cc4669ebce443b7434b95cd6b9}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper deals with the unsupervised domain adaptation problem, where one wants to estimate a prediction function f in a given target domain without any labeled sample by exploiting the knowledge available from a source domain where labels are known. Our work makes the following assumption: there exists a nonlinear transformation between the joint feature/label space distributions of the two domain Ps and Pt that can be estimated with optimal transport. We propose a solution of this problem that allows to recover an estimated target Ptf = (X, f(X)) by optimizing simultaneously the optimal coupling and f. We show that our method corresponds to the minimization of a bound on the target error, and provide an efficient algorithmic solution, for which convergence is proved. The versatility of our approach, both in terms of class of hypothesis or loss functions is demonstrated with real world classification and regression problems, for which we reach or surpass state-of-the-art results.}
+      \field{eprinttype}{arXiv}
+      \field{issn}{10495258}
+      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{number}{Nips}
+      \field{title}{{Joint distribution optimal transportation for domain adaptation}}
+      \field{volume}{2017-December}
+      \field{year}{2017}
+      \field{pages}{3731\bibrangedash 3740}
+      \range{pages}{10}
+      \verb{eprint}
+      \verb 1705.08848
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/1705.08848.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Dadashi2020PrimalWI}{article}{}
+      \name{author}{4}{}{%
+        {{hash=70251f1a8626e6ba8e56adb56f776c15}{%
+           family={Dadashi},
+           familyi={D\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f3f70a64b310a266dfe6a5141c6bee63}{%
+           family={Hussenot},
+           familyi={H\bibinitperiod},
+           given={L'eonard},
+           giveni={L\bibinitperiod}}}%
+        {{hash=fea4079d643b8554a9950ad9d9c05139}{%
+           family={Geist},
+           familyi={G\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b753cffb647f18024dca948af6dfb85a}{%
+           family={Pietquin},
+           familyi={P\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{574434d38d127f63ad2979a09aa8199b}
+      \strng{fullhash}{62fba07a1b0e0597b3b73688189ac923}
+      \strng{bibnamehash}{574434d38d127f63ad2979a09aa8199b}
+      \strng{authorbibnamehash}{574434d38d127f63ad2979a09aa8199b}
+      \strng{authornamehash}{574434d38d127f63ad2979a09aa8199b}
+      \strng{authorfullhash}{62fba07a1b0e0597b3b73688189ac923}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:2006.04678}
+      \field{title}{Primal {W}asserstein Imitation Learning}
+      \field{year}{2020}
+    \endentry
+    \entry{maxsliced}{inproceedings}{}
+      \name{author}{9}{}{%
+        {{hash=4cae5f0ae98512df16b4a82dfba03b23}{%
+           family={Deshpande},
+           familyi={D\bibinitperiod},
+           given={Ishan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=2746f6639cf6eeca31796efb752d3143}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Yuan-Ting},
+           giveni={Y\bibinithyphendelim T\bibinitperiod}}}%
+        {{hash=3e27e9c57a6e277b2d4b33b454e88ff9}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Ruoyu},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0d9205929075e2ee2bd13104818ca65e}{%
+           family={Pyrros},
+           familyi={P\bibinitperiod},
+           given={Ayis},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6b7db148610d0a3ea8623387607fb9d8}{%
+           family={Siddiqui},
+           familyi={S\bibinitperiod},
+           given={Nasir},
+           giveni={N\bibinitperiod}}}%
+        {{hash=f54c36f6a12344c77fdc9680b4927f0f}{%
+           family={Koyejo},
+           familyi={K\bibinitperiod},
+           given={Sanmi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=cd5d73c5a4615a6e03a5574cf9a99486}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Zhizhen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=fb219fee62b61373298aa0f4088c80d1}{%
+           family={Forsyth},
+           familyi={F\bibinitperiod},
+           given={David\bibnamedelima A.},
+           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=0c14478283bed70b2c487f3fba643a7b}{%
+           family={Schwing},
+           familyi={S\bibinitperiod},
+           given={Alexander\bibnamedelima G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{d5e023adfc7a7e238cbbbe042a03fd12}
+      \strng{fullhash}{ca95d1a6a55720d885716b191a417be9}
+      \strng{bibnamehash}{d5e023adfc7a7e238cbbbe042a03fd12}
+      \strng{authorbibnamehash}{d5e023adfc7a7e238cbbbe042a03fd12}
+      \strng{authornamehash}{d5e023adfc7a7e238cbbbe042a03fd12}
+      \strng{authorfullhash}{ca95d1a6a55720d885716b191a417be9}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{CVPR}
+      \field{title}{Max-Sliced Wasserstein Distance and Its Use for GANs}
+      \field{year}{2019}
+    \endentry
+    \entry{Flamary2019}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b10fa2e29995598ae81df7c518ad5786}{%
+           family={Flamary},
+           familyi={F\bibinitperiod},
+           given={R{é}mi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=fc031310dfe00646646eb0122a6f2395}{%
+           family={Lounici},
+           familyi={L\bibinitperiod},
+           given={Karim},
+           giveni={K\bibinitperiod}}}%
+        {{hash=ff23e183ac6de5e5082f0cfa649af62f}{%
+           family={Ferrari},
+           familyi={F\bibinitperiod},
+           given={Andr{é}},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f4f636dcf898c11fb084b809b0c0884}
+      \strng{fullhash}{6f4f636dcf898c11fb084b809b0c0884}
+      \strng{bibnamehash}{6f4f636dcf898c11fb084b809b0c0884}
+      \strng{authorbibnamehash}{6f4f636dcf898c11fb084b809b0c0884}
+      \strng{authornamehash}{6f4f636dcf898c11fb084b809b0c0884}
+      \strng{authorfullhash}{6f4f636dcf898c11fb084b809b0c0884}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article investigates the quality of the estimator of the linear Monge mapping between distributions. We provide the first concentration result on the linear mapping operator and prove a sample complexity of n−1/2 when using empirical estimates of first and second order moments. This result is then used to derive a generalization bound for domain adaptation with optimal transport. As a consequence, this method approaches the performance of theoretical Bayes predictor under mild conditions on the covariance structure of the problem. We also discuss the computational complexity of the linear mapping estimation and show that when the source and target are stationary the mapping is a convolution that can be estimated very efficiently using fast Fourier transforms. Numerical experiments reproduce the behavior of the proven bounds on simulated and real data for mapping estimation and domain adaptation on images.}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv}
+      \field{title}{{Concentration bounds for linear Monge mapping estimation and optimal transport domain adaptation}}
+      \field{year}{2019}
+      \verb{eprint}
+      \verb 1905.10155
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/1905.10155.pdf:pdf
+      \endverb
+    \endentry
+    \entry{gangbo}{article}{}
+      \name{author}{2}{}{%
+        {{hash=c8676addc34ad1df648b54940cafae1e}{%
+           family={Gangbo},
+           familyi={G\bibinitperiod},
+           given={Wilfrid},
+           giveni={W\bibinitperiod}}}%
+        {{hash=801c9567d904a721d5ffbeb03a7bdd43}{%
+           family={Święch},
+           familyi={Ś\bibinitperiod},
+           given={Andrzej},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \strng{fullhash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \strng{bibnamehash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \strng{authorbibnamehash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \strng{authornamehash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \strng{authorfullhash}{e6215a1a34926bd9b2ef80a8e2111221}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Communications on Pure and Applied Mathematics}
+      \field{number}{1}
+      \field{title}{Optimal maps for the multidimensional Monge-Kantorovich problem}
+      \field{volume}{51}
+      \field{year}{1998}
+      \field{pages}{23\bibrangedash 45}
+      \range{pages}{23}
+    \endentry
+    \entry{pmlr-v84-genevay18a}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=47776fae7c2fc770d1aeb3b37778fbdb}{%
+           family={Genevay},
+           familyi={G\bibinitperiod},
+           given={Aude},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0b9f40123392d8a9c832005e78ffe282}{%
+           family={Peyre},
+           familyi={P\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \strng{fullhash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \strng{bibnamehash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \strng{authorbibnamehash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \strng{authornamehash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \strng{authorfullhash}{73372cddedc963315c6bf8aa1ff7c38c}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AISTATS}
+      \field{title}{Learning Generative Models with {S}inkhorn Divergences}
+      \field{year}{2018}
+    \endentry
+    \entry{Genevay2018}{article}{}
+      \name{author}{5}{}{%
+        {{hash=47776fae7c2fc770d1aeb3b37778fbdb}{%
+           family={Genevay},
+           familyi={G\bibinitperiod},
+           given={Aude},
+           giveni={A\bibinitperiod}}}%
+        {{hash=26f35b0dcf049cca74997f8ace77dccb}{%
+           family={Chizat},
+           familyi={C\bibinitperiod},
+           given={L{é}naic},
+           giveni={L\bibinitperiod}}}%
+        {{hash=93da2819ab01d8a5e7bae39ce6f17c1f}{%
+           family={Bach},
+           familyi={B\bibinitperiod},
+           given={Francis},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8381a1d2d66d734a8454d63ac3344f53}{%
+           family={Peyr{é}},
+           familyi={P\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{634e7267572067a1ca80d8ffd1e5541c}
+      \strng{fullhash}{e7c8b2813be581ab7d6deafed2d021ee}
+      \strng{bibnamehash}{634e7267572067a1ca80d8ffd1e5541c}
+      \strng{authorbibnamehash}{634e7267572067a1ca80d8ffd1e5541c}
+      \strng{authornamehash}{634e7267572067a1ca80d8ffd1e5541c}
+      \strng{authorfullhash}{e7c8b2813be581ab7d6deafed2d021ee}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Optimal transport (OT) and maximum mean discrepancies (MMD) are now routinely used in machine learning to compare probability measures. We focus in this paper on $\backslash$emph{\{}Sinkhorn divergences\} (SDs), a regularized variant of OT distances which can interpolate, depending on the regularization strength {\$}\backslashvarepsilon{\$}, between OT ({\$}\backslashvarepsilon=0{\$}) and MMD ({\$}\backslashvarepsilon=\backslashinfty{\$}). Although the tradeoff induced by that regularization is now well understood computationally (OT, SDs and MMD require respectively {\$}O(n{\^}3\backslashlog n){\$}, {\$}O(n{\^}2){\$} and {\$}n{\^}2{\$} operations given a sample size {\$}n{\$}), much less is known in terms of their $\backslash$emph{\{}sample complexity\}, namely the gap between these quantities, when evaluated using finite samples $\backslash$emph{\{}vs.\} their respective densities. Indeed, while the sample complexity of OT and MMD stand at two extremes, {\$}1/n{\^}{\{}1/d\}{\$} for OT in dimension {\$}d{\$} and {\$}1/\backslashsqrt{\{}n\}{\$} for MMD, that for SDs has only been studied empirically. In this paper, we $\backslash$emph{\{}(i)\} derive a bound on the approximation error made with SDs when approximating OT as a function of the regularizer {\$}\backslashvarepsilon{\$}, $\backslash$emph{\{}(ii)\} prove that the optimizers of regularized OT are bounded in a Sobolev (RKHS) ball independent of the two measures and $\backslash$emph{\{}(iii)\} provide the first sample complexity bound for SDs, obtained,by reformulating SDs as a maximization problem in a RKHS. We thus obtain a scaling in {\$}1/\backslashsqrt{\{}n\}{\$} (as in MMD), with a constant that depends however on {\$}\backslashvarepsilon{\$}, making the bridge between OT and MMD complete.}
+      \field{eprinttype}{arXiv}
+      \field{month}{10}
+      \field{title}{{Sample Complexity of Sinkhorn divergences}}
+      \field{year}{2018}
+      \verb{eprint}
+      \verb 1810.02733
+      \endverb
+      \verb{file}
+      \verb :home/yannik/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Genevay et al. - 2018 - Sample Complexity of Sinkhorn divergences.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1810.02733
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1810.02733
+      \endverb
+    \endentry
+    \entry{Gine2016}{book}{}
+      \name{author}{2}{}{%
+        {{hash=a080fabb620157837ced0c5c596403cf}{%
+           family={Gine},
+           familyi={G\bibinitperiod},
+           given={Evarist},
+           giveni={E\bibinitperiod}}}%
+        {{hash=b3aa37be0e7c5438321ea76f3576b00c}{%
+           family={Nickl},
+           familyi={N\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \strng{fullhash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \strng{bibnamehash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \strng{authorbibnamehash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \strng{authornamehash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \strng{authorfullhash}{58baa67f1041dfb3fbe690eb15ed3e15}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{"In nonparametric and high-dimensional statistical models, the classical Gauss-Fisher-Le Cam theory of the optimality of maximum likelihood estimators and Bayesian posterior inference does not apply, and new foundations and ideas have been developed in the past several decades. This book gives a coherent account of the statistical theory in infinite-dimensional parameter spaces. The mathematical foundations include self-contained 'mini-courses' on the theory of Gaussian and empirical processes, on approximation and wavelet theory, and on the basic theory of function spaces. The theory of statistical inference in such models - hypothesis testing, estimation and confidence sets - is then presented within the minimax paradigm of decision theory. This includes the basic theory of convolution kernel and projection estimation, but also Bayesian nonparametrics and nonparametric maximum likelihood estimation. In the final chapter, the theory of adaptive inference in nonparametric models is developed, including Lepski's method, wavelet thresholding, and adaptive inference for self-similar functions."--Publisher's description. 1. Nonparametric statistical models -- 2. Gaussian processes -- 3. Empirical processes -- 4. Function spaces and approximation theory -- 5. Linear nonparametric estimators -- 6. The minimax paradigm -- 7. Likelihood-based procedures -- 8. Adaptive inference.}
+      \field{booktitle}{Mathematical Foundations of Infinite-Dimensional Statistical Models}
+      \field{isbn}{9781107043169}
+      \field{title}{{Mathematical Foundations of Infinite-Dimensional Statistical Models}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1017/cbo9781107337862
+      \endverb
+      \verb{file}
+      \verb :home/pitcany/Downloads/FULLPDF.pdf:pdf
+      \endverb
+    \endentry
+    \entry{gensliced}{incollection}{}
+      \name{author}{5}{}{%
+        {{hash=44020fedcaf68a92e900a015c614deb4}{%
+           family={Kolouri},
+           familyi={K\bibinitperiod},
+           given={Soheil},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5755827c8ad69b5d0bc5531c20ded804}{%
+           family={Nadjahi},
+           familyi={N\bibinitperiod},
+           given={Kimia},
+           giveni={K\bibinitperiod}}}%
+        {{hash=09761c1924ec610e6c70386b093ef79c}{%
+           family={Simsekli},
+           familyi={S\bibinitperiod},
+           given={Umut},
+           giveni={U\bibinitperiod}}}%
+        {{hash=0582b1f51ec419c2ae4bbcdba417d032}{%
+           family={Badeau},
+           familyi={B\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod}}}%
+        {{hash=17161ebc3c4f4f1c61decb5d11824d7b}{%
+           family={Rohde},
+           familyi={R\bibinitperiod},
+           given={Gustavo},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{648f7df7a9b2ab34e630903e99c3c66a}
+      \strng{fullhash}{13270e94163dbc2711f474ebe32a9204}
+      \strng{bibnamehash}{648f7df7a9b2ab34e630903e99c3c66a}
+      \strng{authorbibnamehash}{648f7df7a9b2ab34e630903e99c3c66a}
+      \strng{authornamehash}{648f7df7a9b2ab34e630903e99c3c66a}
+      \strng{authorfullhash}{13270e94163dbc2711f474ebe32a9204}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{NeurIPS}
+      \field{title}{Generalized Sliced {W}asserstein Distances}
+      \field{year}{2019}
+    \endentry
+    \entry{Caltech}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f8a9b4fc02c399fec8d3d4fb31bb1eb6}{%
+           family={L.\bibnamedelimi Fei-Fei},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinithyphendelim F\bibinitperiod},
+           given={R.\bibnamedelimi Fergus},
+           giveni={R\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=9015140be4a28a8c1b4618a57bb3c833}{%
+           family={Perona},
+           familyi={P\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{b7da74ae81c7526938902f36b1dcdca3}
+      \strng{fullhash}{b7da74ae81c7526938902f36b1dcdca3}
+      \strng{bibnamehash}{b7da74ae81c7526938902f36b1dcdca3}
+      \strng{authorbibnamehash}{b7da74ae81c7526938902f36b1dcdca3}
+      \strng{authornamehash}{b7da74ae81c7526938902f36b1dcdca3}
+      \strng{authorfullhash}{b7da74ae81c7526938902f36b1dcdca3}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2004 IEEE Computer Society Conference on Computer Vision and Pattern Recognition - Workshop on Generative-Model Based Vision}
+      \field{title}{Learning generative visual models from few training examples: an incremental Bayesian approach tested on 101 object categories}
+      \field{year}{2004}
+    \endentry
+    \entry{mw_compl}{article}{}
+      \name{author}{4}{}{%
+        {{hash=09b60b6814df777f905b455b955cb226}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Tianyi},
+           giveni={T\bibinitperiod}}}%
+        {{hash=9babeb53ac8a3ced49a7f2bcc2aeb7eb}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={Nhat},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8a36116840c7ee55901618c95fd08a58}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={Michael\bibnamedelima I.},
+           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{c7f670e885397bbe527ec8ed754b9a33}
+      \strng{fullhash}{0aa4a8351f795fb060949adeaff55a5b}
+      \strng{bibnamehash}{c7f670e885397bbe527ec8ed754b9a33}
+      \strng{authorbibnamehash}{c7f670e885397bbe527ec8ed754b9a33}
+      \strng{authornamehash}{c7f670e885397bbe527ec8ed754b9a33}
+      \strng{authorfullhash}{0aa4a8351f795fb060949adeaff55a5b}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:1910.00152}
+      \field{title}{On the Complexity of Approximating Multimarginal Optimal Transport}
+      \field{year}{2019}
+    \endentry
+    \entry{Mena2019}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3db936c6a8cc0a1f03b4d6c4a638b507}{%
+           family={Mena},
+           familyi={M\bibinitperiod},
+           given={Gonzalo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=beacf890fefa83e76f984b760a49dde1}{%
+           family={Weed},
+           familyi={W\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e6502abd15e75e6084ba87003a9c3427}
+      \strng{fullhash}{e6502abd15e75e6084ba87003a9c3427}
+      \strng{bibnamehash}{e6502abd15e75e6084ba87003a9c3427}
+      \strng{authorbibnamehash}{e6502abd15e75e6084ba87003a9c3427}
+      \strng{authornamehash}{e6502abd15e75e6084ba87003a9c3427}
+      \strng{authorfullhash}{e6502abd15e75e6084ba87003a9c3427}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We prove several fundamental statistical bounds for entropic OT with the squared Euclidean cost between subgaussian probability measures in arbitrary dimension. First, through a new sample complexity result we establish the rate of convergence of entropic OT for empirical measures. Our analysis improves exponentially on the bound of Genevay et al. (2019) and extends their work to unbounded measures. Second, we establish a central limit theorem for entropic OT, based on techniques developed by Del Barrio and Loubes (2019). Previously, such a result was only known for finite metric spaces. As an application of our results, we develop and analyze a new technique for estimating the entropy of a random variable corrupted by gaussian noise.}
+      \field{eprinttype}{arXiv}
+      \field{issn}{23318422}
+      \field{journaltitle}{arXiv}
+      \field{title}{{Statistical bounds for entropic optimal transport: sample complexity and the central limit theorem}}
+      \field{year}{2019}
+      \field{pages}{1\bibrangedash 23}
+      \range{pages}{23}
+      \verb{eprint}
+      \verb 1905.11882
+      \endverb
+      \verb{file}
+      \verb :home/pitcany/Downloads/1905.11882.pdf:pdf
+      \endverb
+      \keyw{Central Limit Theorem,Entropic Regularization,Optimal Transport,Sample Complexity}
+    \endentry
+    \entry{distributionalsliced}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=615ca2a5cde06e91bf7b720a930f34f9}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Khai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9babeb53ac8a3ced49a7f2bcc2aeb7eb}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={Nhat},
+           giveni={N\bibinitperiod}}}%
+        {{hash=620108fb5e71475a4b9f42d0da2bfd8b}{%
+           family={Pham},
+           familyi={P\bibinitperiod},
+           given={Tung},
+           giveni={T\bibinitperiod}}}%
+        {{hash=65e613f8301f4430734b61b935f53bde}{%
+           family={Bui},
+           familyi={B\bibinitperiod},
+           given={Hung},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{932358912f1ec8e2d53f5dae5d50eac8}
+      \strng{fullhash}{5501a0d0294ac0df20db91d9489c4849}
+      \strng{bibnamehash}{932358912f1ec8e2d53f5dae5d50eac8}
+      \strng{authorbibnamehash}{932358912f1ec8e2d53f5dae5d50eac8}
+      \strng{authornamehash}{932358912f1ec8e2d53f5dae5d50eac8}
+      \strng{authorfullhash}{5501a0d0294ac0df20db91d9489c4849}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ICLR}
+      \field{title}{Distributional Sliced-Wasserstein and Applications to Generative Modeling}
+      \field{year}{2021}
+    \endentry
+    \entry{Panaretos2020}{book}{}
+      \name{author}{2}{}{%
+        {{hash=15e590e58f7c79b8d168fe2c92592a51}{%
+           family={Panaretos},
+           familyi={P\bibinitperiod},
+           given={Victor\bibnamedelima M.},
+           giveni={V\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=878941c926a76fccc9009824de657f7b}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Yoav},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5701d70511945ddeefdff11a7aa546c2}
+      \strng{fullhash}{5701d70511945ddeefdff11a7aa546c2}
+      \strng{bibnamehash}{5701d70511945ddeefdff11a7aa546c2}
+      \strng{authorbibnamehash}{5701d70511945ddeefdff11a7aa546c2}
+      \strng{authornamehash}{5701d70511945ddeefdff11a7aa546c2}
+      \strng{authorfullhash}{5701d70511945ddeefdff11a7aa546c2}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-030-38437-1}
+      \field{title}{{An Invitation to Statistics in Wasserstein Space}}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.1007/978-3-030-38438-8
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/2020{\_}Book{\_}AnInvitationToStatisticsInWass.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/978-3-030-38438-8
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/978-3-030-38438-8
+      \endverb
+    \endentry
+    \entry{Pass2014MultimarginalOT}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d8f858fc56f0079673200bb384b2d85e}{%
+           family={Pass},
+           familyi={P\bibinitperiod},
+           given={Brendan},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{d8f858fc56f0079673200bb384b2d85e}
+      \strng{fullhash}{d8f858fc56f0079673200bb384b2d85e}
+      \strng{bibnamehash}{d8f858fc56f0079673200bb384b2d85e}
+      \strng{authorbibnamehash}{d8f858fc56f0079673200bb384b2d85e}
+      \strng{authornamehash}{d8f858fc56f0079673200bb384b2d85e}
+      \strng{authorfullhash}{d8f858fc56f0079673200bb384b2d85e}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv:1406.0026}
+      \field{title}{Multi-Marginal Optimal Transport: Theory and Applications}
+      \field{year}{2014}
+    \endentry
+    \entry{compopt}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8381a1d2d66d734a8454d63ac3344f53}{%
+           family={Peyr{é}},
+           familyi={P\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{031f81e8cc543b25b04a1a69bce7d466}
+      \strng{fullhash}{031f81e8cc543b25b04a1a69bce7d466}
+      \strng{bibnamehash}{031f81e8cc543b25b04a1a69bce7d466}
+      \strng{authorbibnamehash}{031f81e8cc543b25b04a1a69bce7d466}
+      \strng{authornamehash}{031f81e8cc543b25b04a1a69bce7d466}
+      \strng{authorfullhash}{031f81e8cc543b25b04a1a69bce7d466}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Foundations and Trends in Machine Learning}
+      \field{title}{Computational Optimal Transport}
+      \field{year}{2019}
+    \endentry
+    \entry{Pinelis2017}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e15e867d1a9508a9804e8fac174cd0da}{%
+           family={Pinelis},
+           familyi={P\bibinitperiod},
+           given={Iosif},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{e15e867d1a9508a9804e8fac174cd0da}
+      \strng{fullhash}{e15e867d1a9508a9804e8fac174cd0da}
+      \strng{bibnamehash}{e15e867d1a9508a9804e8fac174cd0da}
+      \strng{authorbibnamehash}{e15e867d1a9508a9804e8fac174cd0da}
+      \strng{authornamehash}{e15e867d1a9508a9804e8fac174cd0da}
+      \strng{authorfullhash}{e15e867d1a9508a9804e8fac174cd0da}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{It is well known that, under general regularity conditions, the distribution of the maximum likelihood estimator (MLE) is asymptotically normal. Very recently, bounds of the optimal order O(1√n) on the closeness of the distribution of the MLE to normality in the so-called bounded Wasserstein distance were obtained [2, 1], where n is the sample size. However, the corresponding bounds on the Kolmogorov distance were only of the order O(1/n1/4). In this paper, bounds of the optimal order O(1√n) on the closeness of the distribution of the MLE to normality in the Kolmogorov distance are given, as well as their nonuniform counterparts, which work better in tail zones of the distribution of the MLE. These results are based in part on previously obtained general optimal-order bounds on the rate of convergence to normality in the multivariate delta method. The crucial observation is that, under natural conditions, the MLE can be tightly enough bracketed between two smooth enough functions of the sum of independent random vectors, which makes the delta method applicable. It appears that the nonuniform bounds for MLEs in general have no precedents in the existing literature; a special case was recently treated by Pinelis and Molzon [20]. The results can be extended to M-estimators.}
+      \field{issn}{19357524}
+      \field{journaltitle}{Electronic Journal of Statistics}
+      \field{number}{1}
+      \field{title}{{Optimal-order uniform and nonuniform bounds on the rate of convergence to normality for maximum likelihood estimators}}
+      \field{volume}{11}
+      \field{year}{2017}
+      \field{pages}{1160\bibrangedash 1179}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1214/17-EJS1264
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/euclid.ejs.1491897618.pdf:pdf
+      \endverb
+      \keyw{Berry-esseen bounds,Delta method,Maximum likelihood estimators,Rates of convergence}
+    \endentry
+    \entry{Pinelis2016}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e15e867d1a9508a9804e8fac174cd0da}{%
+           family={Pinelis},
+           familyi={P\bibinitperiod},
+           given={Iosif},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3830a75d77384137f65ea26c35ea525f}{%
+           family={Molzon},
+           familyi={M\bibinitperiod},
+           given={Raymond},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{8677b00751c4de26d7392842a7e62998}
+      \strng{fullhash}{8677b00751c4de26d7392842a7e62998}
+      \strng{bibnamehash}{8677b00751c4de26d7392842a7e62998}
+      \strng{authorbibnamehash}{8677b00751c4de26d7392842a7e62998}
+      \strng{authornamehash}{8677b00751c4de26d7392842a7e62998}
+      \strng{authorfullhash}{8677b00751c4de26d7392842a7e62998}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Uniform and nonuniform Berry–Esseen (BE) bounds of optimal orders on the rate of convergence to normality in the delta method for vector statistics are obtained. The results are applicable almost as widely as the delta method itself – except that, quite naturally, the order of the moments needed to be finite is generally 3/2 times as large as that for the corresponding central limit theorems. Our BE bounds appear new even for the one-dimensional delta method, that is, for smooth functions of the sample mean of univariate random variables. Specific applications to Pearson's, noncentral Student's and Hotelling's statistics, sphericity test statistics, a regularized canonical correlation, and maximum likelihood estimators (MLEs) are given; all these uniform and nonuniform BE bounds appear to be the first known results of these kinds, except for uniform BE bounds for MLEs. The new method allows one to obtain bounds with explicit and rather moderate-size constants. For instance, one has the uniform BE bound.(formula presented) for the Pearson sample correlation coefficient based on independent identically distributed random pairs(formula presented).}
+      \field{eprinttype}{arXiv}
+      \field{issn}{19357524}
+      \field{journaltitle}{Electronic Journal of Statistics}
+      \field{number}{1}
+      \field{title}{{Optimal-order bounds on the rate of convergence to normality in the multivariate delta method}}
+      \field{volume}{10}
+      \field{year}{2016}
+      \field{pages}{1001\bibrangedash 1063}
+      \range{pages}{63}
+      \verb{doi}
+      \verb 10.1214/16-EJS1133
+      \endverb
+      \verb{eprint}
+      \verb 0906.0177
+      \endverb
+      \verb{file}
+      \verb :home/yannik/Downloads/euclid.ejs.1460463653.pdf:pdf
+      \endverb
+      \keyw{Berry–Esseen bound,Canonical correlation,Cram{é}r's tilt,Delta method,Exponential inequalities,Maximum likelihood estimators,Noncentral Hotelling's statistic,Noncentral student's statistic,Nonlinear statistics,Pearson's correlation coefficient,Rates of convergence,Sphericity test}
+    \endentry
+    \entry{Redko2017}{report}{}
+      \name{author}{3}{}{%
+        {{hash=7398fa85cd6c5fbbc0ab4cf7f0685b46}{%
+           family={Redko},
+           familyi={R\bibinitperiod},
+           given={Ievgen},
+           giveni={I\bibinitperiod}}}%
+        {{hash=1b1cadcf76e13516bb1be6fdf871e4ba}{%
+           family={Habrard},
+           familyi={H\bibinitperiod},
+           given={Amaury},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e5e02fc8b0b22f6c5375270dfb0f35c6}{%
+           family={Sebban},
+           familyi={S\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f355f16f899fcb166b67db2fa07bc67c}
+      \strng{fullhash}{f355f16f899fcb166b67db2fa07bc67c}
+      \strng{bibnamehash}{f355f16f899fcb166b67db2fa07bc67c}
+      \strng{authorbibnamehash}{f355f16f899fcb166b67db2fa07bc67c}
+      \strng{authornamehash}{f355f16f899fcb166b67db2fa07bc67c}
+      \strng{authorfullhash}{f355f16f899fcb166b67db2fa07bc67c}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Domain adaptation (DA) is an important and emerging field of machine learning that tackles the problem occurring when the distributions of training (source domain) and test (target domain) data are similar but different. This kind of learning paradigm is of vital importance for future advances as it allows a learner to generalize the knowledge across different tasks. Current theoretical results show that the efficiency of DA algorithms depends on their capacity of minimizing the divergence between source and target probability distributions. In this paper, we provide a theoretical study on the advantages that concepts borrowed from optimal transportation theory [17] can bring to DA. In particular, we show that the Wasserstein metric can be used as a divergence measure between distributions to obtain generalization guarantees for three different learning settings: (i) classic DA with unsupervised target data (ii) DA combining source and target labeled data, (iii) multiple source DA. Based on the obtained results, we motivate the use of the regularized optimal transport and provide some algorithmic insights for multi-source domain adaptation. We also show when this theoretical analysis can lead to tighter inequalities than those of other existing frameworks. We believe that these results open the door to novel ideas and directions for DA.}
+      \field{title}{{Theoretical Analysis of Domain Adaptation with Optimal Transport}}
+      \field{type}{techreport}
+      \field{year}{2017}
+      \verb{file}
+      \verb :home/yannik/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Redko, Habrard, Sebban - 2017 - Theoretical Analysis of Domain Adaptation with Optimal Transport.pdf:pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-01613564
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-01613564
+      \endverb
+      \keyw{domain adaptation,generalization bounds,optimal transport}
+    \endentry
+    \entry{orthsliced}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=bbebaeb4d3852537e477b7749599505f}{%
+           family={Rowland},
+           familyi={R\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e5a6e361c4cfa1076434755cd027bbe4}{%
+           family={Hron},
+           familyi={H\bibinitperiod},
+           given={Jiri},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cc209c65492cd9bb325222af88b1134f}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Yunhao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=3790fd4d63272e6ab60c1356f8e70d94}{%
+           family={Choromanski},
+           familyi={C\bibinitperiod},
+           given={Krzysztof},
+           giveni={K\bibinitperiod}}}%
+        {{hash=ced98ed96624a678d9c6568d2481719a}{%
+           family={Sarlos},
+           familyi={S\bibinitperiod},
+           given={Tamas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=89be134d6b955c508c4267860047bdd9}{%
+           family={Weller},
+           familyi={W\bibinitperiod},
+           given={Adrian},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{194cdfcfb8dfc7b4b62ffbcf81816b8e}
+      \strng{fullhash}{29b5040cc560d16d11dd05d712f8ef6b}
+      \strng{bibnamehash}{194cdfcfb8dfc7b4b62ffbcf81816b8e}
+      \strng{authorbibnamehash}{194cdfcfb8dfc7b4b62ffbcf81816b8e}
+      \strng{authornamehash}{194cdfcfb8dfc7b4b62ffbcf81816b8e}
+      \strng{authorfullhash}{29b5040cc560d16d11dd05d712f8ef6b}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AISTATS}
+      \field{title}{Orthogonal Estimation of {W}asserstein Distances}
+      \field{year}{2019}
+    \endentry
+    \entry{bayes}{article}{}
+      \name{author}{3}{}{%
+        {{hash=613c7b8375c49d65e30fea3d44e4f0e6}{%
+           family={Srivastava},
+           familyi={S\bibinitperiod},
+           given={Sanvesh},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0fa86ce76f38abb4293116ef56b787fa}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Cheng},
+           giveni={C\bibinitperiod}}}%
+        {{hash=84545b54e408a7eba6bf9280fd2eaae7}{%
+           family={Dunson},
+           familyi={D\bibinitperiod},
+           given={David\bibnamedelima B.},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{0db003f940a529d1026cb23f983a9678}
+      \strng{fullhash}{0db003f940a529d1026cb23f983a9678}
+      \strng{bibnamehash}{0db003f940a529d1026cb23f983a9678}
+      \strng{authorbibnamehash}{0db003f940a529d1026cb23f983a9678}
+      \strng{authornamehash}{0db003f940a529d1026cb23f983a9678}
+      \strng{authorfullhash}{0db003f940a529d1026cb23f983a9678}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{Scalable Bayes via Barycenter in Wasserstein Space}
+      \field{volume}{19}
+      \field{year}{2018}
+      \field{pages}{312\bibrangedash 346}
+      \range{pages}{35}
+    \endentry
+    \entry{Steinwart2007}{article}{}
+      \name{author}{2}{}{%
+        {{hash=1f7c81e5506fdab760978a8fb50f27a6}{%
+           family={Steinwart},
+           familyi={S\bibinitperiod},
+           given={Ingo},
+           giveni={I\bibinitperiod}}}%
+        {{hash=aafdfc94d9e5d409fface4c577a46284}{%
+           family={Scovel},
+           familyi={S\bibinitperiod},
+           given={Clint},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{6799e9bd4ce6e657681151e953e0c818}
+      \strng{fullhash}{6799e9bd4ce6e657681151e953e0c818}
+      \strng{bibnamehash}{6799e9bd4ce6e657681151e953e0c818}
+      \strng{authorbibnamehash}{6799e9bd4ce6e657681151e953e0c818}
+      \strng{authornamehash}{6799e9bd4ce6e657681151e953e0c818}
+      \strng{authorfullhash}{6799e9bd4ce6e657681151e953e0c818}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{For binary classification we establish learning rates up to the order of n-1 for support vector machines (SVMs) with hinge loss and Gaussian RBF kernels. These rates are in terms of two assumptions on the considered distributions: Tsybakov's noise assumption to establish a small estimation error, and a new geometric noise condition which is used to bound the approximation error. Unlike previously proposed concepts for bounding the approximation error, the geometric noise assumption does not employ any smoothness assumption.}
+      \field{eprinttype}{arXiv}
+      \field{issn}{00905364}
+      \field{journaltitle}{Annals of Statistics}
+      \field{number}{2}
+      \field{title}{{Fast rates for support vector machines using Gaussian kernels}}
+      \field{volume}{35}
+      \field{year}{2007}
+      \field{pages}{575\bibrangedash 607}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1214/009053606000001226
+      \endverb
+      \verb{eprint}
+      \verb arXiv:0708.1838v1
+      \endverb
+      \verb{file}
+      \verb :home/pitcany/Downloads/0708.1838.pdf:pdf
+      \endverb
+      \keyw{Classification,Gaussian RBF kernels,Learning rates,Noise assumption,Nonlinear discrimination,Support vector machines}
+    \endentry
+    \entry{accmmot}{article}{}
+      \name{author}{4}{}{%
+        {{hash=4a6c35b4ec820474a1f5dd2231756f1a}{%
+           family={Tupitsa},
+           familyi={T\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=16341d30beb4248f492b81d817e2a1ac}{%
+           family={Dvurechensky},
+           familyi={D\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=118796836b6b28580f6a6f0d1e002970}{%
+           family={Gasnikov},
+           familyi={G\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a965d4995fe9c18a38e401dd1cded2de}{%
+           family={Uribe},
+           familyi={U\bibinitperiod},
+           given={C{é}sar\bibnamedelima A.},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{ead527f2e5ce401218c5b2e5604d3c83}
+      \strng{fullhash}{6cef259cd9978b78beb111b19cf68147}
+      \strng{bibnamehash}{ead527f2e5ce401218c5b2e5604d3c83}
+      \strng{authorbibnamehash}{ead527f2e5ce401218c5b2e5604d3c83}
+      \strng{authornamehash}{ead527f2e5ce401218c5b2e5604d3c83}
+      \strng{authorfullhash}{6cef259cd9978b78beb111b19cf68147}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{CDC}
+      \field{title}{Multimarginal Optimal Transport by Accelerated Alternating Minimization}
+      \field{year}{2020}
+      \field{pages}{6132\bibrangedash 6137}
+      \range{pages}{6}
+    \endentry
+    \entry{sliced_gw}{incollection}{}
+      \name{author}{5}{}{%
+        {{hash=f08745879b776243cc044bafc7bef4c4}{%
+           family={Vayer},
+           familyi={V\bibinitperiod},
+           given={Titouan},
+           giveni={T\bibinitperiod}}}%
+        {{hash=b10fa2e29995598ae81df7c518ad5786}{%
+           family={Flamary},
+           familyi={F\bibinitperiod},
+           given={Rémi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b5231a6c7af3f041f02b5945fb649993}{%
+           family={Courty},
+           familyi={C\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=3d8260acdd72b376866455e65a3b46f6}{%
+           family={Tavenard},
+           familyi={T\bibinitperiod},
+           given={Romain},
+           giveni={R\bibinitperiod}}}%
+        {{hash=98a9d0646c3af4a7d5b8ee33af753719}{%
+           family={Chapel},
+           familyi={C\bibinitperiod},
+           given={Laetitia},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{1cab34bffe8b804fcb346ec4b2b4026d}
+      \strng{fullhash}{6245f21ab207a1227ba5d6fc49a186ba}
+      \strng{bibnamehash}{1cab34bffe8b804fcb346ec4b2b4026d}
+      \strng{authorbibnamehash}{1cab34bffe8b804fcb346ec4b2b4026d}
+      \strng{authornamehash}{1cab34bffe8b804fcb346ec4b2b4026d}
+      \strng{authorfullhash}{6245f21ab207a1227ba5d6fc49a186ba}
+      \field{sortinit}{V}
+      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{NeurIPS}
+      \field{title}{{Sliced Gromov-Wasserstein}}
+      \field{year}{2019}
+    \endentry
+    \entry{villani}{book}{}
+      \name{author}{1}{}{%
+        {{hash=9a5829eabef68d560b86bf71527fd874}{%
+           family={Villani},
+           familyi={V\bibinitperiod},
+           given={C{é}dric},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{fullhash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{bibnamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authorbibnamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authornamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authorfullhash}{9a5829eabef68d560b86bf71527fd874}
+      \field{sortinit}{V}
+      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Optimal Transport: Old and New}
+      \field{year}{2008}
+    \endentry
+    \entry{NIPS2019_8569}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=6089e89dd54f06ece4073b97080c8602}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Hongteng},
+           giveni={H\bibinitperiod}}}%
+        {{hash=046bba67059e9ba1930508dbbc554fed}{%
+           family={Luo},
+           familyi={L\bibinitperiod},
+           given={Dixin},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ce681750caa3045d8bb30c05a70f10d7}{%
+           family={Carin},
+           familyi={C\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{296334b1f78ebf95374234a0525df1c1}
+      \strng{fullhash}{296334b1f78ebf95374234a0525df1c1}
+      \strng{bibnamehash}{296334b1f78ebf95374234a0525df1c1}
+      \strng{authorbibnamehash}{296334b1f78ebf95374234a0525df1c1}
+      \strng{authornamehash}{296334b1f78ebf95374234a0525df1c1}
+      \strng{authorfullhash}{296334b1f78ebf95374234a0525df1c1}
+      \field{sortinit}{X}
+      \field{sortinithash}{e90038f30fa4b9ce59606fc8347e3cc7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{NeurIPS}
+      \field{title}{Scalable {G}romov-{W}asserstein Learning for Graph Partitioning and Matching}
+      \field{year}{2019}
+    \endentry
+    \entry{pmlr-v97-xu19b}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=6089e89dd54f06ece4073b97080c8602}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Hongteng},
+           giveni={H\bibinitperiod}}}%
+        {{hash=046bba67059e9ba1930508dbbc554fed}{%
+           family={Luo},
+           familyi={L\bibinitperiod},
+           given={Dixin},
+           giveni={D\bibinitperiod}}}%
+        {{hash=55bb21a31fded4aad976b7902dc8206a}{%
+           family={Zha},
+           familyi={Z\bibinitperiod},
+           given={Hongyuan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=6858ddf453f2c9361af9158ad918a8fe}{%
+           family={Duke},
+           familyi={D\bibinitperiod},
+           given={Lawrence\bibnamedelima Carin},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{f4ea6d2a41231a00fea595ae4c8b722b}
+      \strng{fullhash}{87be74fe23a0fcbbaf0c5cf50f585239}
+      \strng{bibnamehash}{f4ea6d2a41231a00fea595ae4c8b722b}
+      \strng{authorbibnamehash}{f4ea6d2a41231a00fea595ae4c8b722b}
+      \strng{authornamehash}{f4ea6d2a41231a00fea595ae4c8b722b}
+      \strng{authorfullhash}{87be74fe23a0fcbbaf0c5cf50f585239}
+      \field{sortinit}{X}
+      \field{sortinithash}{e90038f30fa4b9ce59606fc8347e3cc7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ICML}
+      \field{title}{Gromov-{W}asserstein Learning for Graph Matching and Node Embedding}
+      \field{year}{2019}
+    \endentry
+  \enddatalist
+  \missing{Sonthalia2020}
+\endrefsection
+\endinput
+

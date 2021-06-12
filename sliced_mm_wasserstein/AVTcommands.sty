@@ -1,0 +1,205 @@
+% code readability macros
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[scr]{rsfso}
+\usepackage{mathtools}
+\usepackage{mathcommand}
+\usepackage{stmaryrd}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+\DeclareMathAlphabet\bc{OMS}{cmsy}{b}{n}
+
+% utility to stop loading natbib
+\newcommand{\usepackagewithoutnatbib}[2][]{\@namedef{ver@natbib.sty}{9999/12/31}\let\setcitestyle\@gobble\usepackage[#1]{#2}\let\setcitestyle\undefined\expandafter\let\csname ver@natbib.sty\endcsname\@undefined}
+
+% requires packages bbold and bbold-type1 to avoid bitmap font
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+
+
+\@ifpackageloaded{xcolor}{
+\providecommand{\red}[1]{\textcolor{red!90!blue!75!black}{#1}}
+\providecommand{\green}[1]{\textcolor{green!90!blue!50!black}{#1}}
+\providecommand{\blue}[1]{\textcolor{blue!90!blue!75!black}{#1}}
+\providecommand{\yellow}[1]{\textcolor{yellow!90!blue!38!black}{#1}}
+\providecommand{\orange}[1]{\textcolor{orange!90!blue!50!black}{#1}}
+\providecommand{\purple}[1]{\textcolor{purple!90!blue!75!black}{#1}}
+}
+
+\newcommand{\RegisterPairedDelimiter}[3][1]{
+\ifnum#1=1 \newcommand{#2}[2][-1]{%
+\ifnum##1=-1 #3*{##2}\relax\fi%
+\ifnum##1=0 #3{##2}\relax\fi%
+\ifnum##1=1 #3[\big]{##2}\relax\fi%
+\ifnum##1=2 #3[\Big]{##2}\relax\fi%
+\ifnum##1=3 #3[\bigg]{##2}\relax\fi%
+\ifnum##1=4 #3[\Bigg]{##2}\relax\fi%
+}\fi%
+\ifnum#1=2 \newcommand{#2}[3][-1]{%
+\ifnum##1=-1 #3*{##2}{##3}\relax\fi%
+\ifnum##1=0 #3{##2}{##3}\relax\fi%
+\ifnum##1=1 #3[\big]{##2}{##3}\relax\fi%
+\ifnum##1=2 #3[\Big]{##2}{##3}\relax\fi%
+\ifnum##1=3 #3[\bigg]{##2}{##3}\relax\fi%
+\ifnum##1=4 #3[\Bigg]{##2}{##3}\relax\fi%
+}\fi%
+}
+
+\DeclarePairedDelimiter{\deldelim}{(}{)}
+\RegisterPairedDelimiter{\del}{\deldelim}
+
+\DeclarePairedDelimiter{\sbrdelim}{[}{]}
+\RegisterPairedDelimiter{\sbr}{\sbrdelim}
+
+\DeclarePairedDelimiter{\dbrdelim}{\llbracket}{\rrbracket}
+\RegisterPairedDelimiter{\dbr}{\dbrdelim}
+
+\DeclarePairedDelimiter{\cbrdelim}{\{}{\}}
+\RegisterPairedDelimiter{\cbr}{\cbrdelim}
+
+\DeclarePairedDelimiter{\absdelim}{|}{|}
+\RegisterPairedDelimiter{\abs}{\absdelim}
+
+\DeclarePairedDelimiter{\normdelim}{\lVert}{\rVert}
+\RegisterPairedDelimiter{\norm}{\normdelim}
+
+\DeclarePairedDelimiterX{\innerproddelim}[3]{\langle}{\rangle}{#1,#2}
+\RegisterPairedDelimiter[2]{\innerprod}{\innerproddelim}
+
+\DeclarePairedDelimiterX{\dualproddelim}[3]{\langle}{\rangle}{#1\;\delimsize|\;\mathopen{}#2}
+\RegisterPairedDelimiter[2]{\dualprod}{\dualproddelim}
+
+\DeclarePairedDelimiter{\evaldelim}{.}{|}
+\RegisterPairedDelimiter{\evalpaired}{\evaldelim}
+
+\newcommand{\eval}[1][-1]{\@ifnextchar\bgroup{\expandafter\evalpaired[#1]}{\ifnum#1=-1 |\fi\ifnum#1=0 |\fi\ifnum#1=1 \big|\fi\ifnum#1=2 \Big|\fi\ifnum#1=3 \bigg|\fi\ifnum#1=4 \Bigg|\fi}}
+
+\providecommand{\1}{} % xymatrix workaround
+\renewcommand{\1}{\relax\ifmmode\bb{1}\else\expandafter\@onenonmath\fi} % indicator function and enumerate/itemize shorthand
+\newcommand{\@onenonmath}{\@ifstar\@onestarred\@onenonstarred}
+\newcommand{\@onestarred}{\begin{itemize}\item} % itemize shorthand
+\newcommand{\@onenonstarred}[1][]{\ifx\\#1\\\begin{enumerate}\item\else\begin{enumerate}[#1]\item\fi} % enumerate with possible iteration choice
+\providecommand{\2}{} % xymatrix workaround
+\renewcommand{\2}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\3}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\4}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\5}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\6}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\7}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\8}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\9}{\@ifstar\item\item} % enumerate/itemize shorthand
+\newcommand{\0}{\@ifstar\@zerostarred\@zerononstarred} % close enumerate/itemize
+\newcommand{\@zerostarred}{\end{itemize}} % close itemize
+\newcommand{\@zerononstarred}{\end{enumerate}} % close enumerate
+
+\newcommand{\email}[1]{\href{mailto:#1}{\UrlFont#1}} % correct email hyperlinking
+
+\renewmathcommand{\P}{\operatorname{\mathbb{P}}} % probability
+\DeclareMathOperator{\E}{\mathbb{E}} % expectation
+\DeclareMathOperator{\Var}{Var} % variance
+\DeclareMathOperator{\Cov}{Cov} % covariance
+\renewmathcommand{\ae}[1][]{\ifx-#1\mathpunct{\text{-a.e.}}\else\t{a.e.}\fi} % almost everywhere with dash
+\newcommand{\notindep}{\mathrel{\hspace*{0.3ex}\not\hspace*{-0.9ex}\rotatebox[origin=c]{90}{\ensuremath{\models}}}} % not independent
+\newcommand{\indep}{\mathrel{\rotatebox[origin=c]{90}{\ensuremath{\models}}}} % independent
+\newcommand{\given}{\mid} % conditional probability
+\newcommand{\from}{\mid\mid} % double bars in divergences
+
+\newcommand{\N}{\mathbb{N}} % natural numbers
+\newcommand{\Z}{\mathbb{Z}} % integers
+\newcommand{\Q}{\mathbb{Q}} % rational numbers
+\newcommand{\R}{\mathbb{R}} % real numbers
+\declaremathcommand{\C}{\mathbb{C}} % complex numbers
+\newcommand{\eps}{\varepsilon} % epsilon
+
+\renewmathcommand{\u}{\cup}
+\declaremathcommand{\U}{\bigcup} % sigma notation union
+\renewmathcommand{\^}{\cap} % intersection
+\newcommand{\Int}{\bigcap} % sigma notation intersection
+\newcommand{\takeaway}{\setminus} % take away
+\newcommand{\x}{\times} % Cartesian product
+\let\nothing\emptyset
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\st}{\t{s.t.}} % such that
+\renewmathcommand{\~}[1][]{\sim\ifx\\#1\\\else\operatorname{#1}\fi} % tilde
+\newcommand{\after}{\circ} % composition
+
+\renewmathcommand{\v}{\expandafter\boldsymbol} % vector
+\newcommand{\m}{\expandafter\mathbf} % matrix
+\declaremathcommand{\f}{\expandafter\operatorname} % function
+\renewmathcommand{\c}{\expandafter\mathcal} % calligraphic
+\newcommand{\s}[1]{\mathscr{#1}} % script
+\newcommand{\fr}[1]{\mathfrak{#1}} % fraktur
+\newcommand{\bb}[1]{\in@{#1}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}\ifin@\mathbb{#1}\else\mathbbold{#1}\fi} % blackboard bold
+\renewmathcommand{\t}{\expandafter\mathrel\expandafter\text} % text with spacing
+\newcommand{\h}[1]{\widehat{#1}} % hat
+\newcommand{\tl}[1]{\widetilde{#1}} % tilde
+
+\let\@dash\-
+\newcommandPIE{\@xrightarrow}{\IfEmptyTF{#2#3}{\rightarrow}{\xrightarrow[\GetIndex{#2}]{\GetExponent{#3}}}#1}
+\renewmathcommand{\-}{\@ifnextchar>{\expandafter\@xrightarrow\@gobble}{\@dash}}
+\let\@vert\|
+\newcommandPIE{\@xmapsto}{\IfEmptyTF{#2#3}{\mapsto}{\xmapsto[\GetIndex{#2}]{\GetExponent{#3}}}#1}
+\renewcommand{\|}{\@ifnextchar>{\expandafter\@xmapsto\@gobble}{\@vert}}
+
+\newcommand{\grad}{\nabla} % gradient
+\newcommand{\lap}{\Delta} % laplacian
+\renewmathcommand{\d}{\mathop{}\!\mathrm{d}} % differental
+\newcommand{\D}{\mathrm{D}} % Jacobian
+\newcommand{\od}[3][]{\left.\frac{\d^{#1}{#2}}{\d{#3}^{#1}}\@ifnextchar_{\right|}{\right.}} % fix commath bad display style
+\newcommand{\@pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}} % fix commath bad display style
+\newcommand{\pd}{\@ifnextchar\bgroup{\expandafter\@pd}{\@ifnextchar[{\expandafter\@pd}{\partial}}} % partial derivative with smart multi-index notation
+
+\newcommand{\widebar}[1]{\overline{#1}} % wide bar over symbols
+\renewmathcommand{\k}{\Bbbk} % blackboard bold k
+\newcommand{\conj}[1]{\overline{#1}} %complex conjugate
+\newcommand{\cl}[1]{\overline{#1}} % closure
+\newcommand{\orth}{\perp} % orthogonal
+\newcommand{\directsum}{\bigoplus} % direct sum
+\newcommand{\embeds}{\hookrightarrow} % embedding
+\newcommand{\boundedby}{\lesssim} % bounded by
+\renewmathcommand{\o}{\circ} % circle product
+\newcommand{\ox}{\otimes} % tensor product
+\newcommand{\OX}{\bigotimes} % big tensor product
+\renewmathcommand{\.}{\cdot} % dot binary operation
+\newcommand{\bdot}{\mathbin{\vcenter{\hbox{\scalebox{0.5}{\ensuremath{\bullet}}}}}} % big dot binary operation
+\newcommand{\lacts}{\triangleright} % left action
+\newcommand{\racts}{\triangleleft} % right action
+
+\DeclareMathOperator*{\argmin}{\arg\min} % argmin
+\DeclareMathOperator*{\argmax}{\arg\max} % argmax
+
+\newcommand{\ubr}[1]{\underbracket[0.1ex]{#1}} % underbracket
+\newcommand{\obr}[1]{\overbracket[0.1ex]{#1}} % overbracket
+
+\DeclareMathOperator{\id}{id} % identity
+\DeclareMathOperator{\im}{im} % image
+\DeclareMathOperator{\tr}{tr} % trace
+\DeclareMathOperator{\sgn}{sgn} % sign
+\DeclareMathOperator{\ad}{ad} % adjoint
+\DeclareMathOperator{\Ad}{Ad} % adjoint
+\DeclareMathOperator{\AD}{AD} % adjoint
+\DeclareMathOperator{\proj}{proj} % projection
+\DeclareMathOperator{\Span}{span} % span
+\DeclareMathOperator{\Hom}{Hom} % space of homomorphisms
+\DeclareMathOperator{\End}{End} % space of endomoprhisms
+\DeclareMathOperator{\Aut}{Aut} % space of automoprhisms
+\DeclareMathOperator{\Grad}{grad} % gradient
+\DeclareMathOperator{\Ob}{Ob} % objects
+\DeclareMathOperator{\vol}{vol} % volume
+\DeclareMathOperator{\supp}{supp} % support
+
+\newcommand{\isom}{\cong} % isomorphic
+\newcommand{\newisom}[2]{\newcommand{#1}{\mathrel{\mathchoice{\underset{\operatorname{#2}}{\cong}}{\cong_{\operatorname{#2}}}{\cong_{\operatorname{#2}}}{\cong_{\operatorname{#2}}}}}}
+\newisom{\isomset}{set} % set isomorphic
+\newisom{\isomtop}{top} % topologically isomorphic
+\newisom{\isomgrp}{grp} % group isomorphic
+\newisom{\isomdiff}{diff} % diffeomorphic
+\newisom{\isomvec}{vec} % vector isomorphic
+\newisom{\isommod}{mod} % module isomorphic
+\newisom{\isomlie}{Lie} % Lie isomorphic
+\newisom{\isombdl}{bdl} % bundle isomorphic
+\newisom{\isommeas}{meas} % measure isomorphic
+\newisom{\isombool}{bool} % boolean isomorphic
+\newisom{\isomring}{ring} % ring isomorphic

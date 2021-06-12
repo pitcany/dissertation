@@ -1,0 +1,50 @@
+% citation macros
+\ProvidesPackage{AVTcitations}
+
+\newif\ifcitations@authoryear
+\DeclareOption{authoryear}{\citations@authoryeartrue}
+
+\ProcessOptions\relax
+
+% tectonic biber support workaround
+\ifdef\XeTeXrevision{\PassOptionsToPackage{backend=bibtex}{biblatex}}{}
+
+% select citation style
+\ifcitations@authoryear
+\PassOptionsToPackage{bibstyle=trad-abbrv, citestyle=authoryear}{biblatex}
+\else
+\PassOptionsToPackage{bibstyle=trad-abbrv, citestyle=numeric-comp}{biblatex}
+\fi
+
+% load BibLaTeX
+\RequirePackage[backref=true, useprefix, uniquename=false, maxcitenames=2]{biblatex}
+
+% never decapitalize paper titles
+\DeclareFieldFormat{titlecase}{#1}
+
+% print backreferences without parentheses
+\renewbibmacro*{pageref}{%
+  \iflistundef{pageref}
+    {}
+    {\addperiod\addspace\printtext{%
+       \ifnumgreater{\value{pageref}}{1}
+         {\bibstring{backrefpages}\ppspace}
+         {\bibstring{backrefpage}\ppspace}%
+       \printlist[pageref][-\value{listtotal}]{pageref}}}}
+
+% change authoryear format
+\ifcitations@authoryear
+\renewcommand{\nameyeardelim}{\addcomma\space}
+\renewcommand{\multicitedelim}{\addsemicolon\space}
+\DeclareCiteCommand{\cite}[\mkbibparens]{\usebibmacro{prenote}}{\usebibmacro{citeindex}\usebibmacro{cite}}{\multicitedelim}{\usebibmacro{postnote}}
+\defbibenvironment{bibliography}
+  {\list
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+ \setlength{\bibparsep}{0.5\baselineskip}
+\fi

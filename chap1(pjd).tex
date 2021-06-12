@@ -280,22 +280,23 @@ over all couplings that preserve the marginals on $S$ ($x_{s},y_{s})$ and $T_{X}
 
 \subsection{Sample Dependent Sinkhorn Bounds}
 
-The keys for achieving generalization bounds in this section are the following two lemmas \cite{Genevay2018}: 
-\begin{lemma}
+The following two theorems can be used to bound the empirical Sinkhorn from the Wasserstein distance \cite{Genevay2018} and we list them for convenience. These can be combined with the above result to establish generalization bounds with respect to the Sinkhorn divergence, but we leave this as an open problem.
+ 
+\begin{theorem}
 	\label{divergence_sinkhorn_from_wasserstein}
 	Let $\alpha$ and $\beta$ be probability measures on $\mathcal{X}$ and $\mathcal{Y}$ subsets of $\mathbb{R}^d$ such that $\abs{X}=\abs{Y}\leq D$ and assume that $c$ is L-Lipschitz w.r.t $x$ and $y$. Then
 	$$W_{\epsilon}(\alpha,\beta)-W(\alpha,\beta) \leq 2\epsilon d \log \paren*{\frac{\epsilon^2 L D}{\sqrt{d}\epsilon}}$$ where $\mathcal{X}$ and $\mathcal{Y}$ are subsets of $\mathbb{R}^d$ with diameters at most $D$ and $c$ is $L$-lipschitz w.r.t $x$ and $y$.
-\end{lemma}
+\end{theorem}
 
 and
 
-\begin{lemma}
+\begin{theorem}
 	Let $\hat{\alpha_n}$ and $\hat{\beta_n}$ be empirical measures for $\alpha$ and $\beta$ with size $n$ for each.
 	
 	\[
 	\abs{W_{\epsilon}(\hat{\alpha_n},\hat{\beta_n})-W_{\epsilon}(\alpha,\beta)} \leq 6B \frac{\lambda K}{\sqrt{n}} + C\sqrt{\frac{2 \log\frac{1}{\delta}}{n}}
 	\] with probability at least $1-\delta$.
-\end{lemma}
+\end{theorem}
 
 %\subsection*{New Generalization Bound}
 %

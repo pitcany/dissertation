@@ -7,12 +7,12 @@ Previously, we discussed two methods of regularized optimal transport for domain
 	\item Regularization with respect to dual potentials
 \end{itemize}
 
-However, the emphasis earlier was not on finding the explicit mapping between datasets. One may instead seek to directly estimate the Monge map between source and target datasets. In the next section, we describe prior work done and propose another regularization scheme that incorporates the explicit transport map.
+However, the emphasis earlier was not on finding the explicit mapping between datasets. One may instead seek to directly estimate the Monge map between source and target datasets. In this chapter, we show how to establish the optimal linear transport map under arbitrary distributions with finite second moments, demonstrate that this is also the optimal transport map, and propose another regularization scheme that incorporates the explicit transport map. The first result was also discovered concurrently by \cite{Flamary2019}.
 
 \section*{Linear Monge Mappings}
-Previous work \cite{Flamary2019} estimated the linear Monge mapping between distributions and used this to provide a domain adaptation generalization bound.
+Previous work \cite{Flamary2019} estimated the linear Monge mapping between Gaussian distributions and used this to provide a domain adaptation generalization bound.
 
-We show why estimating the linear Monge map may be of importance if we know the second-order moments. In particular, the optimal linear transport map is the optimal transport map in this setting.
+We show why estimating the linear Monge map may be of importance if we know the second-order moments. And, as stated previously, the optimal linear transport map is the optimal transport map in this setting.
 
 %We conjecture that their result about the optimal transport map can be extended to say that this particular function of the second moments of the source and target distributions gives the optimal linear transport map, even if the optimal transport map isn't linear.
 
@@ -34,7 +34,11 @@ And we also introduce the concept of fidelity measure between matrices.
 	If $A$ and $B$ are positive matrices, then the fidelity $F(A,B) = tr(A^{1/2}BA^{1/2})^{1/2}$.
 \end{definition}
 
-Also let $A\#B=A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$ be the matrix geometric mean.
+Also let $A\#B=A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$ be the matrix geometric mean. With this established, we can introduce our main lemma.
+
+\begin{lemma}
+	Let $\mu_1$ and $\mu_2$ be probability measures with zero means and positive-definite covariance matrices $A,B$ respectively. Then the optimal linear transport map coincides with the optimal transport map.
+\end{lemma}
 
 \section*{Minimizing over set of linear maps \cite{Bhatia2019}}
 Let $x$ and $y$ be random vectors with values in $\mathbb{C}^{n}$, each having zero mean WLOG, and with covariance matrices $A$ and $B$, respectively. This last statement means that

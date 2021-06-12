@@ -2,15 +2,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Contents}{ii}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Figures}{iii}%
+\contentsline {chapter}{List of Figures}{iv}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{List of Tables}{iv}%
+\contentsline {chapter}{List of Tables}{v}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Motivation}{1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Background}{2}%
+\contentsline {section}{\numberline {1.2}Background}{1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Transfer learning scenarios}{2}%
 \defcounter {refsection}{0}\relax 
@@ -67,3 +67,19 @@
 \contentsline {subsection}{Validating the estimator and the learning rate}{44}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{52}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\chapternumberline {7}Sliced Mixed-Marginal Wasserstein}{53}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Abstract}{53}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Introduction}{53}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}Background}{54}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{Sliced Multi-Marginal Wasserstein Distance}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Topological properties}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{Statistical Properties}{57}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{58}%
