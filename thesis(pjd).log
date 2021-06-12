@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.3)  12 JUN 2021 14:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.3)  12 JUN 2021 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1109,15 +1109,7 @@ Overfull \hbox (1.69795pt too wide) in paragraph at lines 152--153
 [44] [45] [46] [47] [48] [49] [50]) [51]
 \openout2 = `chap5(pjd).aux'.
 
- (./chap5(pjd).tex) [52
-
-
-
-]
-\openout2 = `chap6(pjd).aux'.
-
-
-(./chap6(pjd).tex
+ (./chap5(pjd).tex
 
 ! LaTeX Error: Command \k unavailable in encoding OT1.
 
@@ -1132,11 +1124,11 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[53
+[52
 
 
 
-] [54]
+] [53]
 
 ! LaTeX Error: Command \k unavailable in encoding OT1.
 
@@ -1150,28 +1142,28 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-<pictures/diagrams/diagram_uniform.pdf, id=228, 498.36188pt x 231.86626pt>
+<pictures/diagrams/diagram_uniform.pdf, id=225, 498.36188pt x 231.86626pt>
 File: pictures/diagrams/diagram_uniform.pdf Graphic file (type pdf)
 <use pictures/diagrams/diagram_uniform.pdf>
 Package pdftex.def Info: pictures/diagrams/diagram_uniform.pdf  used on input l
 ine 76.
 (pdftex.def)             Requested size: 183.46327pt x 85.35826pt.
-<pictures/diagrams/diagram_alignment.pdf, id=229, 441.6731pt x 231.86626pt>
+<pictures/diagrams/diagram_alignment.pdf, id=226, 441.6731pt x 231.86626pt>
 File: pictures/diagrams/diagram_alignment.pdf Graphic file (type pdf)
 <use pictures/diagrams/diagram_alignment.pdf>
 Package pdftex.def Info: pictures/diagrams/diagram_alignment.pdf  used on input
  line 78.
 (pdftex.def)             Requested size: 162.59427pt x 85.35826pt.
-[55 <./pictures/diagrams/diagram_uniform.pdf> <./pictures/diagrams/diagram_alig
+[54 <./pictures/diagrams/diagram_uniform.pdf> <./pictures/diagrams/diagram_alig
 nment.pdf>]
 
-LaTeX Warning: Citation 'topstatprop' on page 56 undefined on input line 94.
+LaTeX Warning: Citation 'topstatprop' on page 55 undefined on input line 94.
 
 
-LaTeX Warning: Reference `eq:mmwass_closed' on page 56 undefined on input line 
+LaTeX Warning: Reference `eq:mmwass_closed' on page 55 undefined on input line 
 101.
 
-[56]
+[55]
 ! Misplaced alignment tab character &.
 l.146 	\[ &
            \quad \E [\mathcal{SMW}^2(\mu_1,\ldots,\mu_P) - \mathcal{SMW}^2(\...
@@ -1212,7 +1204,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `prop:samples' on page 57 undefined on input line 156.
+LaTeX Warning: Reference `prop:samples' on page 56 undefined on input line 156.
 
 
 
@@ -1944,7 +1936,14 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-) [57] [58
+) [56]
+\openout2 = `chap6(pjd).aux'.
+
+ (./chap6(pjd).tex) [57
+
+
+
+] [58
 
 
 ]
@@ -2022,7 +2021,7 @@ b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis(pjd).pdf (69 pages, 693833 bytes).
+Output written on thesis(pjd).pdf (69 pages, 693878 bytes).
 PDF statistics:
  330 PDF objects out of 1000 (max. 8388607)
  225 compressed objects within 3 object streams

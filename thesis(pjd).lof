@@ -20,6 +20,6 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10pt}
 \defcounter {refsection}{0}\relax 
-\addvspace {10pt}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Illustration of the optimal coupling's structure on $\mathbb {R}$ between discrete measures $\mu _1, \mu _2$ and $\mu _3$. Points are samples of each measures, with weights next to them. Left: histogram of measures (horizontal); joint samples are obtained by sampling a (black) line uniformly (drawn vertically), and picking points that are associated with the bin intersected by that line. Right: Corresponding triples of points that are aligned according to the coupling are linked by a pair of lines.}}{54}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Illustration of the optimal coupling's structure on $\mathbb {R}$ between discrete measures $\mu _1, \mu _2$ and $\mu _3$. Points are samples of each measures, with weights next to them. Left: histogram of measures (horizontal); joint samples are obtained by sampling a (black) line uniformly (drawn vertically), and picking points that are associated with the bin intersected by that line. Right: Corresponding triples of points that are aligned according to the coupling are linked by a pair of lines.}}{55}%
+\addvspace {10pt}

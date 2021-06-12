@@ -66,20 +66,20 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Validating the estimator and the learning rate}{44}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {6}Conclusions and Future Work}{52}%
+\contentsline {chapter}{\chapternumberline {6}Sliced Mixed-Marginal Wasserstein}{52}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {7}Sliced Mixed-Marginal Wasserstein}{53}%
+\contentsline {section}{\numberline {6.1}Abstract}{52}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Abstract}{53}%
+\contentsline {section}{\numberline {6.2}Introduction}{52}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Introduction}{53}%
+\contentsline {section}{\numberline {6.3}Background}{53}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}Background}{54}%
+\contentsline {subsection}{Sliced Multi-Marginal Wasserstein Distance}{55}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Sliced Multi-Marginal Wasserstein Distance}{56}%
+\contentsline {paragraph}{Topological properties}{55}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Topological properties}{56}%
+\contentsline {paragraph}{Statistical Properties}{56}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Statistical Properties}{57}%
+\contentsline {chapter}{\chapternumberline {7}Conclusions and Future Work}{57}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{58}%
